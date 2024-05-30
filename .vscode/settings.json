@@ -1,0 +1,9 @@
+{
+    "prettier.bracketSameLine": true,
+    "prettier.singleAttributePerLine": true,
+    "prettier.printWidth": 120,
+    "prettier.proseWrap": "always",
+    "prettier.semi": false
+
+
+}

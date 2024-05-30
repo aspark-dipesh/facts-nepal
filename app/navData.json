@@ -1,0 +1,40 @@
+[
+    {
+      "label": "About",
+      "link": "/about"
+    },
+    {
+      "label": "Gallery",
+      "link": "/gallery"
+    },
+    {
+      "label": "Contact",
+      "link": "/contact"
+    },{
+      "label": "Pictographs",
+      "link": "/pictographs"
+    },
+
+    {
+      "label": "Careers",
+      "link": "/careers"
+    },
+    {
+      "label":"Team",
+      "link":"/team"
+    },
+    {
+      "label": "Resources",
+      "link": "/resources",
+      "dropdown": [
+        {
+          "label": "Publications",
+          "link": "/publications"
+        },
+        {
+          "label": "Blogs",
+          "link": "/news-and-blogs"
+        }
+      ]
+    }
+  ]
