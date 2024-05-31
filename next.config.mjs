@@ -20,6 +20,12 @@ const nextConfig = {
                 hostname:'nextui.org',
                 pathname:'**',
                 port:''
+            },
+            {
+                protocol:'https',
+                hostname:'backend.factsnepal.bidhee.net',
+                pathname:'**',
+                port:''
             }
         ]
     }

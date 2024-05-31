@@ -7,7 +7,7 @@ import Services from "./components/Services"
 import Statistics from "./components/Statistics"
 import Publications from "./components/Publication"
 import Publication from "./news-and-blogs/data.json"
-import { IPublication } from "./Types"
+import { IInfoGraph, IPaginatedData, IPublication, IService } from "./Types"
 import FactsOfTheDay from "./components/FactsOfTheDay"
 import Blogs from "./components/Blogs"
 import Link from "next/link"
@@ -20,7 +20,31 @@ export const metadata: Metadata = {
       "FACTS Research & Analytics is a private independent research company that prides itself on being precise, intellegence for informed choice and serving reliable, contextual and actionable information based on research and analysis that help clients and the general public to take better effective and efficient decisions.",
   },
 }
-export default function Home() {
+async function GetServiceList(): Promise<IPaginatedData<IService>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/ourservices`, {
+    next: { revalidate: 10 },
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<IService>
+  return data
+}
+async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/infography`, {
+    next: { revalidate: 10 },
+  })
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<IInfoGraph>
+  return data
+}
+export default async function Home() {
+  const serviceList = await GetServiceList()
+  const infoGraph = await GetInfoGraph()
+  console.log("Service list", infoGraph)
   return (
     <div className="">
       <Hero
@@ -89,88 +113,13 @@ export default function Home() {
           statTitle: "text-white",
           statValue: "text-white",
         }}
-        StatisticsList={[
-          {
-            title: "Clients",
-            value: 20,
-          },
-          {
-            title: "Publications",
-            value: 10,
-          },
-          {
-            title: "Projects",
-            value: 200,
-          },
-          {
-            title: "Countries",
-            value: 165,
-          },
-        ]}
+        StatisticsList={infoGraph.results}
       />
 
       <Services
         title="What we do"
         footerBlur
-        servicesList={[
-          {
-            image: {
-              alt: "data analysis",
-              src: "/images/data-analysis.jpg",
-            },
-            title: "Data collection",
-            description: `
-              <ul class="list-decimal list-outside pl-5 ">
-                <li class="indent-2">Collects, measure and analyze for accurate insights through experience and local enumerators</li>
-                <li>Collects data through both Computer Assisted personal interview (CAPI) and paper and pensil interview(PAPI), interview and focus group discussion</li>
-                <li>Through mystery shopping</li>
-                <li>Have more than 250 experience enumerators covering all over nepal</li>
-              </ul>
-            `,
-          },
-          {
-            image: {
-              alt: "Strategy Development",
-              src: "/images/strategy.jpg",
-            },
-            title: "Market Study",
-            description: `
-              <ul class="list-decimal list-outside pl-5 ">
-                <li>Provides insight to business on target audience, current customers, competitors and challenges of business</li>
-                <li>Help understand the business their buyers, market, influence factor for purchase decision of target audience</li>
-               
-              </ul>
-            `,
-          },
-          {
-            image: {
-              alt: "Content-development",
-              src: "/images/content.jpg",
-            },
-            title: "Brand Perception",
-            description: `
-              <ul class="list-decimal list-outside pl-5 ">
-                <li>Gathers feedbacks from prospects to measure the overall sentiment towards brand</li>
-                <li>Measures overall perception, value and awareness of the brand as dictated by the audience.</li>
-               
-              </ul>
-            `,
-          },
-          {
-            image: {
-              alt: "Infographic design",
-              src: "/images/infographic.jpeg",
-            },
-            title: "Human Resource Audit",
-            description: `
-              <ul class="list-decimal list-outside pl-5 ">
-                <li>Investigate Company to strengthen Human Resource Department for proper allocation of human resource</li>
-                <li>Identify the gap and areas where improvement is needed to resolve the gap.</li>
-                
-              </ul>
-            `,
-          },
-        ]}
+        servicesList={serviceList.results}
         classNames={{
           title: "text-black text-3xl font-bold text-center",
           container: "",

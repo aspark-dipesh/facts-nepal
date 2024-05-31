@@ -24,3 +24,23 @@ export interface IPublication {
     slug: string
     category: 'qualitative' | 'quantitative'
 }
+
+export interface IPaginatedData<T> {
+
+  count: number;
+  next: string;
+  previous: string;
+  results: T[]
+}
+
+export interface IService {
+    id: number,
+    name: string
+    description: string
+    img: string
+}
+export interface IInfoGraph {
+    id: number,
+    title: string
+    counter: number
+}

@@ -1,19 +1,16 @@
 "use client"
-import { Button, Card, CardBody, CardFooter, CardHeader, Image, cn } from "@nextui-org/react"
+import { Button, Card, CardBody, CardFooter, CardHeader, cn } from "@nextui-org/react"
 
 import React from "react"
-import { IImage } from "../Types"
+import { IService } from "../Types"
 import Headings from "./ui/Headings"
+import Image from "next/image"
 
 interface IServicesProps {
   hasViewAll?: boolean
   title: string
   description?: string
-  servicesList: {
-    title: string
-    description?: string
-    image: IImage
-  }[]
+  servicesList: IService[]
   footerBlur?: boolean
   classNames?: {
     title?: string
@@ -38,19 +35,21 @@ const Services = ({ servicesList, title, description, footerBlur, classNames }: 
               isPressable
               className="h-full justify-start"
               onPress={() => console.log("item pressed")}>
-              <CardBody className="overflow-visible p-0   h-[340px] flex-none">
+              <CardBody className="overflow-visible p-0  aspect-square w-full flex-none">
                 <Image
-                  shadow="sm"
-                  radius="lg"
-                  width="100%"
-                  alt={service.title}
-                  className="w-full object-cover h-[340px]"
-                  src={service.image.src}
+                  fill
+                  alt={service.name}
+                  className="object-cover"
+                  src={service.img}
+                  sizes="(min-width: 768px) 50vw, 100vw"
                 />
               </CardBody>
               <CardFooter className="text-small flex-col text-start">
-                <b>{service.title}</b>
-                <div dangerouslySetInnerHTML={{ __html: service.description || "" }} />
+                <b>{service.name}</b>
+                <div
+                  className=""
+                  dangerouslySetInnerHTML={{ __html: service.description || "" }}
+                />
               </CardFooter>
             </Card>
           ))}

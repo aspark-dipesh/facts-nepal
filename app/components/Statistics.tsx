@@ -2,12 +2,10 @@
 import { cn } from "@nextui-org/react"
 import React from "react"
 import NumberTicker from "./ui/number-ticker"
+import { IInfoGraph } from "../Types"
 interface IStatisticsProps {
   title: string
-  StatisticsList: {
-    title: string
-    value: number
-  }[]
+  StatisticsList: IInfoGraph[]
   classNames?: {
     title?: string
     container?: string
@@ -36,7 +34,7 @@ const Statistics = ({ title, StatisticsList, classNames }: IStatisticsProps) => 
                   <NumberTicker
                     direction="up"
                     delay={0}
-                    value={statistic.value}
+                    value={statistic.counter}
                   />
                 </div>
                 <div
