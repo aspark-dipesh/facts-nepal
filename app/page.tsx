@@ -150,7 +150,7 @@ export default function Home() {
             title: "Brand Perception",
             description: `
               <ul class="list-decimal list-outside pl-5 ">
-                <li >Gathers feedbacks from prospects to measure the overall sentiment towards brand</li>
+                <li>Gathers feedbacks from prospects to measure the overall sentiment towards brand</li>
                 <li>Measures overall perception, value and awareness of the brand as dictated by the audience.</li>
                
               </ul>

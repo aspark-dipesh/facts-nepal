@@ -55,37 +55,37 @@ const Hero = ({ images, content, contentPosition, classNames, action }: IHeroPro
               sizes="100vw"
               className="object-cover"
             />
+            <div
+              className={cn(
+                "absolute inset-0 flex items-center z-[1] px-20",
+                classNames?.container,
+                contentPosition === "s" && "justify-start",
+                contentPosition === "m" && "justify-center",
+                contentPosition === "e" && "justify-end"
+              )}>
+              <div className={cn("max-w-xl w-full h-72 !text-white", classNames?.description)}>
+                <h1 className={cn("text-2xl font-bold capitalize ", classNames?.title)}>{content?.title}</h1>
+                <p className={cn("text-lg font-semibold mt-5", classNames?.description)}>{content?.description}</p>
+                {action && (
+                  <Button
+                    size="sm"
+                    variant="shadow"
+                    color="primary"
+                    className={cn("flex items-center gap-2 mt-5 mx-auto", classNames?.action)}>
+                    <a
+                      href={action.path}
+                      target="_blank"
+                      rel="noreferrer">
+                      {action.icon}
+                      <p className="text-base font-semibold">{action.label}</p>
+                    </a>
+                  </Button>
+                )}
+              </div>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      <div
-        className={cn(
-          "absolute inset-0 flex items-center z-[1] px-20",
-          classNames?.container,
-          contentPosition === "s" && "justify-start",
-          contentPosition === "m" && "justify-center",
-          contentPosition === "e" && "justify-end"
-        )}>
-        <div className={cn("max-w-xl w-full h-72 !text-white", classNames?.description)}>
-          <h1 className={cn("text-2xl font-bold capitalize ", classNames?.title)}>{content?.title}</h1>
-          <p className={cn("text-lg font-semibold mt-5", classNames?.description)}>{content?.description}</p>
-          {action && (
-            <Button
-              size="sm"
-              variant="shadow"
-              color="primary"
-              className={cn("flex items-center gap-2 mt-5 mx-auto", classNames?.action)}>
-              <a
-                href={action.path}
-                target="_blank"
-                rel="noreferrer">
-                {action.icon}
-                <p className="text-base font-semibold">{action.label}</p>
-              </a>
-            </Button>
-          )}
-        </div>
-      </div>
     </div>
   )
 }
