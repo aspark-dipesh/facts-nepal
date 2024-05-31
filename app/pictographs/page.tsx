@@ -1,7 +1,8 @@
+import FactsOfTheDay from "../components/FactsOfTheDay"
 import PictoCard from "../components/pictograph/PictoCard"
 const PictoData = [
   {
-    title: "Military Aircraft Fleet Strength bg Country(2024)",
+    title: "Military Aircraft Fleet Strength by Country(2024)",
     image: {
       src: "/images/facts/fact2.jpeg",
       alt: "Military Aircraft Fleet Strength",
@@ -50,14 +51,23 @@ const PictoData = [
 ]
 export default function Pictograph() {
   return (
-    <div className="container mx-auto py-20">
-      <div className="grid gap-5">
+    <div className="container mx-auto py-20 max-w-5xl">
+      <div className="grid gap-10">
         {PictoData.map((picto, index) => (
-          <PictoCard
+          <FactsOfTheDay
             key={index}
             title={picto.title}
-            description={picto.description}
-            image={picto.image}
+            image={{
+              src: picto.image.src,
+              alt: picto.image.alt,
+            }}
+            description={picto.description || ""}
+            classNames={{
+              title: "text-3xl font-bold  ",
+              container: "px-10 py-10 border shadow-lg ",
+              image: "w-full aspect-video",
+              description: "!text-black",
+            }}
           />
         ))}
       </div>

@@ -177,20 +177,25 @@ export default function Home() {
           card: "w-full aspect-square relative",
         }}
       />
-      <FactsOfTheDay
-        title="The world's 10 most mountainous countries"
-        image={{
-          src: "/images/facts/facts1.jpeg",
-          alt: "facts",
-        }}
-        classNames={{
-          title: "text-white text-3xl font-bold  ",
-          container: "bg-primary",
-          image: "w-full aspect-video",
-          description: " text-white",
-        }}
-        description={`Note: Bhutan, a small south Asian country located in the eastern Himalaya, is the most mountainous country in the world. Bhutan average elevation of 10,000 feet(3,280 m) above sea level.`}
-      />
+      <section className="bg-primary">
+        <div className="container mx-auto py-20">
+          <h1 className="text-cyan-500 text-3xl font-bold">Fact of the day</h1>
+          <FactsOfTheDay
+            title="The world's 10 most mountainous countries"
+            image={{
+              src: "/images/facts/facts1.jpeg",
+              alt: "facts",
+            }}
+            classNames={{
+              title: "text-white text-3xl font-bold  ",
+              container: "",
+              image: "w-full aspect-video",
+              description: " text-white",
+            }}
+            description={`Note: Bhutan, a small south Asian country located in the eastern Himalaya, is the most mountainous country in the world. Bhutan average elevation of 10,000 feet(3,280 m) above sea level.`}
+          />
+        </div>
+      </section>
       <Publications
         title="Publications"
         footerBlur
