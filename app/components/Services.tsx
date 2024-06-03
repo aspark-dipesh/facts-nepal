@@ -33,8 +33,7 @@ const Services = ({ servicesList, title, description, footerBlur, classNames }: 
               shadow="sm"
               key={index}
               isPressable
-              className="h-full justify-start"
-              onPress={() => console.log("item pressed")}>
+              className="h-full justify-start">
               <CardBody className="overflow-visible p-0  aspect-square w-full flex-none">
                 <Image
                   fill

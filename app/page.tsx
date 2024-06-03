@@ -44,7 +44,7 @@ async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
 export default async function Home() {
   const serviceList = await GetServiceList()
   const infoGraph = await GetInfoGraph()
-  console.log("Service list", infoGraph)
+
   return (
     <div className="">
       <Hero
@@ -128,7 +128,7 @@ export default async function Home() {
       />
       <section className="bg-primary">
         <div className="container mx-auto py-20">
-          <h1 className="text-cyan-500 text-3xl font-bold">Fact of the day</h1>
+          <h1 className="text-cyan-500 text-3xl font-bold mb-5 md:mb-0">Fact of the day</h1>
           <FactsOfTheDay
             title="The world's 10 most mountainous countries"
             image={{
@@ -157,10 +157,10 @@ export default async function Home() {
         Publications={Publication.slice(0, 3) as IPublication[]}
       />
       <div className="relative">
-        <div className=" bg-primary after:content-[''] text-white after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
+        <div className=" bg-primary after:content-[''] text-white md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
           <div className="py-20 container mx-auto col-span-3 z-50">
             <div className="max-w-lg px-2">
-              <h2 className="text-3xl font-bold">Let&apos;s grow together.</h2>
+              <h2 className="">Let&apos;s grow together.</h2>
               <p className="mt-3">
                 We&apos;re building a culture at HubSpot where amazing people (like you) can do their best work. If
                 you&apos;re ready to grow your career and help millions of organizations grow better, you&apos;ve come

@@ -79,33 +79,35 @@ export default function NewsAndBlogs() {
           <Card
             key={item.title}
             className="p-3">
-            <div className="w-full aspect-[4/3]">
+            <div className="w-full aspect-[4/3] relative">
               <Image
-                src={"/images/blog"}
+                src={"/images/blog-2.jpg"}
                 alt={item.title}
                 className="w-full h-full object-cover"
                 fill
               />
             </div>
-            <div className="flex">
-              <span className="text-sm font-bold text-primary/70">{item.date}</span>
-              {/* dot */}
-              <span className="text-sm font-bold text-primary/70 mx-3">•</span>
-              <span className="text-sm font-bold text-primary/70  capitalize">{item.category}</span>
-            </div>
-            <Link
-              href={`/news-and-blogs/view/${item.slug}`}
-              className="text-2xl font-bold hover:text-primary/80">
-              {item.title}
-            </Link>
-            <p className="text-sm line-clamp-4">{item.description}</p>
-            {/* learn more */}
-            <div className="mt-5 z-10">
+            <div className="mt-5 px-5">
+              <div className="flex">
+                <span className="text-sm font-bold text-primary/70">{item.date}</span>
+                {/* dot */}
+                <span className="text-sm font-bold text-primary/70 mx-3">•</span>
+                <span className="text-sm font-bold text-primary/70  capitalize">{item.category}</span>
+              </div>
               <Link
                 href={`/news-and-blogs/view/${item.slug}`}
-                className="text-primary hover:text-primary/80 underline">
-                Learn More...
+                className="text-2xl font-bold hover:text-primary/80">
+                {item.title}
               </Link>
+              <p className="text-sm line-clamp-4">{item.description}</p>
+              {/* learn more */}
+              <div className="mt-5 z-10">
+                <Link
+                  href={`/news-and-blogs/view/${item.slug}`}
+                  className="text-primary hover:text-primary/80 underline">
+                  Learn More...
+                </Link>
+              </div>
             </div>
           </Card>
         ))}

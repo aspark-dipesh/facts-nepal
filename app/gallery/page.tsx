@@ -9,7 +9,7 @@ export default async function Gallery() {
   return (
     <div className="container mx-auto py-20">
       {/* video section */}
-      <h2 className="text-3xl font-semibold my-5">Videos</h2>
+      <h1 className="text-3xl font-semibold my-5">Videos</h1>
       <div className="grid grid-cols-4 gap-4">
         <iframe
           width={"100%"}
@@ -45,7 +45,7 @@ export default async function Gallery() {
           allowFullScreen></iframe>
       </div>
 
-      <h2 className="text-3xl font-semibold my-5 mt-10">Events </h2>
+      <h2 className=" font-semibold my-5 mt-10">Events </h2>
       <LightGalleryComponent className="grid grid-cols-4 gap-4">
         <a
           href="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg"

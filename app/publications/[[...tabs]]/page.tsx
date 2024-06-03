@@ -88,7 +88,7 @@ export default function NewsAndBlogs() {
         {filteredData?.map((item) => (
           <Card
             key={item.title}
-            className="p-3">
+            className=" p-5 py-8">
             <div className="flex">
               <span className="text-sm font-bold text-primary/70">{item.date}</span>
               {/* dot */}

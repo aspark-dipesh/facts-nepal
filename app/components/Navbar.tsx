@@ -32,82 +32,85 @@ export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProp
 
   return (
     <Navbar
+      maxWidth="full"
+      className=""
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       isBlurred={isBlur}
       isBordered={isBorder}
       position={position}>
-      <NavbarContent>
-        <NavbarBrand>
-          <Link href="/">
-            <Image
-              alt="logo"
-              src="/images/logoFacts.png"
-              width={100}
-              height={100}
-            />
-          </Link>
-        </NavbarBrand>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
-      </NavbarContent>
+      <div className="container mx-auto flex">
+        <NavbarContent>
+          <NavbarBrand>
+            <Link href="/">
+              <Image
+                alt="logo"
+                src="/images/logoFacts.png"
+                width={100}
+                height={100}
+              />
+            </Link>
+          </NavbarBrand>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+          />
+        </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex gap-8"
-        justify="end">
-        <NavbarItem isActive={pathname === "/"}>
-          <Link href="/">Home</Link>
-        </NavbarItem>
-        {menuItems.map((item, index) => (
-          <div key={`${item.label}-${index}`}>
-            {item?.dropdown ? (
-              <Dropdown
-                key={item.label}
-                className="bg-white/40 !backdrop-blur-md">
-                <NavbarItem>
-                  <DropdownTrigger>
-                    <Button
-                      disableRipple
-                      className="p-0 text-base bg-transparent data-[hover=true]:bg-transparent"
-                      endContent={
-                        <ChevronLeft className="rotate-0 group-aria-[expanded=true]:-rotate-90 transition-all duration-300" />
-                      }
-                      radius="sm"
-                      variant="light">
-                      {item.label}
-                    </Button>
-                  </DropdownTrigger>
+        <NavbarContent
+          className="hidden sm:flex gap-8"
+          justify="end">
+          <NavbarItem isActive={pathname === "/"}>
+            <Link href="/">Home</Link>
+          </NavbarItem>
+          {menuItems.map((item, index) => (
+            <div key={`${item.label}-${index}`}>
+              {item?.dropdown ? (
+                <Dropdown
+                  key={item.label}
+                  className="bg-white/40 !backdrop-blur-md">
+                  <NavbarItem>
+                    <DropdownTrigger>
+                      <Button
+                        disableRipple
+                        className="p-0 text-base bg-transparent data-[hover=true]:bg-transparent"
+                        endContent={
+                          <ChevronLeft className="rotate-0 group-aria-[expanded=true]:-rotate-90 transition-all duration-300" />
+                        }
+                        radius="sm"
+                        variant="light">
+                        {item.label}
+                      </Button>
+                    </DropdownTrigger>
+                  </NavbarItem>
+                  <DropdownMenu
+                    aria-label="Bidhee software company"
+                    className="min-w-fit max-w-[300px] "
+                    itemClasses={{
+                      base: "gap-4",
+                    }}>
+                    {item?.dropdown?.map((item, index) => (
+                      <DropdownItem key={`${item.label}-${index}`}>
+                        <NavbarItem
+                          key={`${item}-${index}`}
+                          isActive={pathname.startsWith(item.link)}>
+                          <Link href={item.link}>{item.label}</Link>
+                        </NavbarItem>
+                      </DropdownItem>
+                    ))}
+                  </DropdownMenu>
+                </Dropdown>
+              ) : (
+                <NavbarItem
+                  key={`${item}-${index}`}
+                  isActive={pathname.startsWith(item.link)}>
+                  <Link href={item.link}>{item.label}</Link>
                 </NavbarItem>
-                <DropdownMenu
-                  aria-label="Bidhee software company"
-                  className="min-w-fit max-w-[300px] "
-                  itemClasses={{
-                    base: "gap-4",
-                  }}>
-                  {item?.dropdown?.map((item, index) => (
-                    <DropdownItem key={`${item.label}-${index}`}>
-                      <NavbarItem
-                        key={`${item}-${index}`}
-                        isActive={pathname.startsWith(item.link)}>
-                        <Link href={item.link}>{item.label}</Link>
-                      </NavbarItem>
-                    </DropdownItem>
-                  ))}
-                </DropdownMenu>
-              </Dropdown>
-            ) : (
-              <NavbarItem
-                key={`${item}-${index}`}
-                isActive={pathname.startsWith(item.link)}>
-                <Link href={item.link}>{item.label}</Link>
-              </NavbarItem>
-            )}
-          </div>
-        ))}
-      </NavbarContent>
-      {/* <NavbarContent justify="end">
+              )}
+            </div>
+          ))}
+        </NavbarContent>
+        {/* <NavbarContent justify="end">
                 <NavbarItem className="hidden lg:flex">
                     <Link href="#">Login</Link>
                 </NavbarItem>
@@ -117,64 +120,65 @@ export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProp
                     </Button>
                 </NavbarItem>
             </NavbarContent> */}
-      <NavbarMenu>
-        <NavbarItem
-          isActive={pathname === "/"}
-          onClick={() => setIsMenuOpen(false)}>
-          <Link href="/">Home</Link>
-        </NavbarItem>
-        {menuItems.map((item, index) => (
-          <div key={`${item.label}-${index}`}>
-            {item?.dropdown ? (
-              <Dropdown key={item.label}>
-                <NavbarItem>
-                  <DropdownTrigger>
-                    <Button
-                      disableRipple
-                      className="p-0 text-lg bg-transparent data-[hover=true]:bg-transparent"
-                      endContent={
-                        <ChevronLeft className="rotate-0 group-aria-[expanded=true]:-rotate-90 transition-all duration-300" />
-                      }
-                      radius="sm"
-                      variant="light">
-                      {item.label}
-                    </Button>
-                  </DropdownTrigger>
-                </NavbarItem>
-                <DropdownMenu
-                  aria-label="Bidhee software company"
-                  className="w-[340px] bg-white/60"
-                  itemClasses={{
-                    base: "gap-4",
-                  }}>
-                  {item?.dropdown?.map((item, index) => (
-                    <DropdownItem
-                      key={`${item.label}-${index}`}
-                      onClick={() => setIsMenuOpen(false)}
-                      href={item.link}>
-                      <Link
-                        href={item.link}
-                        className="text-base">
+        <NavbarMenu>
+          <NavbarItem
+            isActive={pathname === "/"}
+            onClick={() => setIsMenuOpen(false)}>
+            <Link href="/">Home</Link>
+          </NavbarItem>
+          {menuItems.map((item, index) => (
+            <div key={`${item.label}-${index}`}>
+              {item?.dropdown ? (
+                <Dropdown key={item.label}>
+                  <NavbarItem>
+                    <DropdownTrigger>
+                      <Button
+                        disableRipple
+                        className="p-0 text-lg bg-transparent data-[hover=true]:bg-transparent"
+                        endContent={
+                          <ChevronLeft className="rotate-0 group-aria-[expanded=true]:-rotate-90 transition-all duration-300" />
+                        }
+                        radius="sm"
+                        variant="light">
                         {item.label}
-                      </Link>
-                    </DropdownItem>
-                  ))}
-                </DropdownMenu>
-              </Dropdown>
-            ) : (
-              <NavbarMenuItem
-                key={`${item}-${index}`}
-                isActive={pathname.startsWith(item.link)}>
-                <Link
-                  href={item.link}
-                  onClick={() => setIsMenuOpen(false)}>
-                  {item.label}
-                </Link>
-              </NavbarMenuItem>
-            )}
-          </div>
-        ))}
-      </NavbarMenu>
+                      </Button>
+                    </DropdownTrigger>
+                  </NavbarItem>
+                  <DropdownMenu
+                    aria-label="Bidhee software company"
+                    className="w-[340px] bg-white/60"
+                    itemClasses={{
+                      base: "gap-4",
+                    }}>
+                    {item?.dropdown?.map((item, index) => (
+                      <DropdownItem
+                        key={`${item.label}-${index}`}
+                        onClick={() => setIsMenuOpen(false)}
+                        href={item.link}>
+                        <Link
+                          href={item.link}
+                          className="text-base">
+                          {item.label}
+                        </Link>
+                      </DropdownItem>
+                    ))}
+                  </DropdownMenu>
+                </Dropdown>
+              ) : (
+                <NavbarMenuItem
+                  key={`${item}-${index}`}
+                  isActive={pathname.startsWith(item.link)}>
+                  <Link
+                    href={item.link}
+                    onClick={() => setIsMenuOpen(false)}>
+                    {item.label}
+                  </Link>
+                </NavbarMenuItem>
+              )}
+            </div>
+          ))}
+        </NavbarMenu>
+      </div>
     </Navbar>
   )
 }

@@ -31,7 +31,7 @@ const ContactForm = () => {
               {/* form top part containing mail icon and heading  */}
               <div className="flex flex-col md:flex-row justify-around items-start md:items-center pt-8 p-4">
                 {/* heading  */}
-                <h2 className="text-2xl md:text-3xl font-semibold">Send Us A Message</h2>
+                <h1 className="text-2xl md:text-3xl font-semibold">Send Us A Message</h1>
 
                 {/* mail svg icon  */}
                 <svg
