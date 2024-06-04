@@ -2,6 +2,7 @@ import Image from "next/image"
 import React from "react"
 import { IImage } from "../Types"
 import Link from "next/link"
+import Headings from "./ui/Headings"
 interface IStoryProps {
   title: string
   image: IImage
@@ -17,10 +18,13 @@ const Story = ({ image, title, children, action }: IStoryProps) => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2  py-20 container mx-auto px-2 md:px-0 gap-10">
         <div className="">
-          <h1 className="text-5xl font-bold">{title}</h1>
-          {children}
+          <Headings
+            title={title}
+            className="text-start"
+          />
+          <div className="max-h-[310px] overflow-clip">{children}</div>
           {action && (
-            <div className="mt-5">
+            <div className="mt-3 flex justify-end">
               <Link
                 href={action?.path}
                 className="btn btn-primary flex gap-1 border-b w-fit hover:text-primary px-2">

@@ -19,14 +19,14 @@ interface IProps {
 }
 const FactsOfTheDay = ({ description, image, title, classNames }: IProps) => {
   return (
-    <div className={cn("  ", classNames?.container)}>
+    <div className={cn("container mx-auto ", classNames?.container)}>
       <div className="grid md:grid-cols-2 gap-10">
         <div className="my-auto">
           <h1 className={cn("text-3xl font-bold", classNames?.title)}>{title}</h1>
           <p className={cn("text-lg mt-3", classNames?.description)}>{description}</p>
         </div>
         <div className={cn("my-auto", classNames?.image)}>
-          <div className="relative w-full aspect-video">
+          <div className="relative w-full ">
             <LightGalleryComponent>
               <Link
                 href={image.src}
@@ -37,7 +37,7 @@ const FactsOfTheDay = ({ description, image, title, classNames }: IProps) => {
                   alt={image.alt}
                   fill
                   sizes="100vw"
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-full !relative rounded-md"
                 />
               </Link>
             </LightGalleryComponent>

@@ -12,6 +12,8 @@ import FactsOfTheDay from "./components/FactsOfTheDay"
 import Blogs from "./components/Blogs"
 import Link from "next/link"
 import { Metadata } from "next"
+import Headings from "./components/ui/Headings"
+import ContactForm from "./components/contact/ContactForm"
 export const metadata: Metadata = {
   title: "Facts nepal",
   openGraph: {
@@ -44,7 +46,7 @@ async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
 export default async function Home() {
   const serviceList = await GetServiceList()
   const infoGraph = await GetInfoGraph()
-
+  console.log(serviceList)
   return (
     <div className="">
       <Hero
@@ -88,14 +90,14 @@ export default async function Home() {
           path: "/about",
           icon: <MoveRight />,
         }}>
-        <p className="text-lg mt-5">
+        <p className="text-base mt-5">
           A lack of proper and timely availability of data in Nepal has always remained a great challenge for all who
           believe in the power of accurate and contextual data for informed decision-making. In the past, a lot of data
           in Nepal was considered unattainable, and the available data was often deemed dated, misleading or incomplete,
           all of which contributed to the escalation of a data-dark situation in Nepal.
         </p>
 
-        <p className="text-lg mt-5 line-clamp-6  ">
+        <p className="text-base mt-5  ">
           Back in 2012, a small group of young, enthusiastic and, like-minded individuals got together with an idea to
           contribute to address the situation by forming a research company that collected and analyzed data to provide
           actionable and relevant information to cater to the data-driven needs of the people and organizations, from
@@ -126,25 +128,31 @@ export default async function Home() {
           card: "w-full aspect-square relative",
         }}
       />
-      <section className="bg-primary">
-        <div className="container mx-auto py-20">
-          <h1 className="text-cyan-500 text-3xl font-bold mb-5 md:mb-0">Fact of the day</h1>
-          <FactsOfTheDay
-            title="The world's 10 most mountainous countries"
-            image={{
-              src: "/images/facts/facts1.jpeg",
-              alt: "facts",
-            }}
-            classNames={{
-              title: "text-white text-3xl font-bold  ",
-              container: "",
-              image: "w-full aspect-video",
-              description: " text-white",
-            }}
-            description={`Note: Bhutan, a small south Asian country located in the eastern Himalaya, is the most mountainous country in the world. Bhutan average elevation of 10,000 feet(3,280 m) above sea level.`}
+      <section className="= py-20">
+        <div className="container mx-auto mb-10">
+          <Headings
+            title="Fact of the day"
+            className=""
+            text=""
+            path="/pictographs"
           />
         </div>
+        <FactsOfTheDay
+          title="The world's 10 most mountainous countries"
+          image={{
+            src: "/images/facts/facts1.jpeg",
+            alt: "facts",
+          }}
+          classNames={{
+            title: "text-xl font-bold  ",
+            container: "",
+            image: "w-full aspect-video",
+            description: " text-black",
+          }}
+          description={`Note: Bhutan, a small south Asian country located in the eastern Himalaya, is the most mountainous country in the world. Bhutan average elevation of 10,000 feet(3,280 m) above sea level.`}
+        />
       </section>
+
       <Publications
         title="Publications"
         footerBlur
@@ -160,7 +168,10 @@ export default async function Home() {
         <div className=" bg-primary after:content-[''] text-white md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
           <div className="py-20 container mx-auto col-span-3 z-50">
             <div className="max-w-lg px-2">
-              <h2 className="">Let&apos;s grow together.</h2>
+              <Headings
+                title="Join our team"
+                className="text-white"
+              />
               <p className="mt-3">
                 We&apos;re building a culture at HubSpot where amazing people (like you) can do their best work. If
                 you&apos;re ready to grow your career and help millions of organizations grow better, you&apos;ve come
@@ -169,7 +180,7 @@ export default async function Home() {
               <div className="mt-20">
                 <Link
                   href="/careers"
-                  className="bg-primary-500 mt-20 rounded-md text-white p-3 py-5 z-10 relative">
+                  className="bg-white text-black mt-20 rounded-md  p-3 py-5 z-10 relative">
                   View open positions
                 </Link>
               </div>
@@ -178,6 +189,12 @@ export default async function Home() {
         </div>
       </div>
       <Blogs />
+      <section className="py-20">
+        <div className="container mx-auto">
+          <p className="max-w-6xl mx-auto">Have a question? We&apos;re here to help.</p>
+          <ContactForm />
+        </div>
+      </section>
     </div>
   )
 }

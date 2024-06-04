@@ -1,6 +1,7 @@
 "use client"
 import { Button, Card, CardFooter, CardHeader, cn } from "@nextui-org/react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 
 import React from "react"
 import { IImage, IPublication } from "../Types"
@@ -19,6 +20,7 @@ interface IServicesProps {
   }
 }
 const Publications = ({ Publications, title, footerBlur, classNames, hasViewAll }: IServicesProps) => {
+  const router = useRouter()
   return (
     <div className={classNames?.container}>
       <div className="container mx-auto py-20">
@@ -32,11 +34,12 @@ const Publications = ({ Publications, title, footerBlur, classNames, hasViewAll 
             <Card
               isHoverable
               isPressable
+              onClick={() => router.push(`/publications/view/${publication.slug}`)}
               isFooterBlurred={footerBlur}
               key={index}
-              className={cn("w-full h-full relative p-6", classNames?.card)}>
-              <h2 className="text-black my-3">{publication.title}</h2>
-              <p className="line-clamp-6">{publication.description}</p>
+              className={cn("w-full h-full relative p-10", classNames?.card)}>
+              <h2 className="text-black my-2">{publication.title}</h2>
+              <p className="line-clamp-6 text-justify">{publication.description}</p>
             </Card>
           ))}
         </div>

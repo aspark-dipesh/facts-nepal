@@ -63,7 +63,7 @@ const Hero = ({ images, content, contentPosition, classNames, action }: IHeroPro
                 contentPosition === "m" && "justify-center",
                 contentPosition === "e" && "justify-end"
               )}>
-              <div className={cn("max-w-xl w-full h-72 !text-white", classNames?.description)}>
+              <div className={cn("max-w-xl w-full  !text-white", classNames?.description)}>
                 <h1 className={cn("text-2xl font-bold capitalize ", classNames?.title)}>{content?.title}</h1>
                 <p className={cn("text-lg font-semibold mt-5", classNames?.description)}>{content?.description}</p>
                 {action && (
