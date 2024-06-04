@@ -14,6 +14,8 @@ import Link from "next/link"
 import { Metadata } from "next"
 import Headings from "./components/ui/Headings"
 import ContactForm from "./components/contact/ContactForm"
+import Testimonials from "./components/about/Testimonials"
+import TestimonialSlider from "./components/testimonial"
 export const metadata: Metadata = {
   title: "Facts nepal",
   openGraph: {
@@ -138,6 +140,7 @@ export default async function Home() {
           />
         </div>
         <FactsOfTheDay
+          date=""
           title="The world's 10 most mountainous countries"
           image={{
             src: "/images/facts/facts1.jpeg",
@@ -195,6 +198,12 @@ export default async function Home() {
           <ContactForm />
         </div>
       </section>
+      <div className="py-20">
+        <div className="container mx-auto">
+          <Headings title="Testimonials" />
+        </div>
+        <TestimonialSlider />
+      </div>
     </div>
   )
 }

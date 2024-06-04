@@ -10,6 +10,7 @@ interface IProps {
   title: string
   image: IImage
   description: string
+  date: string
   classNames: {
     container?: string
     title?: string
@@ -17,9 +18,12 @@ interface IProps {
     description?: string
   }
 }
-const FactsOfTheDay = ({ description, image, title, classNames }: IProps) => {
+const FactsOfTheDay = ({ description, image, title, classNames, date }: IProps) => {
   return (
     <div className={cn("container mx-auto ", classNames?.container)}>
+      <div>
+        <p className="text-base  text-black ">{date}</p>
+      </div>
       <div className="grid md:grid-cols-2 gap-10">
         <div className="my-auto">
           <h1 className={cn("text-3xl font-bold", classNames?.title)}>{title}</h1>

@@ -11,6 +11,7 @@ interface IJob {
   slug: string
   type: string
   location: string
+  deadline: string
 }
 const categoryList = [
   {
@@ -66,7 +67,7 @@ export default async function Careers({ searchParams }: { searchParams: ParsedUr
             <div className="p-3 py-5 z-10 relative !w-full">
               <h1 className="text-base font-bold text-indigo-600">{item.title}</h1>
               <h2 className="">{item.department}</h2>
-              <p className="text-lg">{item.location}</p>
+              <p className="text-base font-bold">Deadline: {item.deadline}</p>
             </div>
             {/* apply now */}
             <Link

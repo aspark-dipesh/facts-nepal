@@ -173,7 +173,7 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
               <span>123 Main Street, Anytown USA</span>
             </div>
 
-            <div className="flex justify-center md:justify-start items-center gap-4">
+            <div className="flex justify-center md:justify-center items-center gap-4">
               <a
                 title="youtube"
                 href="#">

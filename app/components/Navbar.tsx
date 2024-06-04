@@ -33,14 +33,14 @@ export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProp
   return (
     <Navbar
       maxWidth="full"
-      className=""
+      className="border-b"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       isBlurred={isBlur}
       isBordered={isBorder}
       position={position}>
-      <div className="container mx-auto flex">
-        <NavbarContent>
+      <div className="container mx-auto flex items-center">
+        <NavbarContent className="">
           <NavbarBrand>
             <Link href="/">
               <Image

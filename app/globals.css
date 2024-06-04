@@ -9,7 +9,7 @@
   --swiper-theme-color :#ff0000 !important;
 }
 
-.swiper-slide {
+.mySwiper .swiper-slide {
   text-align: center;
   font-size: 18px;
   background: #fff;

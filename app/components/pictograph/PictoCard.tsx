@@ -10,13 +10,16 @@ export default function PictoCard({
   image,
   title,
   description,
+  date,
 }: {
   title: string
   description?: string
+  date?: string
   image: IImage
 }) {
   return (
     <Card className="w-[740px] mx-auto py-5">
+      <div>date: {date}</div>
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <div className="flex flex-col gap-1 items-start justify-center">

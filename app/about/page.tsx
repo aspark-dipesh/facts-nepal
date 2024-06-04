@@ -5,6 +5,19 @@ import HeadMessage from "../components/about/HeadMessage"
 import MissionVision from "../components/about/MissionVision"
 import Testimonials from "../components/about/Testimonials"
 import { isEven } from "../utils/Healpers"
+import Statistics from "../components/Statistics"
+import { IInfoGraph, IPaginatedData } from "../Types"
+async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/infography`, {
+    next: { revalidate: 10 },
+  })
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<IInfoGraph>
+  return data
+}
 export const metadata: Metadata = {
   title: "About Facts nepal",
   description: `Back in 2012, a small group of young, enthusiastic and, like-minded individuals got together with an idea to contribute
@@ -100,6 +113,7 @@ const AboutData = [
 ]
 
 export default async function About() {
+  const infoGraph = await GetInfoGraph()
   return (
     <div className="px-2 md:px-0">
       {AboutData.map((data, index) => (
@@ -118,6 +132,15 @@ export default async function About() {
           <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
         </ImageContentGrid>
       ))}
+      <Statistics
+        title=" "
+        classNames={{
+          container: "bg-primary",
+          statTitle: "text-white",
+          statValue: "text-white",
+        }}
+        StatisticsList={infoGraph.results}
+      />
       <Testimonials />
     </div>
   )

@@ -4,118 +4,137 @@
     "department": "Engineering",
     "slug": "software-development-intern",
     "type": "internships",
-    "location": "San Francisco, CA"
+    "location": "San Francisco, CA",
+    "deadline": "2025-10-01"
+    
   },
   {
     "title": "Marketing Specialist",
     "department": "Marketing",
     "slug": "marketing-specialist",
     "type": "full-time",
-    "location": "New York, NY"
+    "location": "New York, NY",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Graphic Designer",
     "department": "Design",
     "slug": "graphic-designer",
     "type": "part-time",
-    "location": "Austin, TX"
+    "location": "Austin, TX",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Community Outreach Volunteer",
     "department": "Community",
     "slug": "community-outreach-volunteer",
     "type": "voluntary",
-    "location": "Los Angeles, CA"
+    "location": "Los Angeles, CA",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Data Analyst Intern",
     "department": "Data Science",
     "slug": "data-analyst-intern",
     "type": "internships",
-    "location": "Chicago, IL"
+    "location": "Chicago, IL",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Project Manager",
     "department": "Project Management",
     "slug": "project-manager",
     "type": "full-time",
-    "location": "Seattle, WA"
+    "location": "Seattle, WA",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Customer Service Representative",
     "department": "Customer Service",
     "slug": "customer-service-representative",
     "type": "part-time",
-    "location": "Denver, CO"
+    "location": "Denver, CO",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Event Coordinator Volunteer",
     "department": "Events",
     "slug": "event-coordinator-volunteer",
     "type": "voluntary",
-    "location": "Miami, FL"
+    "location": "Miami, FL",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Human Resources Intern",
     "department": "Human Resources",
     "slug": "human-resources-intern",
     "type": "internships",
-    "location": "Boston, MA"
+    "location": "Boston, MA",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Financial Analyst",
     "department": "Finance",
     "slug": "financial-analyst",
     "type": "full-time",
-    "location": "Dallas, TX"
+    "location": "Dallas, TX",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Content Writer",
     "department": "Content",
     "slug": "content-writer",
     "type": "part-time",
-    "location": "Portland, OR"
+    "location": "Portland, OR",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Animal Shelter Volunteer",
     "department": "Animal Care",
     "slug": "animal-shelter-volunteer",
     "type": "voluntary",
-    "location": "San Diego, CA"
+    "location": "San Diego, CA",
+    "deadline": "2025-10-01"
   },
   {
     "title": "IT Support Intern",
     "department": "Information Technology",
     "slug": "it-support-intern",
     "type": "internships",
-    "location": "Houston, TX"
+    "location": "Houston, TX",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Sales Manager",
     "department": "Sales",
     "slug": "sales-manager",
     "type": "full-time",
-    "location": "Atlanta, GA"
+    "location": "Atlanta, GA",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Administrative Assistant",
     "department": "Administration",
     "slug": "administrative-assistant",
     "type": "part-time",
-    "location": "Phoenix, AZ"
+    "location": "Phoenix, AZ",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Environmental Conservation Volunteer",
     "department": "Environment",
     "slug": "environmental-conservation-volunteer",
     "type": "voluntary",
-    "location": "Salt Lake City, UT"
+    "location": "Salt Lake City, UT",
+    "deadline": "2025-10-01"
   },
   {
     "title": "Marketing Intern",
     "department": "Marketing",
     "slug": "marketing-intern",
     "type": "internships",
+    
+    "deadline": "2025-10-01",
     "location": "Philadelphia, PA"
   },
   {
@@ -123,6 +142,8 @@
     "department": "Operations",
     "slug": "operations-manager",
     "type": "full-time",
+    
+    "deadline": "2025-10-01",
     "location": "Charlotte, NC"
   },
   {
@@ -130,6 +151,8 @@
     "department": "Administration",
     "slug": "receptionist",
     "type": "part-time",
+    
+    "deadline": "2025-10-01",
     "location": "Las Vegas, NV"
   },
   {
@@ -137,6 +160,8 @@
     "department": "Health",
     "slug": "health-clinic-volunteer",
     "type": "voluntary",
+    
+    "deadline": "2025-10-01",
     "location": "Orlando, FL"
   }
 ]

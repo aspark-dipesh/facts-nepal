@@ -13,7 +13,7 @@ async function GetServiceList(): Promise<IPaginatedData<IService>> {
 }
 export default async function ServiceDetails({ params }: { params: { slug: string } }) {
   const serviceList = await GetServiceList()
-  console.log(params)
+
   return (
     <div className="">
       <div className="aspect-[12/5] relative">
