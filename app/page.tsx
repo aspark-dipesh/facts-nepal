@@ -48,7 +48,7 @@ async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
 export default async function Home() {
   const serviceList = await GetServiceList()
   const infoGraph = await GetInfoGraph()
-  console.log(serviceList)
+
   return (
     <div className="">
       <Hero
