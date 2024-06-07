@@ -1,3 +1,5 @@
+import dynamicIconImports from "lucide-react/dynamicIconImports";
+
 interface nav{
     label: string;
     link: string;
@@ -43,4 +45,5 @@ export interface IInfoGraph {
     id: number,
     title: string
     counter: number
+    icon_names: keyof typeof dynamicIconImports
 }

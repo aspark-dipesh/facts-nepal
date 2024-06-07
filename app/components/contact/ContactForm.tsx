@@ -40,11 +40,11 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                   width="33"
                   height="33"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="#fff"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round">
+                  strokeLinecap="round"
+                  strokeLinejoin="round">
                   <path
                     stroke="none"
                     d="M0 0h24v24H0z"

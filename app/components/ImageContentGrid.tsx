@@ -12,6 +12,7 @@ interface IProps {
     container?: string
     title?: string
     image?: string
+    imageContainer?: string
   }
   ordering?: {
     image: string
@@ -24,7 +25,11 @@ const ImageContentGrid = ({ image, title, children, ordering, classNames, subtit
     <div className={cn("py-10", classNames?.container)}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 container mx-auto">
         <div className={cn("", ordering?.image)}>
-          <div className="relative w-full aspect-[4/3]">
+          <div
+            className={cn(
+              "relative w-full ",
+              classNames?.imageContainer ? classNames?.imageContainer : "aspect-[4/3]"
+            )}>
             <Image
               src={image.src}
               alt={image.alt}

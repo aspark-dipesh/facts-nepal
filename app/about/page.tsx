@@ -9,7 +9,7 @@ import Statistics from "../components/Statistics"
 import { IInfoGraph, IPaginatedData } from "../Types"
 async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/infography`, {
-    next: { revalidate: 10 },
+    cache: "no-store",
   })
 
   if (!res.ok) {

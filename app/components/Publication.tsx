@@ -29,7 +29,7 @@ const Publications = ({ Publications, title, footerBlur, classNames, hasViewAll 
           className={classNames?.title}
           path={hasViewAll ? "/publications" : undefined}
         />
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-10 lg:gap-40 mt-10 place-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-10 lg:gap-20 mt-10 place-items-center">
           {Publications.map((publication, index) => (
             <Card
               isHoverable

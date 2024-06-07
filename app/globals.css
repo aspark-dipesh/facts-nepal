@@ -8,6 +8,14 @@
 :root{
   --swiper-theme-color :#ff0000 !important;
 }
+@layer components {
+  .container {
+      @apply px-2 max-w-[1400px] mx-auto md:!px-10 lg:!px-20
+    }
+  p{
+    @apply text-justify
+  }
+} 
 
 .mySwiper .swiper-slide {
   text-align: center;

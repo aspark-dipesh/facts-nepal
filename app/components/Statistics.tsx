@@ -3,6 +3,8 @@ import { cn } from "@nextui-org/react"
 import React from "react"
 import NumberTicker from "./ui/number-ticker"
 import { IInfoGraph } from "../Types"
+import Icon from "./Dynimicicon"
+
 interface IStatisticsProps {
   title: string
   StatisticsList: IInfoGraph[]
@@ -16,6 +18,7 @@ interface IStatisticsProps {
   }
 }
 const Statistics = ({ title, StatisticsList, classNames }: IStatisticsProps) => {
+  console.log(StatisticsList)
   return (
     <>
       <section className={cn("relative not-prose scroll-mt-[72px] ", classNames?.container)}>
@@ -24,22 +27,29 @@ const Statistics = ({ title, StatisticsList, classNames }: IStatisticsProps) => 
           <div className="flex flex-wrap justify-center -m-4 text-center">
             {StatisticsList.map((statistic, index) => (
               <div
-                className="p-4 md:w-1/4 sm:w-1/2 w-full min-w-[220px] text-center md:border-r md:last:border-none "
+                className="p-4 md:w-1/4 sm:w-1/2 w-full min-w-[220px] text-center md:border-r md:last:border-none flex items-end gap-5 "
                 key={index}>
-                <div
-                  className={cn(
-                    "font-heading text-[2.6rem] font-bold  lg:text-5xl xl:text-6xl",
-                    classNames?.statValue
-                  )}>
-                  <NumberTicker
-                    direction="up"
-                    delay={0}
-                    value={statistic.counter}
-                  />
-                </div>
-                <div
-                  className={cn("text-sm font-medium uppercase tracking-widest lg:text-base", classNames?.statTitle)}>
-                  {statistic.title}
+                <Icon
+                  className="text-[#b8b8b8]"
+                  name={statistic.icon_names}
+                  size={100}
+                />
+                <div>
+                  <div
+                    className={cn(
+                      "font-heading text-[2.6rem] font-bold  lg:text-5xl xl:text-6xl",
+                      classNames?.statValue
+                    )}>
+                    <NumberTicker
+                      direction="up"
+                      delay={0}
+                      value={statistic.counter}
+                    />
+                  </div>
+                  <div
+                    className={cn("text-sm font-medium uppercase tracking-widest lg:text-base", classNames?.statTitle)}>
+                    {statistic.title}
+                  </div>
                 </div>
               </div>
             ))}
