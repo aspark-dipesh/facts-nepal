@@ -4,17 +4,17 @@
       "link": "/about"
     },
     {
+      "label": "Services",
+      "link": "/services"
+    },
+    {
       "label": "Gallery",
       "link": "/gallery"
     },
     {
       "label": "Contact",
       "link": "/contact"
-    },{
-      "label": "Pictographs",
-      "link": "/pictographs"
     },
-
     {
       "label": "Careers",
       "link": "/careers"
@@ -34,7 +34,12 @@
         {
           "label": "Blogs",
           "link": "/news-and-blogs"
+        },
+        {
+          "label": "Pictographs",
+          "link": "/pictographs"
         }
+
       ]
     }
   ]

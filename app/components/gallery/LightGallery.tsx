@@ -13,9 +13,7 @@ import lgZoom from "lightgallery/plugins/zoom"
 import React from "react"
 
 const LightGalleryComponent = ({ children, className }: { children?: React.ReactNode; className?: string }) => {
-  const onInit = () => {
-    console.log("lightGallery has been initialized")
-  }
+  const onInit = () => {}
   return (
     <div>
       <LightGallery

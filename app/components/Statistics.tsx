@@ -18,7 +18,6 @@ interface IStatisticsProps {
   }
 }
 const Statistics = ({ title, StatisticsList, classNames }: IStatisticsProps) => {
-  console.log(StatisticsList)
   return (
     <>
       <section className={cn("relative not-prose scroll-mt-[72px] ", classNames?.container)}>

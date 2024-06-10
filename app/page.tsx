@@ -122,6 +122,7 @@ export default async function Home() {
 
       <Services
         title="What we do"
+        path="/services"
         footerBlur
         servicesList={serviceList.results}
         classNames={{
@@ -191,19 +192,20 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <Blogs />
-      <section className="py-20">
-        <div className="container mx-auto">
-          <p className="max-w-6xl mx-auto">Have a question? We&apos;re here to help.</p>
-          <ContactForm />
-        </div>
-      </section>
+
       <div className="py-20">
         <div className="container mx-auto">
           <Headings title="Testimonials" />
         </div>
         <TestimonialSlider />
       </div>
+      <section className="py-20">
+        <div className="container mx-auto">
+          <p className="max-w-6xl mx-auto">Have a question? We&apos;re here to help.</p>
+          <ContactForm />
+        </div>
+      </section>
+      <Blogs />
     </div>
   )
 }

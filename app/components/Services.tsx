@@ -15,6 +15,7 @@ interface IServicesProps {
   description?: string
   servicesList: IService[]
   footerBlur?: boolean
+  path?: string
   classNames?: {
     title?: string
     container?: string
@@ -22,15 +23,15 @@ interface IServicesProps {
     cardFooter?: string
   }
 }
-const Services = ({ servicesList, title, description, footerBlur, classNames }: IServicesProps) => {
+const Services = ({ servicesList, title, description, footerBlur, classNames, path }: IServicesProps) => {
   const router = useRouter()
   return (
     <div className={classNames?.container}>
-      <div className="container mx-auto py-20">
+      <div className="container mx-auto py-10">
         <Headings
           title={title}
           className={classNames?.title}
-          path=""
+          path={path}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-10 place-items-center">
           {servicesList.map((service, index) => (
