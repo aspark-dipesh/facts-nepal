@@ -29,10 +29,12 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
           <div className="p-2 md:p-4 h-full col-span-3">
             <form onSubmit={HandleSubmit}>
               {/* form top part containing mail icon and heading  */}
-              <div className="flex flex-col md:flex-row justify-around items-start md:items-center pt-8 p-4">
+              <div className="flex flex-col md:flex-row justify-around items-start md:items-center pt-8">
                 {/* heading  */}
-                <h1 className="text-2xl md:text-3xl font-semibold">Send Us A Message</h1>
-
+                <div className="w-full px-4 md:px-8">
+                  <p className="max-w-6xl mx-auto font-semibold">Have a question? We&apos;re here to help.</p>
+                  <h1 className="text-2xl md:text-3xl font-semibold">Send Us A Message</h1>
+                </div>
                 {/* mail svg icon  */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +73,7 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                     label=""
                     color="default"
                     variant="underlined"
-                    placeholder="Eg: John Doe"
+                    placeholder="full name"
                     classNames={{
                       input: "!text-black",
                     }}
@@ -89,7 +91,7 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                     errorMessage="Email is required"
                     label=""
                     variant="underlined"
-                    placeholder="Eg: QbPjv@example.com"
+                    placeholder="email"
                     classNames={{
                       input: "!text-black",
                     }}
@@ -107,7 +109,7 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                     type="tel"
                     label=""
                     variant="underlined"
-                    placeholder="Eg: 1234567890"
+                    placeholder="phone number"
                     classNames={{
                       input: "!text-black",
                     }}
@@ -125,7 +127,7 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                     type="text"
                     label=""
                     variant="underlined"
-                    placeholder="Eg: I want to hire you"
+                    placeholder="subject"
                     classNames={{
                       input: "!text-black",
                     }}
@@ -140,7 +142,7 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                   <textarea
                     rows={5}
                     className="w-full border border-gray-300 rounded-md p-2 bg-transparent"
-                    placeholder="Eg: I want to hire you"></textarea>
+                    placeholder=""></textarea>
                 </div>
               </div>
               <div className="flex items-center justify-center md:justify-end py-4 px-8">

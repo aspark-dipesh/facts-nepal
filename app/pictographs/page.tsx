@@ -1,3 +1,4 @@
+import Banner from "../components/Banner"
 import FactsOfTheDay from "../components/FactsOfTheDay"
 import PictoCard from "../components/pictograph/PictoCard"
 const PictoData = [
@@ -58,7 +59,14 @@ const PictoData = [
 ]
 export default function Pictograph() {
   return (
-    <div className="container mx-auto py-20 max-w-5xl">
+    <div className="container mx-auto  max-w-5xl">
+      <Banner
+        title="Pictograph"
+        breadcrumb={[
+          { label: "Home", path: "/" },
+          { label: "Pictograph", path: "/pictograph" },
+        ]}
+      />
       <div className="grid gap-10">
         {PictoData.map((picto, index) => (
           <FactsOfTheDay

@@ -1,6 +1,8 @@
 import Link from "next/link"
 import Publication from "../../data.json"
 import { Card } from "@nextui-org/react"
+import { SearchIcon } from "lucide-react"
+import BreadCrumbs from "@/app/components/BreadCrumbs"
 export default function NewsAndBlogsDetails({ params }: { params: { slug: string } }) {
   const data = Publication.filter((item) => item.slug === params.slug)[0]
   // select 5 randomly from Publication
@@ -8,8 +10,15 @@ export default function NewsAndBlogsDetails({ params }: { params: { slug: string
     .sort(() => Math.random() - 0.5)
     .slice(0, 5)
   return (
-    <div className="container mx-auto py-20">
-      <div className="grid grid-cols-10 gap-10">
+    <div className="container mx-auto pt-4">
+      <BreadCrumbs
+        BreadCrumbs={[
+          { label: "Home", path: "/" },
+          { label: "Blogs", path: "/news-and-blogs" },
+          { label: data?.title, path: `/news-and-blogs/view/${data?.slug}` },
+        ]}
+      />
+      <div className="grid grid-cols-10 gap-10 pt-10 pb-10">
         <div className="col-span-7">
           <h1 className="text-3xl md:text-6xl font-bold">{data?.title}</h1>
           <p className="text-lg mt-3 text-end">{data?.date}</p>
@@ -31,6 +40,22 @@ export default function NewsAndBlogsDetails({ params }: { params: { slug: string
         <div className="col-span-3">
           <div className="sticky top-20">
             <h1 className="text-xl font-bold my-3">Related Posts</h1>
+            <div className="flex justify-center my-10">
+              <form className="relative max-w-xl w-full flex">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <SearchIcon className="w-5 h-5 text-gray-500" />
+                </div>
+                <input
+                  type="text"
+                  className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Search"
+                  name="search"
+                />
+                <button className="text-white absolute right-2.5 bottom-2.5 bg-primary/70 hover:bg-primary/80 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
+                  Search
+                </button>
+              </form>
+            </div>
             {
               // select 5 randomly from Publication
 

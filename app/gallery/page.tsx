@@ -1,13 +1,21 @@
 import Image from "next/image"
 import LightGalleryComponent from "../components/gallery/LightGallery"
 import { Metadata } from "next"
+import Banner from "../components/Banner"
 export const metadata: Metadata = {
   title: "Gallery",
   description: "Here are some glimpses of our work.",
 }
 export default async function Gallery() {
   return (
-    <div className="container mx-auto py-20">
+    <div className="container mx-auto ">
+      <Banner
+        breadcrumb={[
+          { label: "Home", path: "/" },
+          { label: "Gallery", path: "/gallery" },
+        ]}
+        title="Gallery"
+      />
       {/* video section */}
       <h1 className="text-3xl font-semibold my-5">Videos</h1>
       <div className="grid grid-cols-4 gap-4">

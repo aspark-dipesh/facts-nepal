@@ -31,7 +31,7 @@ const Statistics = ({ title, StatisticsList, classNames }: IStatisticsProps) => 
                 <Icon
                   className="text-[#b8b8b8]"
                   name={statistic.icon_names}
-                  size={100}
+                  size={85}
                 />
                 <div>
                   <div

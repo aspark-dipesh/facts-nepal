@@ -5,6 +5,7 @@ import Image from "next/image"
 import { cn } from "./ui/magic-card"
 import LightGalleryComponent from "./gallery/LightGallery"
 import Link from "next/link"
+import { Calendar, CalendarDays } from "lucide-react"
 interface IProps {
   children?: React.ReactNode
   title: string
@@ -21,12 +22,16 @@ interface IProps {
 const FactsOfTheDay = ({ description, image, title, classNames, date }: IProps) => {
   return (
     <div className={cn("container mx-auto ", classNames?.container)}>
-      <div>
-        <p className="text-base  text-black ">{date}</p>
-      </div>
       <div className="grid md:grid-cols-2 gap-10">
         <div className="my-auto">
           <h1 className={cn("text-3xl font-bold", classNames?.title)}>{title}</h1>
+          {date && (
+            <p className="text-base flex justify-end my-3 gap-2 text-end  text-black font-semibold ">
+              <Calendar />
+              {date}
+            </p>
+          )}
+
           <p className={cn("text-lg mt-3", classNames?.description)}>{description}</p>
         </div>
         <div className={cn("my-auto", classNames?.image)}>

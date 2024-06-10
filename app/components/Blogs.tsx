@@ -5,7 +5,7 @@ import Headings from "./ui/Headings"
 
 const Blogs = () => {
   return (
-    <div className="wrapper py-20">
+    <div className="wrapper py-10">
       <div className="container mx-auto">
         <Headings
           title="Our Latest Blog Posts"

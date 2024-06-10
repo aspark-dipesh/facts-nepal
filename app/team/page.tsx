@@ -5,9 +5,18 @@ import Link from "next/link"
 import { Linkedin, LinkedinIcon } from "lucide-react"
 import ApplyForm from "../components/careers/ApplyForm"
 import ImageContentGrid from "../components/ImageContentGrid"
+import BreadCrumbs from "../components/BreadCrumbs"
 export default async function Team() {
   return (
     <div>
+      <div>
+        <BreadCrumbs
+          BreadCrumbs={[
+            { label: "Home", path: "/" },
+            { label: "Team", path: "/team" },
+          ]}
+        />
+      </div>
       <div className="w-full aspect-[12/4] relative">
         <div className="absolute w-full h-full bg-black/50 z-10">
           <div className="container mx-auto flex h-full justify-start items-end py-20">

@@ -7,7 +7,15 @@ import Publication from "../data.json"
 import { useEffect, useState } from "react"
 import { IPublication } from "@/app/Types"
 import Image from "next/image"
-
+import NewsCard from "@/app/components/NewsCard"
+import Banner from "@/app/components/Banner"
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window
+  return {
+    width,
+    height,
+  }
+}
 export default function NewsAndBlogs() {
   const category = [
     {
@@ -20,6 +28,8 @@ export default function NewsAndBlogs() {
     },
   ]
   const [filteredData, setFilteredData] = useState<IPublication[]>()
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
+  const [cardPerColumn, setCardPerColumn] = useState<number>(filteredData?.length! / 3)
 
   const pathname = usePathname()
   const params = useParams()
@@ -32,11 +42,38 @@ export default function NewsAndBlogs() {
       setFilteredData(Publication as IPublication[])
     }
   }, [params])
+
+  useEffect(() => {
+    setWindowDimensions(getWindowDimensions())
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions())
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+  useEffect(() => {
+    if (windowDimensions.width < 768) {
+      setCardPerColumn(Math.ceil(filteredData?.length! / 1))
+    }
+    if (windowDimensions.width < 1024) {
+      setCardPerColumn(Math.ceil(filteredData?.length! / 2))
+    }
+    if (windowDimensions.width > 1024) {
+      setCardPerColumn(Math.ceil(filteredData?.length! / 3))
+    }
+  }, [windowDimensions])
   return (
-    <div className="container mx-auto p-2 my-20">
-      <h1 className="text-3xl font-bold text-center">Blogs </h1>
+    <div className="container mx-auto p-2 ">
+      <Banner
+        title="Our Publication"
+        breadcrumb={[
+          { label: "Home", path: "/" },
+          { label: "Publication", path: "/publications" },
+        ]}
+      />
       {/* Search bar */}
-      <div className="flex justify-center my-10">
+      <div className="flex justify-center">
         <form className="relative max-w-xl w-full flex">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <SearchIcon className="w-5 h-5 text-gray-500" />
@@ -74,43 +111,49 @@ export default function NewsAndBlogs() {
                     }
                 </Tabs>
             </div> */}
-      <div className="grid  grid-cols-4 gap-5 mt-5">
-        {filteredData?.map((item) => (
-          <Card
-            key={item.title}
-            className="p-3">
-            <div className="w-full aspect-[4/3] relative">
-              <Image
-                src={"/images/blog-2.jpg"}
-                alt={item.title}
-                className="w-full h-full object-cover"
-                fill
-              />
-            </div>
-            <div className="mt-5 px-5">
-              <div className="flex">
-                <span className="text-sm font-bold text-primary/70">{item.date}</span>
-                {/* dot */}
-                <span className="text-sm font-bold text-primary/70 mx-3">•</span>
-                <span className="text-sm font-bold text-primary/70  capitalize">{item.category}</span>
-              </div>
-              <Link
-                href={`/news-and-blogs/view/${item.slug}`}
-                className="text-2xl font-bold hover:text-primary/80">
-                {item.title}
-              </Link>
-              <p className="text-sm line-clamp-4">{item.description}</p>
-              {/* learn more */}
-              <div className="mt-5 z-10">
-                <Link
-                  href={`/news-and-blogs/view/${item.slug}`}
-                  className="text-primary hover:text-primary/80 underline">
-                  Learn More...
-                </Link>
-              </div>
-            </div>
-          </Card>
-        ))}
+      <div className=" grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-5 mt-5">
+        <div className="flex flex-col gap-10">
+          {filteredData?.slice(0, cardPerColumn).map((item) => (
+            <NewsCard
+              key={item.title}
+              category={item.category}
+              date={item.date}
+              description={item.description}
+              image={"item.image"}
+              link={item.link}
+              title={item.title}
+              slug={`/publications/view/${item.slug}`}
+            />
+          ))}
+        </div>
+        <div className="flex flex-col gap-10">
+          {filteredData?.slice(cardPerColumn, cardPerColumn * 2).map((item) => (
+            <NewsCard
+              key={item.title}
+              category={item.category}
+              date={item.date}
+              description={item.description}
+              image={"item.image"}
+              link={item.link}
+              title={item.title}
+              slug={`/news-and-blogs/view/${item.slug}`}
+            />
+          ))}
+        </div>
+        <div className="flex flex-col gap-10">
+          {filteredData?.slice(cardPerColumn * 2).map((item) => (
+            <NewsCard
+              key={item.title}
+              category={item.category}
+              date={item.date}
+              description={item.description}
+              image={"item.image"}
+              link={item.link}
+              title={item.title}
+              slug={`/publications/view/${item.slug}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

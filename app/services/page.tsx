@@ -1,6 +1,8 @@
 import Image from "next/image"
 import { IPaginatedData, IService } from "../Types"
 import Services from "../components/Services"
+import BreadCrumbs from "../components/BreadCrumbs"
+import Banner from "../components/Banner"
 async function GetServiceList(): Promise<IPaginatedData<IService>> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/ourservices`, {
     next: { revalidate: 10 },
@@ -15,27 +17,20 @@ export default async function ServicesList() {
   const serviceList = await GetServiceList()
   return (
     <div>
-      <div className=" h-[500px] relative">
-        <div className="absolute inset-0 bg-black/20 z-10"></div>
-        <Image
-          src={"/images/servicesbanner.jpg"}
-          alt={serviceList.results[0].name}
-          fill
-          className="object-cover "
-          sizes="100vw"
-        />
-        <h1 className="z-20 absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 !text-5xl  ">
-          Our Services
-        </h1>
-      </div>
-
+      <Banner
+        title="Our Services"
+        breadcrumb={[
+          { label: "Home", path: "/" },
+          { label: "Services", path: "/services" },
+        ]}
+      />
       <Services
         title=""
         footerBlur
         servicesList={serviceList.results}
         classNames={{
           title: "text-black text-3xl font-bold text-center",
-          container: "py-10",
+          container: "",
           card: "w-full aspect-square relative",
         }}
       />

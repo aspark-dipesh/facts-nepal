@@ -16,7 +16,7 @@ interface IStoryProps {
 const Story = ({ image, title, children, action }: IStoryProps) => {
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2  py-20 container mx-auto px-2 md:px-0 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2  py-10 container mx-auto px-2 md:px-0 gap-10">
         <div className="">
           <Headings
             title={title}

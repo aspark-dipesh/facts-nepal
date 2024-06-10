@@ -7,6 +7,7 @@ import Testimonials from "../components/about/Testimonials"
 import { isEven } from "../utils/Healpers"
 import Statistics from "../components/Statistics"
 import { IInfoGraph, IPaginatedData } from "../Types"
+import Banner from "../components/Banner"
 async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/infography`, {
     cache: "no-store",
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 }
 const AboutData = [
   {
-    title: "About Us",
+    title: "Our story",
     description: `<p className='text-base mt-5'>A lack of proper and timely availability of data in Nepal has always remained a great challenge for all who
                     believe in the power of accurate and contextual data for informed decision-making. In the past, a lot of data
                     in Nepal was considered unattainable, and the available data was often deemed dated, misleading or incomplete,
@@ -116,6 +117,13 @@ export default async function About() {
   const infoGraph = await GetInfoGraph()
   return (
     <div className="px-2 md:px-0">
+      <Banner
+        title="About our company"
+        breadcrumb={[
+          { label: "Home", path: "/" },
+          { label: "About", path: "/about" },
+        ]}
+      />
       {AboutData.map((data, index) => (
         <ImageContentGrid
           key={index}

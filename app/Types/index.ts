@@ -24,6 +24,7 @@ export interface IPublication {
     link: string
     description: string
     slug: string
+    image?: string
     category: 'qualitative' | 'quantitative'
 }
 
@@ -46,4 +47,9 @@ export interface IInfoGraph {
     title: string
     counter: number
     icon_names: keyof typeof dynamicIconImports
+}
+
+export interface IBreadcrumb {
+    label: string
+    path: string
 }

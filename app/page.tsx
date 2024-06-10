@@ -193,15 +193,14 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="py-20">
+      <div className="py-10">
         <div className="container mx-auto">
           <Headings title="Testimonials" />
         </div>
         <TestimonialSlider />
       </div>
-      <section className="py-20">
+      <section className="py-10">
         <div className="container mx-auto">
-          <p className="max-w-6xl mx-auto">Have a question? We&apos;re here to help.</p>
           <ContactForm />
         </div>
       </section>

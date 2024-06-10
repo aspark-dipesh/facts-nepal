@@ -46,7 +46,7 @@ const Testimonials = [
 ]
 const TestimonialSlider = () => {
   return (
-    <div className="container mx-auto pb-20">
+    <div className="container mx-auto">
       <Swiper
         loop
         spaceBetween={30}
