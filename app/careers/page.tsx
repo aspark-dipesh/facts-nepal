@@ -6,6 +6,19 @@ import { ParsedUrlQuery } from "querystring"
 import jobs from "./data.json"
 import Link from "next/link"
 import Banner from "../components/Banner"
+import CardUi from "../components/ui/CardUi"
+import { ICareers, IPaginatedData } from "../Types"
+async function GetJobList(): Promise<IPaginatedData<ICareers>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/career/`, {
+    cache: "no-store",
+  })
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<ICareers>
+  return data
+}
 interface IJob {
   title: string
   department: string
@@ -33,11 +46,7 @@ const categoryList = [
   },
 ]
 export default async function Careers({ searchParams }: { searchParams: ParsedUrlQuery }) {
-  const JobList = jobs as IJob[]
-  const Filtered = JobList.filter(
-    (item) => item.type === (searchParams.type ? searchParams.type : categoryList[0].slug)
-  )
-
+  const JobList = await GetJobList()
   return (
     <>
       <Banner
@@ -68,13 +77,11 @@ export default async function Careers({ searchParams }: { searchParams: ParsedUr
           <VacanciesTab Categories={categoryList} />
         </div>
         <div className="mt-10 grid grid-cols-4 gap-5">
-          {Filtered.map((item) => (
-            <Card
-              className=""
-              key={item.slug}>
+          {JobList.results.map((item) => (
+            <CardUi key={item.slug}>
               <div className="p-3 py-5 z-10 relative !w-full">
                 <h1 className="text-base font-bold text-indigo-600">{item.title}</h1>
-                <h2 className="">{item.department}</h2>
+                <h2 className="text-sm">{item.department}</h2>
                 <p className="text-base font-bold">Deadline: {item.deadline}</p>
               </div>
               {/* apply now */}
@@ -83,7 +90,7 @@ export default async function Careers({ searchParams }: { searchParams: ParsedUr
                 className="p-3 m-3 rounded-md text-white z-10 relative bg-primary w-fit flex gap-2">
                 Apply Now <MoveRightIcon />
               </Link>
-            </Card>
+            </CardUi>
           ))}
         </div>
       </div>

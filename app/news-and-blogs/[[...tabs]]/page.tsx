@@ -1,68 +1,9 @@
 "use client"
-import { Card, Tab, Tabs } from "@nextui-org/react"
+
 import { SearchIcon } from "lucide-react"
-import Link from "next/link"
-import { usePathname, useParams, useSearchParams } from "next/navigation"
-import Publication from "../data.json"
-import { useEffect, useState } from "react"
-import { IPublication } from "@/app/Types"
-import Image from "next/image"
-import NewsCard from "@/app/components/NewsCard"
 import Banner from "@/app/components/Banner"
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window
-  return {
-    width,
-    height,
-  }
-}
+
 export default function NewsAndBlogs() {
-  const category = [
-    {
-      name: "Quantitative",
-      slug: "quantitative",
-    },
-    {
-      name: "Qualitative",
-      slug: "qualitative",
-    },
-  ]
-  const [filteredData, setFilteredData] = useState<IPublication[]>()
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
-  const [cardPerColumn, setCardPerColumn] = useState<number>(filteredData?.length! / 3)
-
-  const pathname = usePathname()
-  const params = useParams()
-  const searchParams = useSearchParams()
-
-  useEffect(() => {
-    if (params.tabs) {
-      setFilteredData(Publication.filter((item) => item.category === params?.tabs[0]) as IPublication[])
-    } else {
-      setFilteredData(Publication as IPublication[])
-    }
-  }, [params])
-
-  useEffect(() => {
-    setWindowDimensions(getWindowDimensions())
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions())
-    }
-
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-  useEffect(() => {
-    if (windowDimensions.width < 768) {
-      setCardPerColumn(Math.ceil(filteredData?.length! / 1))
-    }
-    if (windowDimensions.width < 1024) {
-      setCardPerColumn(Math.ceil(filteredData?.length! / 2))
-    }
-    if (windowDimensions.width > 1024) {
-      setCardPerColumn(Math.ceil(filteredData?.length! / 3))
-    }
-  }, [windowDimensions])
   return (
     <div className="container mx-auto p-2 ">
       <Banner
@@ -111,50 +52,6 @@ export default function NewsAndBlogs() {
                     }
                 </Tabs>
             </div> */}
-      <div className=" grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-5 mt-5">
-        <div className="flex flex-col gap-10">
-          {filteredData?.slice(0, cardPerColumn).map((item) => (
-            <NewsCard
-              key={item.title}
-              category={item.category}
-              date={item.date}
-              description={item.description}
-              image={"item.image"}
-              link={item.link}
-              title={item.title}
-              slug={`/publications/view/${item.slug}`}
-            />
-          ))}
-        </div>
-        <div className="flex flex-col gap-10">
-          {filteredData?.slice(cardPerColumn, cardPerColumn * 2).map((item) => (
-            <NewsCard
-              key={item.title}
-              category={item.category}
-              date={item.date}
-              description={item.description}
-              image={"item.image"}
-              link={item.link}
-              title={item.title}
-              slug={`/news-and-blogs/view/${item.slug}`}
-            />
-          ))}
-        </div>
-        <div className="flex flex-col gap-10">
-          {filteredData?.slice(cardPerColumn * 2).map((item) => (
-            <NewsCard
-              key={item.title}
-              category={item.category}
-              date={item.date}
-              description={item.description}
-              image={"item.image"}
-              link={item.link}
-              title={item.title}
-              slug={`/publications/view/${item.slug}`}
-            />
-          ))}
-        </div>
-      </div>
     </div>
   )
 }

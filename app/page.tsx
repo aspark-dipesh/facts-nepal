@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 }
 async function GetServiceList(): Promise<IPaginatedData<IService>> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/ourservices`, {
-    next: { revalidate: 10 },
+    cache: "no-store",
   })
   if (!res.ok) {
     throw new Error("Failed to fetch data")
@@ -34,9 +34,19 @@ async function GetServiceList(): Promise<IPaginatedData<IService>> {
   const data = (await res.json()) as IPaginatedData<IService>
   return data
 }
+async function GetPublications(): Promise<IPaginatedData<IPublication>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/ourpublication?limit=3`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<IPublication>
+  return data
+}
 async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/infography`, {
-    next: { revalidate: 10 },
+    cache: "no-store",
   })
 
   if (!res.ok) {
@@ -48,6 +58,7 @@ async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
 export default async function Home() {
   const serviceList = await GetServiceList()
   const infoGraph = await GetInfoGraph()
+  const publications = await GetPublications()
 
   return (
     <div className="">
@@ -166,7 +177,7 @@ export default async function Home() {
           card: "w-full relative rounded rounded-tr-[50px] rounded-br-[50px] rounded-bl-[50px] flex flex-col gap-10 justify-between",
         }}
         hasViewAll
-        Publications={Publication.slice(0, 3) as IPublication[]}
+        Publications={publications.results as IPublication[]}
       />
       <div className="relative">
         <div className=" bg-primary after:content-[''] text-white md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">

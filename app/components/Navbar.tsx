@@ -94,7 +94,11 @@ export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProp
                         <NavbarItem
                           key={`${item}-${index}`}
                           isActive={pathname.startsWith(item.link)}>
-                          <Link href={item.link}>{item.label}</Link>
+                          <Link
+                            href={item.link}
+                            className="w-full flex">
+                            {item.label}
+                          </Link>
                         </NavbarItem>
                       </DropdownItem>
                     ))}
@@ -153,11 +157,10 @@ export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProp
                     {item?.dropdown?.map((item, index) => (
                       <DropdownItem
                         key={`${item.label}-${index}`}
-                        onClick={() => setIsMenuOpen(false)}
-                        href={item.link}>
+                        onClick={() => setIsMenuOpen(false)}>
                         <Link
                           href={item.link}
-                          className="text-base">
+                          className="text-base w-full relative">
                           {item.label}
                         </Link>
                       </DropdownItem>

@@ -28,11 +28,14 @@ const FactsOfTheDay = ({ description, image, title, classNames, date }: IProps) 
           {date && (
             <p className="text-base flex justify-end my-3 gap-2 text-end  text-black font-semibold ">
               <Calendar />
-              {date}
+              {new Date(date).toDateString()}
             </p>
           )}
 
-          <p className={cn("text-lg mt-3", classNames?.description)}>{description}</p>
+          <p
+            className={cn("text-lg mt-3", classNames?.description)}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         </div>
         <div className={cn("my-auto", classNames?.image)}>
           <div className="relative w-full ">

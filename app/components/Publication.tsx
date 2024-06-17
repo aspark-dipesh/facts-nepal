@@ -38,8 +38,10 @@ const Publications = ({ Publications, title, footerBlur, classNames, hasViewAll 
               isFooterBlurred={footerBlur}
               key={index}
               className={cn("w-full h-full relative p-10", classNames?.card)}>
-              <h2 className="text-black my-2">{publication.title}</h2>
-              <p className="line-clamp-6 text-justify">{publication.description}</p>
+              <h2 className="text-black my-2">{publication.main_heading}</h2>
+              <p className="line-clamp-6 text-justify">
+                <div dangerouslySetInnerHTML={{ __html: publication.paragraph }} />
+              </p>
             </Card>
           ))}
         </div>

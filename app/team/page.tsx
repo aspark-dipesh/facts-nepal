@@ -1,12 +1,24 @@
 import Image from "next/image"
-import teamList from "./teamData.json"
-import { Card, CardBody, CardHeader } from "@nextui-org/react"
-import Link from "next/link"
-import { Linkedin, LinkedinIcon } from "lucide-react"
+
 import ApplyForm from "../components/careers/ApplyForm"
 import ImageContentGrid from "../components/ImageContentGrid"
 import BreadCrumbs from "../components/BreadCrumbs"
+import { IPaginatedData, ITeamMember } from "../Types"
+import TeamCard from "../components/team/TeamCard"
+
+async function GetTeamList(): Promise<IPaginatedData<ITeamMember>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/teammember`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<ITeamMember>
+  return data
+}
 export default async function Team() {
+  const teamList = await GetTeamList()
+
   return (
     <div>
       <div>
@@ -66,34 +78,12 @@ export default async function Team() {
       </ImageContentGrid>
       <div className="container mx-auto py-5">
         <h2 className=" font-bold ">Meet Our Team: Driving Excellence Through Expertise and Dedication</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mt-10">
-          {teamList.map((team, index) => (
-            <Card
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10">
+          {teamList.results.map((team, index) => (
+            <TeamCard
               key={index}
-              className="">
-              <CardBody className="overflow-visible ">
-                <div className="w-full aspect-square">
-                  <Image
-                    alt="Card background"
-                    className="object-cover rounded-xl"
-                    src={team.image}
-                    fill
-                  />
-                </div>
-              </CardBody>
-              <CardHeader className="pb-0 pt-2 p-4 flex-col items-start">
-                <h4 className="font-bold text-large">{team.name}</h4>
-                <p className="text-tiny uppercase font-bold">{team.position}</p>
-                <div className="text-default-500 flex justify-end w-full text-end">
-                  <Link
-                    href={team.linkedIn}
-                    target="_blank"
-                    className="text-lg rounded-md text-white bg-[#006097] p-1 mt-1">
-                    <LinkedinIcon fill="white" />
-                  </Link>
-                </div>
-              </CardHeader>
-            </Card>
+              team={team}
+            />
           ))}
         </div>
       </div>

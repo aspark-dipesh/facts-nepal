@@ -5,16 +5,16 @@ import React from "react"
 import { IPublication } from "../Types"
 import { CalendarDays } from "lucide-react"
 
-const NewsCard = ({ category, date, description, link, slug, title, image }: IPublication) => {
+const NewsCard = ({ category, main_heading, slug, paragraph, sub_heading, img, pdf_file, url, date }: IPublication) => {
   return (
     <Card
-      key={title}
+      key={main_heading}
       className="p-3">
-      {image && (
+      {img && (
         <div className="w-full aspect-[4/3] relative">
           <Image
             src={"/images/blog-2.jpg"}
-            alt={title}
+            alt={main_heading}
             className="w-full h-full object-cover"
             fill
           />
@@ -25,7 +25,7 @@ const NewsCard = ({ category, date, description, link, slug, title, image }: IPu
         <div className="flex">
           <span className="text-sm font-bold text-primary/70 flex items-center gap-1">
             <CalendarDays size={14} />
-            {date}
+            {date ? new Date(date).toDateString() : new Date().toDateString()}
           </span>
           {/* dot */}
           <span className="text-sm font-bold text-primary/70 mx-3">•</span>
@@ -34,9 +34,11 @@ const NewsCard = ({ category, date, description, link, slug, title, image }: IPu
         <Link
           href={`${slug}`}
           className="text-2xl font-semibold hover:text-primary/80">
-          {title}
+          {main_heading}
         </Link>
-        <p className="text-sm line-clamp-4">{description}</p>
+        <div className="text-sm line-clamp-4">
+          <div dangerouslySetInnerHTML={{ __html: paragraph }} />
+        </div>
         {/* learn more */}
         <div className="mt-5 z-10">
           <Link
