@@ -35,37 +35,41 @@ const Services = ({ servicesList, title, description, footerBlur, classNames, pa
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-10 place-items-center">
           {servicesList.map((service, index) => (
-            <Card
-              shadow="sm"
+            <Link
               key={index}
-              isHoverable
-              isPressable
-              onPress={() => router.prefetch(`/services/${service.id}`)}
-              className="h-full justify-start group">
-              <CardBody className="overflow-hidden p-0  aspect-square w-full flex-none">
-                <Image
-                  fill
-                  alt={service.name}
-                  className="object-cover group-hover:scale-110 transition-all duration-300"
-                  src={service.img}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                />
-              </CardBody>
-              <CardFooter className="text-small flex-col text-start">
-                <b>{service.name}</b>
-                <div
-                  className="line-clamp-3"
-                  dangerouslySetInnerHTML={{ __html: service.description || "" }}
-                />
-                {/* learn more */}
-                <Link
-                  className="flex justify-end w-full gap-1 items-center hover:text-primary-500"
-                  href={`/services/${service.id}`}>
-                  <MoveRight />
-                  learn more
-                </Link>
-              </CardFooter>
-            </Card>
+              href={`/services/${service.id}`}>
+              <Card
+                shadow="sm"
+                key={index}
+                isHoverable
+                isPressable
+                onPress={() => router.push(`/services/${service.id}`)}
+                className="h-full justify-start group">
+                <CardBody className="overflow-hidden p-0  aspect-square w-full flex-none">
+                  <Image
+                    fill
+                    alt={service.name}
+                    className="object-cover group-hover:scale-110 transition-all duration-300"
+                    src={service.img}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                  />
+                </CardBody>
+                <CardFooter className="text-small flex-col text-start">
+                  <b>{service.name}</b>
+                  <div
+                    className="line-clamp-3"
+                    dangerouslySetInnerHTML={{ __html: service.description || "" }}
+                  />
+                  {/* learn more */}
+                  <Link
+                    className="flex justify-end w-full gap-1 items-center hover:text-primary-500"
+                    href={`/services/${service.id}`}>
+                    <MoveRight />
+                    learn more
+                  </Link>
+                </CardFooter>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>

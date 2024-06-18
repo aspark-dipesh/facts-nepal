@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import React from "react"
 import { IImage, IPublication } from "../Types"
 import Headings from "./ui/Headings"
+import Link from "next/link"
 interface IServicesProps {
   hasViewAll?: boolean
   title: string
@@ -31,18 +32,22 @@ const Publications = ({ Publications, title, footerBlur, classNames, hasViewAll 
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-10 lg:gap-20 mt-10 place-items-center">
           {Publications.map((publication, index) => (
-            <Card
-              isHoverable
-              isPressable
-              onClick={() => router.prefetch(`/publications/view/${publication.slug}`)}
-              isFooterBlurred={footerBlur}
+            <Link
               key={index}
-              className={cn("w-full h-full relative p-10", classNames?.card)}>
-              <h2 className="text-black my-2">{publication.main_heading}</h2>
-              <p className="line-clamp-6 text-justify">
-                <div dangerouslySetInnerHTML={{ __html: publication.paragraph }} />
-              </p>
-            </Card>
+              href={`/publications/view/${publication.slug}`}>
+              <Card
+                isHoverable
+                isPressable
+                onClick={() => router.push(`/publications/view/${publication.slug}`)}
+                isFooterBlurred={footerBlur}
+                key={index}
+                className={cn("w-full h-full relative p-10", classNames?.card)}>
+                <h2 className="text-black my-2">{publication.main_heading}</h2>
+                <p className="line-clamp-6 text-justify">
+                  <div dangerouslySetInnerHTML={{ __html: publication.paragraph }} />
+                </p>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>
