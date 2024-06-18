@@ -1,10 +1,23 @@
 "use client"
+import { IOrganization, IPaginatedData } from "@/app/Types"
 import { Input } from "@nextui-org/react"
-import { Github, Instagram, Linkedin, MailPlus, MapPin, PhoneCall, Youtube } from "lucide-react"
-import React from "react"
+import { Facebook, Github, Instagram, Linkedin, MailPlus, MapPin, PhoneCall, Twitter, Youtube } from "lucide-react"
+import React, { useEffect } from "react"
 
 const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
   const [formData, setFormData] = React.useState({ name: "", email: "", message: "" })
+  const [organization, setOrganization] = React.useState<IOrganization>()
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/organization`)
+      if (!res.ok) {
+        throw new Error("Failed to fetch data")
+      }
+      const data = (await res.json()) as IPaginatedData<IOrganization>
+      setOrganization(data.results[0])
+    }
+    fetchData()
+  }, [])
   const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
   }
@@ -163,39 +176,54 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
             {/* email and icon  */}
             <div className="flex flex-col items-center justify-center ">
               <MailPlus />
-              <span>yourmail@support.com</span>
+              <span>{organization?.primary_comany_email}</span>
+              <span>{organization?.secondary_company_email}</span>
             </div>
             {/* contacts and icons */}
             <div className=" flex flex-col items-center justify-center gap-2">
               <PhoneCall />
-              <span>+91 9876543210</span>
+              <span>{organization?.primary_contact_number}</span>
+              <span>{organization?.primary_support_contact_number}</span>
             </div>
             <div className=" flex flex-col items-center justify-center">
               <MapPin />
-              <span>123 Main Street, Anytown USA</span>
+              <span className="text-center">{organization?.company_address}</span>
             </div>
 
             <div className="flex justify-center md:justify-center items-center gap-4">
-              <a
-                title="youtube"
-                href="#">
-                <Youtube className="h-8 w-8  text-red-600" />
-              </a>
-              <a
-                title="linkedin"
-                href="#">
-                <Linkedin className="h-8 w-8 text-blue-600" />
-              </a>
-              <a
-                title="instagram"
-                href="#">
-                <Instagram className="h-8 w-8 text-pink-600" />
-              </a>
-              <a
-                title="github"
-                href="#">
-                <Github className="h-8 w-8 text-black" />
-              </a>
+              {organization?.facebook_url && (
+                <a
+                  title="facebook"
+                  target="_blank"
+                  href={organization?.facebook_url}>
+                  <Facebook className="h-8 w-8 text-blue-600" />
+                </a>
+              )}
+              {organization?.twitter_url && (
+                <a
+                  title="twitter"
+                  target="_blank"
+                  href={organization?.twitter_url}>
+                  <Twitter className="h-8 w-8 text-blue-400" />
+                </a>
+              )}
+              {organization?.linkedin_url && (
+                <a
+                  title="linkedin"
+                  target="_blank"
+                  href={organization?.linkedin_url}>
+                  <Linkedin className="h-8 w-8 text-blue-700" />
+                </a>
+              )}
+
+              {organization?.instagram_url && (
+                <a
+                  title="instagram"
+                  target="_blank"
+                  href={organization?.instagram_url}>
+                  <Instagram className="h-8 w-8 text-pink-600" />
+                </a>
+              )}
             </div>
           </div>
         </div>

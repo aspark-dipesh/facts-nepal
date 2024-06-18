@@ -121,6 +121,7 @@ export default async function Home() {
           overwhelming.
         </p>
       </Story>
+
       <Statistics
         title=" "
         classNames={{
@@ -204,18 +205,18 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="py-10">
+      <div className="pt-10">
         <div className="container mx-auto">
           <Headings title="Testimonials" />
         </div>
         <TestimonialSlider />
       </div>
+      <Blogs />
       <section className="py-10">
         <div className="container mx-auto">
           <ContactForm />
         </div>
       </section>
-      <Blogs />
     </div>
   )
 }

@@ -38,14 +38,15 @@ const Services = ({ servicesList, title, description, footerBlur, classNames, pa
             <Card
               shadow="sm"
               key={index}
+              isHoverable
               isPressable
               onPress={() => router.push(`/services/${service.id}`)}
-              className="h-full justify-start">
-              <CardBody className="overflow-visible p-0  aspect-square w-full flex-none">
+              className="h-full justify-start group">
+              <CardBody className="overflow-hidden p-0  aspect-square w-full flex-none">
                 <Image
                   fill
                   alt={service.name}
-                  className="object-cover"
+                  className="object-cover group-hover:scale-110 transition-all duration-300"
                   src={service.img}
                   sizes="(min-width: 768px) 50vw, 100vw"
                 />

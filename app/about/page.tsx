@@ -66,7 +66,7 @@ export default async function About() {
         <div dangerouslySetInnerHTML={{ __html: AboutData.results[0].description }}></div>
       </ImageContentGrid>
 
-      {AboutData.results[0].additional_content.map((data, index) => (
+      {AboutData?.results[0]?.additional_content?.map((data, index) => (
         <ImageContentGrid
           key={index}
           image={{

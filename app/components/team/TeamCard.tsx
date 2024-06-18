@@ -8,7 +8,7 @@ import React from "react"
 const TeamCard = ({ team }: { team: ITeamMember }) => {
   return (
     <Card className="">
-      <CardBody className="overflow-visible ">
+      {/* <CardBody className="overflow-visible ">
         <div className="relative w-full aspect-square">
           <Image
             alt="Card background"
@@ -17,7 +17,7 @@ const TeamCard = ({ team }: { team: ITeamMember }) => {
             fill
           />
         </div>
-      </CardBody>
+      </CardBody> */}
       <CardHeader className="pb-0 pt-2 p-4 flex flex-col items-start justify-start  ">
         <h4 className="font-bold text-large">{team.full_name}</h4>
         <p className="text-tiny uppercase font-bold text-start">{team.designation}</p>

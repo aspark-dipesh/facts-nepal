@@ -1,9 +1,9 @@
 import React from "react"
-import { INavData } from "../Types"
+import { INavData, IOrganization } from "../Types"
 import { Mail, MapPin, Phone } from "lucide-react"
 import Image from "next/image"
 import NavData from "../navData.json"
-const Footer = () => {
+const Footer = ({ organization }: { organization?: IOrganization }) => {
   const menuItems: INavData[] = NavData
   const contactInformation = [
     {
@@ -34,13 +34,11 @@ const Footer = () => {
               className="mr-5 object-contain"
               alt="logo"
             />
-            <p className="max-w-xs mt-4 text-sm text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, accusantium.
-            </p>
+            <p className="max-w-xs mt-4 text-sm text-gray-600">{organization?.short_description}</p>
             <div className="flex mt-8 space-x-6 text-gray-600">
               <a
                 className="hover:opacity-75"
-                href="/ "
+                href={organization?.facebook_url || "/"}
                 target="_blank"
                 rel="noreferrer">
                 <span className="sr-only"> Facebook </span>
@@ -58,7 +56,7 @@ const Footer = () => {
               </a>
               <a
                 className="hover:opacity-75"
-                href="/ "
+                href={organization?.instagram_url || "/"}
                 target="_blank"
                 rel="noreferrer">
                 <span className="sr-only"> Instagram </span>
@@ -76,7 +74,7 @@ const Footer = () => {
               </a>
               <a
                 className="hover:opacity-75"
-                href="/ "
+                href={organization?.twitter_url || "#"}
                 target="_blank"
                 rel="noreferrer">
                 <span className="sr-only"> Twitter </span>
@@ -88,7 +86,7 @@ const Footer = () => {
                   <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                 </svg>
               </a>
-              <a
+              {/* <a
                 className="hover:opacity-75"
                 href="/ "
                 target="_blank"
@@ -105,8 +103,8 @@ const Footer = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-              </a>
-              <a
+              </a> */}
+              {/* <a
                 className="hover:opacity-75"
                 href="/ "
                 target="_blank"
@@ -123,7 +121,7 @@ const Footer = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-              </a>
+              </a> */}
             </div>
           </div>
           <div className="flex flex-wrap gap-8 lg:col-span-2">
@@ -166,17 +164,27 @@ const Footer = () => {
             <div className="flex-1 min-w-fit">
               <p className="font-medium">Contact information</p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm ">
-                {contactInformation.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start space-x-2 ">
-                    {item.icon}
-                    <div className="flex gap-2 ">
-                      <span className="hover:opacity-75 ">{item.title}</span> :{" "}
-                      <span className="hover:opacity-75 ">{item.value}</span>
-                    </div>
+                <div className="flex items-start space-x-2 ">
+                  <Phone className="h-5 w-5" />
+                  <div className="flex gap-2 ">
+                    <span className="hover:opacity-75 ">Contact</span> :{" "}
+                    <span className="hover:opacity-75 ">{organization?.primary_contact_number}</span>
                   </div>
-                ))}
+                </div>
+                <div className="flex items-start space-x-2 ">
+                  <Mail className="h-5 w-5" />
+                  <div className="flex gap-2 ">
+                    <span className="hover:opacity-75 ">E-Mail</span> :{" "}
+                    <span className="hover:opacity-75 ">{organization?.primary_comany_email}</span>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-2 ">
+                  <MapPin className="h-5 w-5" />
+                  <div className="flex gap-2 ">
+                    <span className="hover:opacity-75 ">Address</span> :{" "}
+                    <span className="hover:opacity-75 max-w-[200px] ">{organization?.company_address}</span>
+                  </div>
+                </div>
               </nav>
             </div>
           </div>

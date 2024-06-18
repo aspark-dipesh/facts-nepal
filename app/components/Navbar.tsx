@@ -15,17 +15,18 @@ import {
 } from "@nextui-org/react"
 import Link from "next/link"
 import { useState } from "react"
-import { INavData } from "../Types"
+import { INavData, IOrganization } from "../Types"
 import { usePathname } from "next/navigation"
-import { ChevronLeft } from "lucide-react"
+import { ChevronDown, ChevronLeft } from "lucide-react"
 import NavData from "../navData.json"
 import Image from "next/image"
 interface INavBarProps {
   isBlur?: boolean
   isBorder?: boolean
   position?: "sticky" | "static" | undefined
+  organization?: IOrganization
 }
-export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProps) {
+export default function NavbarLayout({ isBlur, isBorder, position, organization }: INavBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
   const menuItems: INavData[] = NavData
@@ -41,13 +42,14 @@ export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProp
       position={position}>
       <div className="container mx-auto flex items-center">
         <NavbarContent className="">
-          <NavbarBrand>
+          <NavbarBrand className="relative">
             <Link href="/">
               <Image
                 alt="logo"
-                src="/images/logoFacts.png"
-                width={100}
-                height={100}
+                src={organization?.org_logo || "/images/logo.png"}
+                className="object-contain"
+                width={150}
+                height={150}
               />
             </Link>
           </NavbarBrand>
@@ -61,7 +63,11 @@ export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProp
           className="hidden sm:flex gap-8"
           justify="end">
           <NavbarItem isActive={pathname === "/"}>
-            <Link href="/">Home</Link>
+            <Link
+              href="/"
+              className="w-full flex hover:text-primary/50 font-semibold ">
+              Home
+            </Link>
           </NavbarItem>
           {menuItems.map((item, index) => (
             <div key={`${item.label}-${index}`}>
@@ -73,9 +79,9 @@ export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProp
                     <DropdownTrigger>
                       <Button
                         disableRipple
-                        className="p-0 text-base bg-transparent data-[hover=true]:bg-transparent"
+                        className="p-0 text-base bg-transparent data-[hover=true]:bg-transparent gap-0 font-semibold"
                         endContent={
-                          <ChevronLeft className="rotate-0 group-aria-[expanded=true]:-rotate-90 transition-all duration-300" />
+                          <ChevronDown className="rotate-0 group-aria-[expanded=true]:rotate-90 transition-all duration-300" />
                         }
                         radius="sm"
                         variant="light">
@@ -96,7 +102,7 @@ export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProp
                           isActive={pathname.startsWith(item.link)}>
                           <Link
                             href={item.link}
-                            className="w-full flex">
+                            className="w-full flex hover:text-primary/50 font-semibold ">
                             {item.label}
                           </Link>
                         </NavbarItem>
@@ -107,6 +113,11 @@ export default function NavbarLayout({ isBlur, isBorder, position }: INavBarProp
               ) : (
                 <NavbarItem
                   key={`${item}-${index}`}
+                  className={`${
+                    item?.type === "button"
+                      ? "bg-primary p-2 text-white rounded-lg hover:bg-primary/80 font-semibold"
+                      : "hover:text-primary/50 font-semibold "
+                  }`}
                   isActive={pathname.startsWith(item.link)}>
                   <Link href={item.link}>{item.label}</Link>
                 </NavbarItem>

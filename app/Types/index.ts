@@ -9,6 +9,7 @@ export interface INavData extends nav{
     label: string;
     link: string;
     dropdown?: nav[]
+    type?: string
 }
 export interface IImage{
     src: string
@@ -112,4 +113,27 @@ export interface IPublication {
   pdf_file?: string;
   category: string;
   // css: any[];
+}
+
+export interface IOrganization {
+  id: number;
+  org_name: string;
+  org_logo: string;
+  website_url?: string;
+  copyright: string;
+  company_motto?:string ;
+  short_description: string;
+  primary_contact_number: string;
+  secondary_contact_number?: string;
+  primary_comany_email?: string;
+  secondary_company_email?: string;
+  primary_support_contact_number?: string;
+  secondary_support_contact_number?: string;
+  company_address?: string;
+  google_map?: string;
+  instagram_url?: string;
+  facebook_url?: string;
+  linkedin_url?: string;
+  twitter_url?: string;
+  youtube_url?: string;
 }

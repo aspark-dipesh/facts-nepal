@@ -1,28 +1,27 @@
 [
     {
-      "label": "About",
-      "link": "/about"
+      "label": "About US",
+      "link": "/",
+      "dropdown": [
+        {
+          "label": "About",
+          "link": "/about"
+        },
+        {
+          "label": "Our team",
+          "link": "/team"
+
+        },
+        {
+          "label": "Gallery",
+          "link": "/gallery"
+        }
+      ]
     },
     {
       "label": "Services",
       "link": "/services"
-    },
-    {
-      "label": "Gallery",
-      "link": "/gallery"
-    },
-    {
-      "label": "Contact",
-      "link": "/contact"
-    },
-    {
-      "label": "Careers",
-      "link": "/careers"
-    },
-    {
-      "label":"Team",
-      "link":"/team"
-    },
+    },    
     {
       "label": "Resources",
       "link": "/resources",
@@ -41,5 +40,10 @@
         }
 
       ]
+    },
+    {
+      "label": "Contact Us",
+      "link": "/contact",
+      "type":"button"
     }
   ]

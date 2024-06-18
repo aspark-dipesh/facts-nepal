@@ -17,7 +17,7 @@ async function PublicationDetails({ slug }: { slug: string }): Promise<IPublicat
 }
 export default async function NewsAndBlogsDetails({ params }: { params: { slug: string } }) {
   const publication = await PublicationDetails({ slug: params.slug })
-  console.log("publication", publication)
+
   // select 5 randomly from Publication
 
   return (
