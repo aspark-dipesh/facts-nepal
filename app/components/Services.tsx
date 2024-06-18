@@ -40,7 +40,7 @@ const Services = ({ servicesList, title, description, footerBlur, classNames, pa
               key={index}
               isHoverable
               isPressable
-              onPress={() => router.push(`/services/${service.id}`)}
+              onPress={() => router.prefetch(`/services/${service.id}`)}
               className="h-full justify-start group">
               <CardBody className="overflow-hidden p-0  aspect-square w-full flex-none">
                 <Image

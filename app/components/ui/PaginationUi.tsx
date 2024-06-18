@@ -6,7 +6,7 @@ import React from "react"
 const PaginationUi = ({ total, page }: { total: number; page: number }) => {
   const router = useRouter()
   const onchange = (page: number) => {
-    router.push(`?page=${page}`)
+    router.prefetch(`?page=${page}`)
   }
   return (
     <div>

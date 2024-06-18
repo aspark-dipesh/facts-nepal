@@ -34,7 +34,7 @@ const Publications = ({ Publications, title, footerBlur, classNames, hasViewAll 
             <Card
               isHoverable
               isPressable
-              onClick={() => router.push(`/publications/view/${publication.slug}`)}
+              onClick={() => router.prefetch(`/publications/view/${publication.slug}`)}
               isFooterBlurred={footerBlur}
               key={index}
               className={cn("w-full h-full relative p-10", classNames?.card)}>
