@@ -16,6 +16,7 @@ import Headings from "./components/ui/Headings"
 import ContactForm from "./components/contact/ContactForm"
 import Testimonials from "./components/about/Testimonials"
 import TestimonialSlider from "./components/testimonial"
+import NavTabs from "./components/ui/NavTab"
 export const metadata: Metadata = {
   title: "Facts nepal",
   openGraph: {
@@ -143,7 +144,10 @@ export default async function Home() {
           card: "w-full aspect-square relative",
         }}
       />
-      <section className="= py-20">
+      <section className="container mx-auto">
+        <NavTabs />
+      </section>
+      {/* <section className=" py-20">
         <div className="container mx-auto mb-10">
           <Headings
             title="Fact of the day"
@@ -167,7 +171,7 @@ export default async function Home() {
           }}
           description={`Note: Bhutan, a small south Asian country located in the eastern Himalaya, is the most mountainous country in the world. Bhutan average elevation of 10,000 feet(3,280 m) above sea level.`}
         />
-      </section>
+      </section> */}
 
       <Publications
         title="Publications"

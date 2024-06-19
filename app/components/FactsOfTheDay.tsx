@@ -21,7 +21,7 @@ interface IProps {
 }
 const FactsOfTheDay = ({ description, image, title, classNames, date }: IProps) => {
   return (
-    <div className={cn("container mx-auto ", classNames?.container)}>
+    <div className={cn(" mx-auto ", classNames?.container)}>
       <div className="grid md:grid-cols-2 gap-10">
         <div className="my-auto">
           <h1 className={cn("text-3xl font-bold", classNames?.title)}>{title}</h1>
