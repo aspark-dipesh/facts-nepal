@@ -66,32 +66,28 @@ export default async function Home() {
       <Hero
         images={[
           {
-            src: "https://source.unsplash.com/random/1200×500?city,buildings&1 ",
+            src: "/images/banner1.jpg",
             alt: "photo 1",
           },
           {
-            src: "https://source.unsplash.com/random/1200×500?city,buildings&2 ",
+            src: "/images/banner2.jpg",
             alt: "photo 2",
-          },
-          {
-            src: "https://source.unsplash.com/random/1200×500?city,buildings&3 ",
-            alt: "photo 3",
           },
         ]}
         contentPosition="m"
-        content={{
-          title: "Offering total research solutions for your business requirements",
-          description: "Collecting, processing and analyzing data",
-        }}
-        classNames={{
-          title: "text-primary text-3xl font-bold text-center",
-          container: "bg-black/20",
-          description: "text-white text-center",
-        }}
-        action={{
-          label: "Get Started",
-          path: "/contact",
-        }}
+        // content={{
+        //   title: "Offering total research solutions for your business requirements",
+        //   description: "Collecting, processing and analyzing data",
+        // }}
+        // classNames={{
+        //   title: "text-primary text-3xl font-bold text-center",
+        //   container: "bg-black/20",
+        //   description: "text-white text-center",
+        // }}
+        // action={{
+        //   label: "Get Started",
+        //   path: "/contact",
+        // }}
       />
       <Story
         title="Our Story"

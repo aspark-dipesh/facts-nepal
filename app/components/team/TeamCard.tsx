@@ -7,7 +7,9 @@ import React from "react"
 
 const TeamCard = ({ team }: { team: ITeamMember }) => {
   return (
-    <Card className="">
+    <Card
+      className=""
+      isHoverable>
       {/* <CardBody className="overflow-visible ">
         <div className="relative w-full aspect-square">
           <Image

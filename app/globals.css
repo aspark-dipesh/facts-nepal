@@ -22,7 +22,7 @@
   font-size: 18px;
   background: #fff;
   min-height: 60vh;
-  aspect-ratio: 12/5;
+  aspect-ratio:8/3;
   /* Center slide text vertically */
   display: flex;
   justify-content: center;
