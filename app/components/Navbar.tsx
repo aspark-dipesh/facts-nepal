@@ -15,7 +15,7 @@ import {
 } from "@nextui-org/react"
 import Link from "next/link"
 import { useState } from "react"
-import { INavData, IOrganization } from "../Types"
+import { INavData, INavMenu, IOrganization } from "../Types"
 import { usePathname } from "next/navigation"
 import { ChevronDown, ChevronLeft } from "lucide-react"
 import NavData from "../navData.json"
@@ -25,11 +25,11 @@ interface INavBarProps {
   isBorder?: boolean
   position?: "sticky" | "static" | undefined
   organization?: IOrganization
+  NavData: INavMenu
 }
-export default function NavbarLayout({ isBlur, isBorder, position, organization }: INavBarProps) {
+export default function NavbarLayout({ isBlur, isBorder, position, organization, NavData }: INavBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
-  const menuItems: INavData[] = NavData
 
   return (
     <Navbar
@@ -65,15 +65,15 @@ export default function NavbarLayout({ isBlur, isBorder, position, organization 
           <NavbarItem isActive={pathname === "/"}>
             <Link
               href="/"
-              className="w-full flex hover:text-primary/50 font-semibold ">
+              className="w-full flex hover:text-primary font-semibold ">
               Home
             </Link>
           </NavbarItem>
-          {menuItems.map((item, index) => (
-            <div key={`${item.label}-${index}`}>
-              {item?.dropdown ? (
+          {NavData.menu.map((item, index) => (
+            <div key={`${item.menuname}-${index}`}>
+              {item?.submenu?.length! > 0 ? (
                 <Dropdown
-                  key={item.label}
+                  key={item.menuname}
                   className="bg-white/40 !backdrop-blur-md">
                   <NavbarItem>
                     <DropdownTrigger>
@@ -85,7 +85,7 @@ export default function NavbarLayout({ isBlur, isBorder, position, organization 
                         }
                         radius="sm"
                         variant="light">
-                        {item.label}
+                        {item.menuname}
                       </Button>
                     </DropdownTrigger>
                   </NavbarItem>
@@ -95,15 +95,15 @@ export default function NavbarLayout({ isBlur, isBorder, position, organization 
                     itemClasses={{
                       base: "gap-4",
                     }}>
-                    {item?.dropdown?.map((item, index) => (
-                      <DropdownItem key={`${item.label}-${index}`}>
+                    {item?.submenu!.map((item, index) => (
+                      <DropdownItem key={`${item.sub_menu_name}-${index}`}>
                         <NavbarItem
                           key={`${item}-${index}`}
-                          isActive={pathname.startsWith(item.link)}>
+                          isActive={pathname.startsWith(item.menu_link)}>
                           <Link
-                            href={item.link}
-                            className="w-full flex hover:text-primary/50 font-semibold ">
-                            {item.label}
+                            href={item.menu_link}
+                            className="w-full flex hover:text-primary font-semibold ">
+                            {item.sub_menu_name}
                           </Link>
                         </NavbarItem>
                       </DropdownItem>
@@ -114,16 +114,21 @@ export default function NavbarLayout({ isBlur, isBorder, position, organization 
                 <NavbarItem
                   key={`${item}-${index}`}
                   className={`${
-                    item?.type === "button"
-                      ? "bg-primary p-2 text-white rounded-lg hover:bg-primary/80 font-semibold"
-                      : "hover:text-primary/50 font-semibold "
+                    item?.menuname === "contact"
+                      ? "bg-primary p-2 text-white rounded-lg hover:bg-primary font-semibold"
+                      : "hover:text-primary font-semibold "
                   }`}
-                  isActive={pathname.startsWith(item.link)}>
-                  <Link href={item.link}>{item.label}</Link>
+                  isActive={pathname.startsWith(item.menu_link)}>
+                  <Link href={item.menu_link || item.menuname}>{item.menuname}</Link>
                 </NavbarItem>
               )}
             </div>
           ))}
+          <NavbarItem
+            className={"bg-primary p-2 text-white rounded-lg hover:bg-primary font-semibold"}
+            isActive={pathname.startsWith("contact")}>
+            <Link href={"/contact"}>Contact</Link>
+          </NavbarItem>
         </NavbarContent>
         {/* <NavbarContent justify="end">
                 <NavbarItem className="hidden lg:flex">
@@ -141,10 +146,10 @@ export default function NavbarLayout({ isBlur, isBorder, position, organization 
             onClick={() => setIsMenuOpen(false)}>
             <Link href="/">Home</Link>
           </NavbarItem>
-          {menuItems.map((item, index) => (
-            <div key={`${item.label}-${index}`}>
-              {item?.dropdown ? (
-                <Dropdown key={item.label}>
+          {NavData.menu.map((item, index) => (
+            <div key={`${item.menuname}-${index}`}>
+              {item?.submenu ? (
+                <Dropdown key={item.menuname}>
                   <NavbarItem>
                     <DropdownTrigger>
                       <Button
@@ -155,7 +160,7 @@ export default function NavbarLayout({ isBlur, isBorder, position, organization 
                         }
                         radius="sm"
                         variant="light">
-                        {item.label}
+                        {item.menuname}
                       </Button>
                     </DropdownTrigger>
                   </NavbarItem>
@@ -165,14 +170,14 @@ export default function NavbarLayout({ isBlur, isBorder, position, organization 
                     itemClasses={{
                       base: "gap-4",
                     }}>
-                    {item?.dropdown?.map((item, index) => (
+                    {item?.submenu?.map((item, index) => (
                       <DropdownItem
-                        key={`${item.label}-${index}`}
+                        key={`${item.sub_menu_name}-${index}`}
                         onClick={() => setIsMenuOpen(false)}>
                         <Link
-                          href={item.link}
+                          href={item.menu_link}
                           className="text-base w-full relative">
-                          {item.label}
+                          {item.sub_menu_name}
                         </Link>
                       </DropdownItem>
                     ))}
@@ -181,11 +186,11 @@ export default function NavbarLayout({ isBlur, isBorder, position, organization 
               ) : (
                 <NavbarMenuItem
                   key={`${item}-${index}`}
-                  isActive={pathname.startsWith(item.link)}>
+                  isActive={pathname.startsWith(item.menu_link)}>
                   <Link
-                    href={item.link}
+                    href={item.menu_link || item.menuname}
                     onClick={() => setIsMenuOpen(false)}>
-                    {item.label}
+                    {item.menuname}
                   </Link>
                 </NavbarMenuItem>
               )}

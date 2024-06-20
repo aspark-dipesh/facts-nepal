@@ -5,7 +5,7 @@ import { Providers } from "./provider"
 import NavbarLayout from "./components/Navbar"
 import Footer from "./components/Footer"
 import PopupBanner from "./components/PopupBanner"
-import { IOrganization, IPaginatedData } from "./Types"
+import { INavMenu, IOrganization, IPaginatedData } from "./Types"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -21,6 +21,14 @@ async function GetOrganization(): Promise<IPaginatedData<IOrganization>> {
   const data = (await res.json()) as IPaginatedData<IOrganization>
   return data
 }
+async function GetMenuData(): Promise<IPaginatedData<INavMenu>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/navbar/`)
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<INavMenu>
+  return data
+}
 
 export default async function RootLayout({
   children,
@@ -28,7 +36,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const org = await GetOrganization()
-
+  const NavData = await GetMenuData()
   return (
     <html lang="en">
       <body className={poppins.className + ""}>
@@ -39,6 +47,7 @@ export default async function RootLayout({
           <PopupBanner />
           <div className="relative">
             <NavbarLayout
+              NavData={NavData.results[0]}
               position="sticky"
               organization={org.results[0]}
             />
