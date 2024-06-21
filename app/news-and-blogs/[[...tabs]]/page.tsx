@@ -3,7 +3,9 @@ import Banner from "@/app/components/Banner"
 import { IBlog, IPaginatedData } from "@/app/Types"
 import BlogsList from "@/app/components/blogs/BlogsList"
 async function getBlogs(): Promise<IPaginatedData<IBlog>> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`, {
+    cache: "no-store",
+  })
   if (!res.ok) {
     throw new Error("Failed to fetch data")
   }

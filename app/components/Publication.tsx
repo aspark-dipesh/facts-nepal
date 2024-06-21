@@ -33,6 +33,7 @@ const Publications = ({ Publications, title, footerBlur, classNames, hasViewAll 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-10 lg:gap-20 mt-10 place-items-center">
           {Publications.map((publication, index) => (
             <Link
+              className="h-full"
               key={index}
               href={`/publications/view/${publication.slug}`}>
               <Card
