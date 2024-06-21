@@ -13,7 +13,7 @@ const NewsCard = ({ category, main_heading, slug, paragraph, sub_heading, img, p
       {img && (
         <div className="w-full aspect-[4/3] relative">
           <Image
-            src={"/images/blog-2.jpg"}
+            src={img}
             alt={main_heading}
             className="w-full h-full object-cover"
             fill

@@ -1,27 +1,9 @@
 import React from "react"
-import { INavData, IOrganization } from "../Types"
+import { IMenu, INavData, IOrganization } from "../Types"
 import { Mail, MapPin, Phone } from "lucide-react"
 import Image from "next/image"
-import NavData from "../navData.json"
-const Footer = ({ organization }: { organization?: IOrganization }) => {
-  const menuItems: INavData[] = NavData
-  const contactInformation = [
-    {
-      title: "Phone",
-      value: "1-800-123-1234",
-      icon: <Phone />,
-    },
-    {
-      title: "Email",
-      value: "lD8pL@example.com",
-      icon: <Mail />,
-    },
-    {
-      title: "Address",
-      value: "123 Main Street, Anytown, USA 12345",
-      icon: <MapPin />,
-    },
-  ]
+
+const Footer = ({ organization, FooterData }: { organization?: IOrganization; FooterData: IMenu[] }) => {
   return (
     <footer className="bg-gradient-to-r from-gray-100 via-primary/40 to-gray-100">
       <div className="container py-16 mx-auto ">
@@ -125,71 +107,56 @@ const Footer = ({ organization }: { organization?: IOrganization }) => {
             </div>
           </div>
           <div className="flex flex-wrap gap-8 lg:col-span-2">
-            <div className="flex-1 min-w-fit">
-              <p className="font-medium">Company</p>
-              <nav className="flex flex-col mt-4 space-y-2 text-sm">
-                {menuItems
-                  .filter((item) => !item.dropdown)
-                  .map((item, index) => (
+            {FooterData?.map((item, index) => (
+              <div
+                key={index}
+                className="flex-1 min-w-fit">
+                <p className="font-medium">{item.menuname}</p>
+                <nav className="flex flex-col mt-4 space-y-2 text-sm">
+                  {item.submenu?.map((item, index) => (
                     <a
                       key={index}
                       className="hover:opacity-75"
-                      href={item.link}>
+                      href={item.menu_link}>
                       {" "}
-                      {item.label}{" "}
+                      {item.sub_menu_name}{" "}
                     </a>
                   ))}
-              </nav>
-            </div>
-            {menuItems
-              .filter((item) => item.dropdown)
-              .map((item, index) => (
-                <div
-                  key={index}
-                  className="flex-1 min-w-fit">
-                  <p className="font-medium">{item.label}</p>
-                  <nav className="flex flex-col mt-4 space-y-2 text-sm ">
-                    {item.dropdown?.map((dropdownItem, index) => (
-                      <a
-                        key={index}
-                        className="hover:opacity-75"
-                        href={dropdownItem.link}>
-                        {" "}
-                        {dropdownItem.label}{" "}
-                      </a>
-                    ))}
-                  </nav>
-                </div>
-              ))}
+                </nav>
+              </div>
+            ))}
+
             <div className="flex-1 min-w-fit">
               <p className="font-medium">Contact information</p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm ">
                 <div className="flex items-start space-x-2 ">
                   <Phone className="h-5 w-5" />
                   <div className="flex gap-2 ">
-                    <span className="hover:opacity-75 ">Contact</span> :{" "}
+                    <span className="hover:opacity-75 w-16 ">Contact</span> :{" "}
                     <span className="hover:opacity-75 ">{organization?.primary_contact_number}</span>
                   </div>
                 </div>
                 <div className="flex items-start space-x-2 ">
                   <Mail className="h-5 w-5" />
                   <div className="flex gap-2 ">
-                    <span className="hover:opacity-75 ">E-Mail</span> :{" "}
-                    <span className="hover:opacity-75 ">{organization?.primary_comany_email}</span>
+                    <span className="hover:opacity-75 w-16 ">E-Mail</span> :{" "}
+                    <span className="hover:opacity-75  ">{organization?.primary_comany_email}</span>
                   </div>
                 </div>
                 <div className="flex items-start space-x-2 ">
                   <MapPin className="h-5 w-5" />
                   <div className="flex gap-2 ">
-                    <span className="hover:opacity-75 ">Address</span> :{" "}
-                    <span className="hover:opacity-75 max-w-[200px] ">{organization?.company_address}</span>
+                    <span className="hover:opacity-75 w-16 ">Address</span> :{" "}
+                    <span className="hover:opacity-75 md:max-w-[200px] ">{organization?.company_address}</span>
                   </div>
                 </div>
               </nav>
             </div>
           </div>
         </div>
-        <p className="mt-8 text-xs text-gray-800">© 2022 Comany Name</p>
+        <p className="mt-8 text-xs text-gray-800">
+          © {new Date().getFullYear()} {organization?.copyright}
+        </p>
       </div>
     </footer>
   )

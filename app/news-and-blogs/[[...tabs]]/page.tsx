@@ -1,16 +1,24 @@
-"use client"
-
 import { SearchIcon } from "lucide-react"
 import Banner from "@/app/components/Banner"
-
-export default function NewsAndBlogs() {
+import { IBlog, IPaginatedData } from "@/app/Types"
+import BlogsList from "@/app/components/blogs/BlogsList"
+async function getBlogs(): Promise<IPaginatedData<IBlog>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`)
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<IBlog>
+  return data
+}
+export default async function NewsAndBlogs() {
+  const BlogsData = await getBlogs()
   return (
     <div className="container mx-auto p-2 ">
       <Banner
-        title="Our Publication"
+        title="Blogs"
         breadcrumb={[
           { label: "Home", path: "/" },
-          { label: "Publication", path: "/publications" },
+          { label: "Blogs", path: "/news-and-blogs" },
         ]}
       />
       {/* Search bar */}
@@ -30,6 +38,7 @@ export default function NewsAndBlogs() {
           </button>
         </form>
       </div>
+      <BlogsList filteredData={BlogsData.results} />
       {/* <div className="flex justify-center">
                 <Tabs variant={"underlined"} aria-label="Options"
                     classNames={{
