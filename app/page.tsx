@@ -122,7 +122,7 @@ export default async function Home() {
       <Statistics
         title=" "
         classNames={{
-          container: "bg-gradient-to-tl from-[#bd1b23] to-[#bd1b23] ",
+          container: "bg-[#FF3131] ",
           statTitle: "text-white",
           statValue: "text-white",
         }}
@@ -181,7 +181,7 @@ export default async function Home() {
         Publications={publications.results as IPublication[]}
       />
       <div className="relative">
-        <div className=" bg-gradient-to-tl from-[#bd1b23] to-[#bd1b23]  after:content-[''] text-white md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
+        <div className=" bg-[#FF2400]  after:content-[''] text-white md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
           <div className="py-20 container mx-auto col-span-3 z-50">
             <div className="max-w-lg px-2">
               <Headings
