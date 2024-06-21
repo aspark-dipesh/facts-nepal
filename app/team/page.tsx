@@ -162,7 +162,10 @@ export default async function Team() {
                 <div className="p-3 py-5 z-10 relative !w-full">
                   <h1 className="text-base font-bold text-indigo-600">{item.title}</h1>
                   <h2 className="text-sm">{item.department}</h2>
-                  <p className="text-base font-bold">Deadline: {item.deadline}</p>
+                  <p className="text-base font-bold mt-5">
+                    Deadline:{" "}
+                    {new Date(item?.deadline!) < new Date() ? " Closed" : new Date(item?.deadline!)?.toDateString()}
+                  </p>
                 </div>
                 {/* apply now */}
                 <Link

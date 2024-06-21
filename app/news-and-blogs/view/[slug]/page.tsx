@@ -1,40 +1,59 @@
 import Link from "next/link"
-import Publication from "../../data.json"
-import { Card } from "@nextui-org/react"
+
 import { SearchIcon } from "lucide-react"
 import BreadCrumbs from "@/app/components/BreadCrumbs"
-export default function NewsAndBlogsDetails({ params }: { params: { slug: string } }) {
-  const data = Publication.filter((item) => item.slug === params.slug)[0]
-  // select 5 randomly from Publication
-  const Related = Publication.filter((item) => item.category === data?.category)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 5)
+import { IBlog } from "@/app/Types"
+import Image from "next/image"
+async function GetBlogDetail({ slug }: { slug: string }) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}/`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IBlog
+  return data
+}
+export default async function NewsAndBlogsDetails({ params }: { params: { slug: string } }) {
+  const BlogDetail = await GetBlogDetail({ slug: params.slug })
   return (
     <div className="container mx-auto pt-4">
       <BreadCrumbs
         BreadCrumbs={[
           { label: "Home", path: "/" },
           { label: "Blogs", path: "/news-and-blogs" },
-          { label: data?.title, path: `/news-and-blogs/view/${data?.slug}` },
+          { label: BlogDetail?.title, path: `/news-and-blogs/view/${BlogDetail?.slug}` },
         ]}
       />
       <div className="grid grid-cols-10 gap-10 pt-10 pb-10">
         <div className="col-span-7">
-          <h1 className="text-3xl md:text-6xl font-bold">{data?.title}</h1>
-          <p className="text-lg mt-3 text-end">{data?.date}</p>
-          <p className="text-lg mt-3">{data?.description}</p>
+          {BlogDetail?.featured_image && (
+            <div className="my-10 relative aspect-[4/3]">
+              <Image
+                src={BlogDetail?.featured_image}
+                alt={BlogDetail?.title}
+                fill
+              />
+            </div>
+          )}
+          <h1 className="text-3xl md:text-6xl font-bold">{BlogDetail.title}</h1>
+          <p className="text-lg mt-3 text-end">{BlogDetail.published_date}</p>
+          <p className="text-lg mt-3">{BlogDetail.short_description}</p>
           {/* View pdf */}
           <div className="mt-5">
-            {data?.link && (
+            {BlogDetail.link && (
               <Link
-                href={data?.link}
+                href={BlogDetail.link}
                 target="_blank"
                 className="text-lg p-3 bg-primary-500 mt-10 rounded-md text-white">
                 View pdf
               </Link>
             )}
           </div>
-          <div>{data?.content}</div>
+          <div
+            className="mt-5"
+            dangerouslySetInnerHTML={{ __html: BlogDetail.content }}
+          />
         </div>
 
         <div className="col-span-3">
@@ -56,16 +75,14 @@ export default function NewsAndBlogsDetails({ params }: { params: { slug: string
                 </button>
               </form>
             </div>
-            {
-              // select 5 randomly from Publication
-
+            {/* {
               Related.map((item) => (
                 <Card
                   key={item.title}
                   className="p-3 mb-5">
                   <div className="flex">
                     <span className="text-sm font-bold text-primary/70">{item.date}</span>
-                    {/* dot */}
+
                     <span className="text-sm font-bold text-primary/70 mx-3">•</span>
                     <span className="text-sm font-bold text-primary/70  capitalize">{item.category}</span>
                   </div>
@@ -76,7 +93,7 @@ export default function NewsAndBlogsDetails({ params }: { params: { slug: string
                   </Link>
                 </Card>
               ))
-            }
+            } */}
           </div>
         </div>
       </div>

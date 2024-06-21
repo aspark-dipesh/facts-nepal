@@ -86,7 +86,7 @@ export default async function Careers({ searchParams }: { searchParams: ParsedUr
               </div>
               {/* apply now */}
               <Link
-                href={`/careers/${item.slug}`}
+                href={`/careers/${item.id}`}
                 className="p-3 m-3 rounded-md text-white z-10 relative bg-primary w-fit flex gap-2">
                 Apply Now <MoveRightIcon />
               </Link>

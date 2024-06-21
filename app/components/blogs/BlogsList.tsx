@@ -1,13 +1,13 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import NewsCard from "../NewsCard"
-import { IPublication } from "@/app/Types"
+import { IBlog, IPublication } from "@/app/Types"
 function getWindowDimensions() {
   return {
-    width: window?.innerWidth,
+    width: window.innerWidth,
   }
 }
-const PublicationLists = ({ filteredData }: { filteredData?: IPublication[] }) => {
+const BlogsList = ({ filteredData }: { filteredData?: IBlog[] }) => {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
   const [cardPerColumn, setCardPerColumn] = useState<number>(filteredData?.length! / 3)
 
@@ -37,15 +37,15 @@ const PublicationLists = ({ filteredData }: { filteredData?: IPublication[] }) =
         {filteredData?.slice(0, filteredData?.length === 4 ? 2 : cardPerColumn).map((item) => (
           <NewsCard
             key={item.slug}
-            date={item.date}
-            category={item.category}
-            paragraph={item.paragraph}
-            img={item.img}
-            url={item.url}
-            pdf_file={item.pdf_file}
-            main_heading={item.main_heading}
-            sub_heading={item.sub_heading}
-            slug={`/publications/view/${item.slug}`}
+            date={item.published_date}
+            category={item.category.toString()}
+            paragraph={item.content}
+            img={item.featured_image}
+            url={""}
+            pdf_file={""}
+            main_heading={item.title}
+            sub_heading={""}
+            slug={`/news-and-blogs/view/${item.slug}`}
           />
         ))}
       </div>
@@ -55,15 +55,15 @@ const PublicationLists = ({ filteredData }: { filteredData?: IPublication[] }) =
           .map((item) => (
             <NewsCard
               key={item.slug}
-              date={item.date}
-              category={item.category}
-              paragraph={item.paragraph}
-              img={item.img}
-              url={item.url}
-              pdf_file={item.pdf_file}
-              main_heading={item.main_heading}
-              sub_heading={item.sub_heading}
-              slug={`/publications/view/${item.slug}`}
+              date={item.published_date}
+              category={item.category.toString()}
+              paragraph={item.content}
+              img={item.featured_image}
+              url={""}
+              pdf_file={""}
+              main_heading={item.title}
+              sub_heading={""}
+              slug={`/news-and-blogs/view/${item.slug}`}
             />
           ))}
       </div>
@@ -71,15 +71,15 @@ const PublicationLists = ({ filteredData }: { filteredData?: IPublication[] }) =
         {filteredData?.slice(filteredData?.length === 4 ? 3 : cardPerColumn * 2).map((item) => (
           <NewsCard
             key={item.slug}
-            category={item.category}
-            paragraph={item.paragraph}
-            date={item.date}
-            img={item.img}
-            url={item.url}
-            pdf_file={item.pdf_file}
-            main_heading={item.main_heading}
-            sub_heading={item.sub_heading}
-            slug={`/publications/view/${item.slug}`}
+            date={item.published_date}
+            category={item.category.toString()}
+            paragraph={item.content}
+            img={item.featured_image}
+            url={""}
+            pdf_file={""}
+            main_heading={item.title}
+            sub_heading={""}
+            slug={`/news-and-blogs/view/${item.slug}`}
           />
         ))}
       </div>
@@ -87,4 +87,4 @@ const PublicationLists = ({ filteredData }: { filteredData?: IPublication[] }) =
   )
 }
 
-export default PublicationLists
+export default BlogsList

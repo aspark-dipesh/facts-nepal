@@ -39,6 +39,7 @@ const VacanciesTab = ({ Categories }: IProps) => {
             key={category.slug}
             title={
               <Link
+                scroll={false}
                 href={`${pathname}?type=${category.slug}`}
                 className="p-2 h-full">
                 {category.name}

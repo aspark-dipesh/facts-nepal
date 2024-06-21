@@ -137,3 +137,46 @@ export interface IOrganization {
   twitter_url?: string;
   youtube_url?: string;
 }
+
+
+export interface INavMenu {
+  name: string;
+  menu: IMenu[];
+  created_at: string;
+}
+export interface IMenu {
+   menuname: string,
+   menu_link: string
+   submenu?: ISubmenu[]
+}
+
+interface ISubmenu {
+  sub_menu_name: string
+  menu_link: string
+}
+
+export interface IFooterData {
+  footer_menu: IFooterMenu[]
+
+}
+export interface IFooterMenu{
+  name: string
+  menu: {
+    name: string
+    menu : IMenu[]
+  }
+}
+export interface IBlog {
+  id: number;
+  sorting_order: number;
+  title: string;
+  slug: string;
+  featured_image: string;
+  content: string;
+  is_published: boolean;
+  published_date: string;
+  author: string;
+  category: number;
+  short_description?: string;
+  link?: string;
+}
