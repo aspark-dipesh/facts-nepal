@@ -27,13 +27,13 @@ const Services = ({ servicesList, title, description, footerBlur, classNames, pa
   const router = useRouter()
   return (
     <div className={classNames?.container}>
-      <div className="container mx-auto py-10">
+      <div className="container mx-auto ">
         <Headings
           title={title}
           className={classNames?.title}
           path={path}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-10 place-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 place-items-center">
           {servicesList.map((service, index) => (
             <Link
               key={index}

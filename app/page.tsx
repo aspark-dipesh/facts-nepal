@@ -135,8 +135,8 @@ export default async function Home() {
         footerBlur
         servicesList={serviceList.results}
         classNames={{
-          title: "text-black text-3xl font-bold text-center",
-          container: "",
+          title: "text-black text-3xl font-bold text-center mb-10",
+          container: "py-10",
           card: "w-full aspect-square relative",
         }}
       />
