@@ -2,7 +2,7 @@ import Image from "next/image"
 import Hero from "./components/Hero"
 import { title } from "process"
 import Story from "./components/Story"
-import { MoveRight } from "lucide-react"
+import { Calendar, MoveRight } from "lucide-react"
 import Services from "./components/Services"
 import Statistics from "./components/Statistics"
 import Publications from "./components/Publication"
@@ -140,34 +140,33 @@ export default async function Home() {
           card: "w-full aspect-square relative",
         }}
       />
+      <section className=" container py-20">
+        <div className={" mx-auto "}>
+          <div className="grid md:grid-cols-2 gap-10">
+            <div className="my-auto">
+              <h1 className={"text-3xl font-bold"}>Why Facts nepal</h1>
+
+              <p className={"text-lg mt-3"}>
+                We are committed to providing our clients with the highest quality of service. We are committed to
+                providing our clients with the highest quality of service. We are committed to providing our clients
+                with the highest quality of service.
+              </p>
+            </div>
+            <div className={"my-auto"}>
+              <div className="relative w-full ">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  src="/trucks.mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="container mx-auto">
         <NavTabs />
       </section>
-      {/* <section className=" py-20">
-        <div className="container mx-auto mb-10">
-          <Headings
-            title="Fact of the day"
-            className=""
-            text=""
-            path="/pictographs"
-          />
-        </div>
-        <FactsOfTheDay
-          date=""
-          title="The world's 10 most mountainous countries"
-          image={{
-            src: "/images/facts/facts1.jpeg",
-            alt: "facts",
-          }}
-          classNames={{
-            title: "text-xl font-bold  ",
-            container: "",
-            image: "w-full aspect-video",
-            description: " text-black",
-          }}
-          description={`Note: Bhutan, a small south Asian country located in the eastern Himalaya, is the most mountainous country in the world. Bhutan average elevation of 10,000 feet(3,280 m) above sea level.`}
-        />
-      </section> */}
 
       <Publications
         title="Publications"
