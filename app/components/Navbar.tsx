@@ -30,7 +30,7 @@ interface INavBarProps {
 export default function NavbarLayout({ isBlur, isBorder, position, organization, NavData }: INavBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
-
+  console.log(NavData)
   return (
     <Navbar
       maxWidth="full"
@@ -118,8 +118,8 @@ export default function NavbarLayout({ isBlur, isBorder, position, organization,
                       ? "bg-primary p-2 text-white rounded-lg hover:bg-primary font-semibold"
                       : "hover:text-primary font-semibold "
                   }`}
-                  isActive={pathname.startsWith(item.menu_link)}>
-                  <Link href={item.menu_link || item.menuname}>{item.menuname}</Link>
+                  isActive={pathname.startsWith(item.menu_path)}>
+                  <Link href={item.menu_path || item.menuname}>{item.menuname}</Link>
                 </NavbarItem>
               )}
             </div>
@@ -186,9 +186,9 @@ export default function NavbarLayout({ isBlur, isBorder, position, organization,
               ) : (
                 <NavbarMenuItem
                   key={`${item}-${index}`}
-                  isActive={pathname.startsWith(item.menu_link)}>
+                  isActive={pathname.startsWith(item.menu_path)}>
                   <Link
-                    href={item.menu_link || item.menuname}
+                    href={item.menu_path || item.menuname}
                     onClick={() => setIsMenuOpen(false)}>
                     {item.menuname}
                   </Link>
