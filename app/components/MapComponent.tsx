@@ -1,10 +1,15 @@
+// import React from "react"
+
+// const MapComponent = () => {
+//   return <div>hello</div>
+// }
+
+// export default MapComponent
+
 import React from "react"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
-import L, { LatLngExpression } from "leaflet"
-import markerIcon from "leaflet/dist/images/marker-icon.png"
-import markerShadow from "leaflet/dist/images/marker-shadow.png"
-import markerRetina from "leaflet/dist/images/marker-icon-2x.png"
+import { LatLngExpression } from "leaflet"
 
 interface ILocation {
   position: LatLngExpression
@@ -22,13 +27,12 @@ const MapComponent = () => {
       text: "Branch office",
     },
   ] as ILocation[]
-  // as LatLngExpression[]
 
   return (
     <MapContainer
       center={[28.553104412291884, 83.9275572921903]}
       zoom={7}
-      scrollWheelZoom={false}>
+      scrollWheelZoom={true}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
