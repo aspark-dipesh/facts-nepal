@@ -3,6 +3,7 @@ import { IOrganization, IPaginatedData } from "@/app/Types"
 import { Input } from "@nextui-org/react"
 import { Facebook, Github, Instagram, Linkedin, MailPlus, MapPin, PhoneCall, Twitter, Youtube } from "lucide-react"
 import React, { useEffect } from "react"
+import MapComponent from "../MapComponent"
 
 const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
   const [formData, setFormData] = React.useState({ name: "", email: "", message: "" })
@@ -228,17 +229,7 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
           </div>
         </div>
       </div>
-      {hasMap && (
-        <div className="">
-          <h1 className="text-3xl md:text-4xl font-bold mt-20 mb-10 text-center">Visit our office</h1>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d589.3934265968564!2d85.33947907537132!3d27.705883416401385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a86296eacf%3A0x857b4d5307df8061!2sFacts%20Research%20and%20Analytics!5e0!3m2!1sen!2snp!4v1716204830644!5m2!1sen!2snp"
-            width="100%"
-            height="450"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      )}
+      {hasMap && <MapComponent />}
     </div>
   )
 }

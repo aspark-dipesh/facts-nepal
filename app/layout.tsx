@@ -6,7 +6,7 @@ import NavbarLayout from "./components/Navbar"
 import Footer from "./components/Footer"
 import PopupBanner from "./components/PopupBanner"
 import { IFooterData, IFooterMenu, INavMenu, IOrganization, IPaginatedData } from "./Types"
-
+import { APIProvider } from "@vis.gl/react-google-maps"
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -52,6 +52,7 @@ export default async function RootLayout({
         {/* <div className="fixed inset-0 ">
 
         </div> */}
+
         <Providers>
           <PopupBanner />
           <div className="relative">
