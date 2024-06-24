@@ -1,13 +1,23 @@
 "use client"
+
+import dynamic from "next/dynamic"
+
 import { IOrganization, IPaginatedData } from "@/app/Types"
 import { Input } from "@nextui-org/react"
 import { Facebook, Github, Instagram, Linkedin, MailPlus, MapPin, PhoneCall, Twitter, Youtube } from "lucide-react"
-import React, { useEffect } from "react"
-import MapComponent from "../MapComponent"
+import React, { useEffect, useMemo } from "react"
 
 const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
   const [formData, setFormData] = React.useState({ name: "", email: "", message: "" })
   const [organization, setOrganization] = React.useState<IOrganization>()
+  const MapComponent = useMemo(
+    () =>
+      dynamic(() => import("../MapComponent"), {
+        loading: () => <p>A map is loading</p>,
+        ssr: false,
+      }),
+    []
+  )
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/organization`)
