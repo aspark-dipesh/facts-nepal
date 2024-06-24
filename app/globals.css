@@ -50,3 +50,7 @@ ol {
     @apply text-lg md:text-2xl font-bold
   }
 }
+ .leaflet-container {
+   height: 500px;
+   width: 100%;
+ }
