@@ -30,7 +30,6 @@ interface INavBarProps {
 export default function NavbarLayout({ isBlur, isBorder, position, organization, NavData }: INavBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
-  console.log(NavData)
   return (
     <Navbar
       maxWidth="full"

@@ -44,7 +44,7 @@ const Services = ({ servicesList, title, description, footerBlur, classNames, pa
                 isHoverable
                 isPressable
                 onPress={() => router.push(`/services/${service.id}`)}
-                className="h-full justify-start group">
+                className="h-full justify-start group hover:bg-primary/40">
                 <CardBody className="overflow-hidden p-0  aspect-square w-full flex-none">
                   <Image
                     fill

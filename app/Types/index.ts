@@ -173,3 +173,10 @@ export interface IBlog {
   short_description?: string
   link?: string
 }
+
+export interface IClientAndPartner {
+  name: string
+  img: string
+  description: string
+  url?: string
+}

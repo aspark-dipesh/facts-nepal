@@ -2,10 +2,10 @@
 import React from "react"
 import { IImage } from "../Types"
 import Image from "next/image"
-import { cn } from "./ui/magic-card"
 import LightGalleryComponent from "./gallery/LightGallery"
 import Link from "next/link"
 import { Calendar, CalendarDays } from "lucide-react"
+import { cn } from "../utils/Healpers"
 interface IProps {
   children?: React.ReactNode
   title: string
