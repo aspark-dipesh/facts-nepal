@@ -24,7 +24,7 @@ const Publications = ({ Publications, title, footerBlur, classNames, hasViewAll 
   const router = useRouter()
   return (
     <div className={classNames?.container}>
-      <div className="container mx-auto py-20">
+      <div className="container mx-auto py-10">
         <Headings
           title={title}
           className={classNames?.title}

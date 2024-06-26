@@ -1,22 +1,23 @@
-import Image from "next/image"
 import Hero from "./components/Hero"
-import { title } from "process"
+
 import Story from "./components/Story"
-import { Calendar, MoveRight } from "lucide-react"
+import { MoveRight } from "lucide-react"
 import Services from "./components/Services"
 import Statistics from "./components/Statistics"
 import Publications from "./components/Publication"
-import Publication from "./news-and-blogs/data.json"
-import { IInfoGraph, IPaginatedData, IPublication, IService } from "./Types"
-import FactsOfTheDay from "./components/FactsOfTheDay"
+
+import { IClientAndPartner, IInfoGraph, IPaginatedData, IPublication, IService } from "./Types"
+
 import Blogs from "./components/Blogs"
 import Link from "next/link"
 import { Metadata } from "next"
 import Headings from "./components/ui/Headings"
 import ContactForm from "./components/contact/ContactForm"
-import Testimonials from "./components/about/Testimonials"
+
 import TestimonialSlider from "./components/testimonial"
 import NavTabs from "./components/ui/NavTab"
+import ClientMarquee from "./components/about/ClientMarquee"
+import Image from "next/image"
 export const metadata: Metadata = {
   title: "Facts nepal",
   openGraph: {
@@ -56,11 +57,21 @@ async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
   const data = (await res.json()) as IPaginatedData<IInfoGraph>
   return data
 }
+async function GetClientAndPartner(): Promise<IPaginatedData<IClientAndPartner>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/clientandpartner/`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<IClientAndPartner>
+  return data
+}
 export default async function Home() {
   const serviceList = await GetServiceList()
   const infoGraph = await GetInfoGraph()
   const publications = await GetPublications()
-
+  const clientAndPartner = await GetClientAndPartner()
   return (
     <div className="">
       <Hero
@@ -122,7 +133,7 @@ export default async function Home() {
       <Statistics
         title=" "
         classNames={{
-          container: "bg-[#FF3131] ",
+          container: "bg-primary ",
           statTitle: "text-white",
           statValue: "text-white",
         }}
@@ -140,8 +151,8 @@ export default async function Home() {
           card: "w-full aspect-square relative",
         }}
       />
-      <section className=" container py-20">
-        <div className={" mx-auto "}>
+      <section className=" bg-gradient-to-r from-gray-100 via-primary/40 to-gray-100">
+        <div className={"container py-10 mx-auto "}>
           <div className="grid md:grid-cols-2 gap-10">
             <div className="my-auto">
               <h1 className={"text-3xl font-bold"}>Why Facts nepal</h1>
@@ -164,7 +175,7 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <section className="container mx-auto">
+      <section className="container mx-auto py-10">
         <NavTabs />
       </section>
 
@@ -173,19 +184,19 @@ export default async function Home() {
         footerBlur
         classNames={{
           title: "text-black text-3xl font-bold text-center",
-          container: "",
+          container: "bg-gradient-to-r from-gray-100 via-primary/40",
           card: "w-full relative rounded rounded-tr-[50px] rounded-br-[50px] rounded-bl-[50px] flex flex-col gap-10 justify-between",
         }}
         hasViewAll
         Publications={publications.results as IPublication[]}
       />
       <div className="relative">
-        <div className=" bg-[#FF2400]  after:content-[''] text-white md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
+        <div className="  after:content-[''] text-black md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
           <div className="py-20 container mx-auto col-span-3 z-50">
             <div className="max-w-lg px-2">
               <Headings
                 title="Join our team"
-                className="text-white"
+                className=""
               />
               <p className="mt-3">
                 We&apos;re building a culture at HubSpot where amazing people (like you) can do their best work. If
@@ -195,7 +206,7 @@ export default async function Home() {
               <div className="mt-20">
                 <Link
                   href="/careers"
-                  className="bg-white text-black mt-20 rounded-md  p-3 py-5 z-10 relative">
+                  className="bg-primary text-white mt-20 rounded-md  p-3 py-5 z-10 relative">
                   View open positions
                 </Link>
               </div>
@@ -203,14 +214,45 @@ export default async function Home() {
           </div>
         </div>
       </div>
-
-      <div className="pt-10">
-        <div className="container mx-auto">
+      <section>
+        <div className="container mx-auto py-10">
+          <h2 className="text-3xl font-bold text-center mb-3">Our clients</h2>
+          <ClientMarquee Clients={clientAndPartner.results} />
+        </div>
+      </section>
+      <div className="py-10 bg-gradient-to-r from-gray-100 via-primary/40">
+        <div className="container mx-auto mb-3">
           <Headings title="Testimonials" />
         </div>
         <TestimonialSlider />
       </div>
       <Blogs />
+      <section className=" bg-gradient-to-r from-gray-100 via-primary/40 to-gray-100">
+        <div className={"container py-10 mx-auto "}>
+          <div className="grid md:grid-cols-1 gap-10">
+            <div className="my-auto">
+              <h1 className={"text-3xl font-bold text-center"}>Our Reach </h1>
+
+              <p className={"text-lg mt-3 text-center max-w-xl mx-auto"}>
+                We are committed to providing our clients with the highest quality of service. We are committed to
+                providing our clients with the highest quality of service. We are committed to providing our clients
+                with the highest quality of service.
+              </p>
+            </div>
+            <div className={"my-auto"}>
+              <div className="relative w-full ">
+                <Image
+                  src="/images/our-global-reach.gif"
+                  alt="map"
+                  fill
+                  sizes="100vw"
+                  className="object-cover w-full h-full !relative rounded-md"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="py-10">
         <div className="container mx-auto">
           <ContactForm />
