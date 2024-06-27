@@ -20,6 +20,7 @@ const VacanciesTab = ({ Categories }: IProps) => {
     } else {
       setSelected(searchParams.get("type") as string)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

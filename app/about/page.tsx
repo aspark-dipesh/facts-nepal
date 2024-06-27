@@ -3,8 +3,10 @@ import ImageContentGrid from "../components/ImageContentGrid"
 import Testimonials from "../components/about/Testimonials"
 import { isEven } from "../utils/Healpers"
 import Statistics from "../components/Statistics"
-import { IAboutUs, IInfoGraph, IPaginatedData } from "../Types"
+import { IAboutUs, IInfoGraph, IPaginatedData, ITestimonial } from "../Types"
 import Banner from "../components/Banner"
+import { ParsedUrlQuery } from "querystring"
+import Link from "next/link"
 async function GetInfoGraph(): Promise<IPaginatedData<IInfoGraph>> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/infography`, {
     cache: "no-store",
@@ -36,9 +38,25 @@ async function GetAboutData(): Promise<IPaginatedData<IAboutUs>> {
   return data
 }
 
-export default async function About() {
+async function GetTestimonial({ page }: { page: string }): Promise<IPaginatedData<ITestimonial>> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/basic/testimonials/?limit=12&offset=${4 * (parseInt(page) - 1)}`,
+    {
+      cache: "no-store",
+    }
+  )
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<ITestimonial>
+  return data
+}
+export default async function About({ searchParams }: { searchParams?: ParsedUrlQuery }) {
   const infoGraph = await GetInfoGraph()
   const AboutData = await GetAboutData()
+  const page = searchParams?.page?.toString() || "1"
+  const Testimonial = await GetTestimonial({ page })
+
   return (
     <div className="px-2 md:px-0">
       <Banner
@@ -48,6 +66,7 @@ export default async function About() {
           { label: "About", path: "/about" },
         ]}
       />
+      <Link href="#testimonials">Testimonial</Link>
 
       <ImageContentGrid
         image={{
@@ -94,7 +113,14 @@ export default async function About() {
         }}
         StatisticsList={infoGraph.results}
       />
-      <Testimonials />
+      <div
+        className="container"
+        id="testimonials">
+        <Testimonials
+          currentPage={page}
+          Testimonials={Testimonial}
+        />
+      </div>
     </div>
   )
 }

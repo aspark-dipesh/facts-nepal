@@ -1,15 +1,48 @@
 "use client"
-
 import dynamic from "next/dynamic"
-
 import { IOrganization, IPaginatedData } from "@/app/Types"
-import { Input } from "@nextui-org/react"
+import { Input, Spinner } from "@nextui-org/react"
 import { Facebook, Github, Instagram, Linkedin, MailPlus, MapPin, PhoneCall, Twitter, Youtube } from "lucide-react"
 import React, { useEffect, useMemo } from "react"
 
 const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
-  const [formData, setFormData] = React.useState({ name: "", email: "", message: "" })
+  const [formData, setFormData] = React.useState({
+    full_name: "",
+    email: "",
+    phone_number: "",
+    message: "",
+  })
   const [organization, setOrganization] = React.useState<IOrganization>()
+  const [loading, setLoading] = React.useState(false)
+  const [message, setMessage] = React.useState({
+    text: "",
+    type: "",
+  })
+  const HandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contactus/create/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+    if (!res.ok) {
+      setMessage({ text: "Cannot submit your form", type: "error" })
+      setLoading(false)
+      return
+    }
+    setLoading(false)
+    setMessage({ text: "Form submitted successfully", type: "success" })
+    setFormData({
+      full_name: "",
+      email: "",
+      phone_number: "",
+      message: "",
+    })
+  }
+
   const MapComponent = useMemo(
     () =>
       dynamic(() => import("../MapComponent"), {
@@ -29,9 +62,15 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
     }
     fetchData()
   }, [])
-  const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
+
+  useEffect(() => {
+    if (message.text) {
+      setTimeout(() => {
+        setMessage({ text: "", type: "" })
+      }, 5000)
+    }
+  }, [message])
+
   return (
     <div className="py-10 max-w-6xl mx-auto">
       {/* <div className="relative ">
@@ -88,13 +127,15 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                 {/* name input  */}
                 <div className="flex flex-col gap-1">
                   <label className="font-semibold ">
-                    Name <span className="text-red-500">&#42;</span>
+                    Full Name <span className="text-red-500">&#42;</span>
                   </label>
                   <Input
                     isRequired
                     errorMessage="Name is required"
                     type="text"
                     label=""
+                    value={formData.full_name}
+                    onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
                     color="default"
                     variant="underlined"
                     placeholder="full name"
@@ -111,6 +152,8 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                   </label>
                   <Input
                     type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     isRequired
                     errorMessage="Email is required"
                     label=""
@@ -130,6 +173,8 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                   <Input
                     isRequired
                     errorMessage="Phone number is required"
+                    value={formData.phone_number}
+                    onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
                     type="tel"
                     label=""
                     variant="underlined"
@@ -165,16 +210,32 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                   </label>
                   <textarea
                     rows={5}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full border border-gray-300 rounded-md p-2 bg-transparent"
                     placeholder=""></textarea>
                 </div>
               </div>
-              <div className="flex items-center justify-center md:justify-end py-4 px-8">
+              <div className="flex items-center justify-between  py-4 px-8">
+                {/* error message  */}
+                <div>
+                  {message.text && (
+                    <p
+                      className={` ${
+                        message.type === "success"
+                          ? "text-green-500 bg-green-200 p-2 rounded-lg"
+                          : "bg-red-200 p-2 rounded-lg text-red-500"
+                      } `}>
+                      {message.text}
+                    </p>
+                  )}
+                </div>
                 {/* submit button  */}
                 <button
                   type="submit"
+                  disabled={loading}
                   className="py-2 px-4 md:py-4 md:px-6 bg-primary text-white rounded-md border-2 border-white flex items-center gap-2 hover:scale-95 transition-all">
-                  Submit
+                  {loading ? <Spinner color="white" /> : "Submit"}
                 </button>
               </div>
             </form>
