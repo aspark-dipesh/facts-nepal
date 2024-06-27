@@ -54,3 +54,8 @@ ol {
    height: 500px;
    width: 100%;
  }
+
+/* scroll behavior  */
+html {
+  scroll-behavior: smooth;
+}

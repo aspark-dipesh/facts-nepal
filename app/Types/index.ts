@@ -31,6 +31,7 @@ export interface IService {
   name: string
   description: string
   img: string
+  slug: string
 }
 export interface IInfoGraph {
   id: number
@@ -179,4 +180,12 @@ export interface IClientAndPartner {
   img: string
   description: string
   url?: string
+}
+
+export interface ITestimonial {
+  id: number
+  name: string
+  position: string
+  img?: string
+  description: string
 }

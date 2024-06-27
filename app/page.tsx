@@ -6,7 +6,7 @@ import Services from "./components/Services"
 import Statistics from "./components/Statistics"
 import Publications from "./components/Publication"
 
-import { IClientAndPartner, IInfoGraph, IPaginatedData, IPublication, IService } from "./Types"
+import { IClientAndPartner, IInfoGraph, IPaginatedData, IPublication, IService, ITestimonial } from "./Types"
 
 import Blogs from "./components/Blogs"
 import Link from "next/link"
@@ -67,11 +67,36 @@ async function GetClientAndPartner(): Promise<IPaginatedData<IClientAndPartner>>
   const data = (await res.json()) as IPaginatedData<IClientAndPartner>
   return data
 }
+
+async function GetTestimonial(): Promise<IPaginatedData<ITestimonial>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/testimonials/?limit=4`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<ITestimonial>
+  return data
+}
+
+async function GetBlogs(): Promise<IPaginatedData<any>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<any>
+  return data
+}
 export default async function Home() {
   const serviceList = await GetServiceList()
   const infoGraph = await GetInfoGraph()
   const publications = await GetPublications()
   const clientAndPartner = await GetClientAndPartner()
+  const testimonialList = await GetTestimonial()
+  const blogs = await GetBlogs()
+  console.log(blogs)
   return (
     <div className="">
       <Hero
@@ -164,11 +189,12 @@ export default async function Home() {
               </p>
             </div>
             <div className={"my-auto"}>
-              <div className="relative w-full ">
+              <div className="relative w-full">
                 <video
                   autoPlay
                   muted
                   loop
+                  className="rounded-lg"
                   src="/trucks.mp4"></video>
               </div>
             </div>
@@ -224,7 +250,7 @@ export default async function Home() {
         <div className="container mx-auto mb-3">
           <Headings title="Testimonials" />
         </div>
-        <TestimonialSlider />
+        <TestimonialSlider Testimonials={testimonialList.results} />
       </div>
       <Blogs />
       <section className=" bg-gradient-to-r from-gray-100 via-primary/40 to-gray-100">

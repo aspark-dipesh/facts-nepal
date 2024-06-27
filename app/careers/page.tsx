@@ -12,21 +12,13 @@ async function GetJobList(): Promise<IPaginatedData<ICareers>> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/career/`, {
     cache: "no-store",
   })
-
   if (!res.ok) {
     throw new Error("Failed to fetch data")
   }
   const data = (await res.json()) as IPaginatedData<ICareers>
   return data
 }
-interface IJob {
-  title: string
-  department: string
-  slug: string
-  type: string
-  location: string
-  deadline: string
-}
+
 const categoryList = [
   {
     name: "Internships",
@@ -86,7 +78,7 @@ export default async function Careers({ searchParams }: { searchParams: ParsedUr
               </div>
               {/* apply now */}
               <Link
-                href={`/careers/${item.id}`}
+                href={`/careers/${item.slug}`}
                 className="p-3 m-3 rounded-md text-white z-10 relative bg-primary w-fit flex gap-2">
                 Apply Now <MoveRightIcon />
               </Link>

@@ -37,13 +37,12 @@ const Services = ({ servicesList, title, description, footerBlur, classNames, pa
           {servicesList.map((service, index) => (
             <Link
               key={index}
-              href={`/services/${service.id}`}>
+              href={`/services/${service.slug}`}>
               <Card
                 shadow="sm"
                 key={index}
                 isHoverable
                 isPressable
-                onPress={() => router.push(`/services/${service.id}`)}
                 className="h-full justify-start group hover:bg-primary/40">
                 <CardBody className="overflow-hidden p-0  aspect-square w-full flex-none">
                   <Image
