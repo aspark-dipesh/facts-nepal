@@ -24,7 +24,7 @@ const Testimonials = ({
   Testimonials: IPaginatedData<ITestimonial>
   currentPage: string
 }) => {
-  const totalPage = Math.ceil(Testimonials.count / 4)
+  const totalPage = Math.ceil(Testimonials.count / 12)
   const router = useRouter()
 
   const renderItem = ({ ref, key, value, isActive, className }: any) => {
