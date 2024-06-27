@@ -96,7 +96,6 @@ export default async function Home() {
   const clientAndPartner = await GetClientAndPartner()
   const testimonialList = await GetTestimonial()
   const blogs = await GetBlogs()
-  console.log(blogs)
   return (
     <div className="">
       <Hero

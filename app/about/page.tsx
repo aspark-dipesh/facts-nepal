@@ -40,7 +40,7 @@ async function GetAboutData(): Promise<IPaginatedData<IAboutUs>> {
 
 async function GetTestimonial({ page }: { page: string }): Promise<IPaginatedData<ITestimonial>> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/basic/testimonials/?limit=12&offset=${4 * (parseInt(page) - 1)}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/basic/testimonials/?limit=12&offset=${12 * (parseInt(page) - 1)}`,
     {
       cache: "no-store",
     }
@@ -66,8 +66,6 @@ export default async function About({ searchParams }: { searchParams?: ParsedUrl
           { label: "About", path: "/about" },
         ]}
       />
-      <Link href="#testimonials">Testimonial</Link>
-
       <ImageContentGrid
         image={{
           src: AboutData.results[0].img,

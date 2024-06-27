@@ -41,7 +41,7 @@ const TestimonialSlider = ({ Testimonials }: { Testimonials: ITestimonial[] }) =
                   <figcaption className="mt-10">
                     {item.img && (
                       <Image
-                        className="mx-auto h-10 w-10 rounded-full"
+                        className="mx-auto h-20 w-20 rounded-full"
                         alt=""
                         src={item.img}
                         width={100}
@@ -50,7 +50,9 @@ const TestimonialSlider = ({ Testimonials }: { Testimonials: ITestimonial[] }) =
                     )}
 
                     <div className="mt-4 flex items-center justify-center space-x-3 text-base">
-                      <div className="font-semibold text-gray-900">{item.name}</div>
+                      <div className="font-semibold text-gray-900">
+                        {item.name} {"-"} {item.position}
+                      </div>
                     </div>
                   </figcaption>
                 </figure>
