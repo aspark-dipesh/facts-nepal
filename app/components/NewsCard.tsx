@@ -8,6 +8,7 @@ import { CalendarDays } from "lucide-react"
 const NewsCard = ({ category, main_heading, slug, paragraph, sub_heading, img, pdf_file, url, date }: IPublication) => {
   return (
     <Card
+      isHoverable
       key={main_heading}
       className="p-3">
       {img && (

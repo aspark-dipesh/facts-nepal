@@ -200,8 +200,36 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <section className="container mx-auto py-10">
-        <NavTabs />
+      <section className="">
+        <div className={"container py-10 mx-auto "}>
+          <div className="grid md:grid-cols-1 gap-10">
+            <div className="my-auto">
+              <h1 className={"text-3xl font-bold text-center"}>Our Reach </h1>
+
+              <p className={"text-lg mt-3 text-center max-w-xl mx-auto"}>
+                We are committed to providing our clients with the highest quality of service. We are committed to
+                providing our clients with the highest quality of service. We are committed to providing our clients
+                with the highest quality of service.
+              </p>
+            </div>
+            <div className={"my-auto"}>
+              <div className="relative w-full ">
+                <Image
+                  src="/images/our-global-reach.gif"
+                  alt="map"
+                  fill
+                  sizes="100vw"
+                  className="object-cover w-full h-full !relative rounded-md"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className=" bg-gradient-to-r from-gray-100 via-primary/40 to-gray-100">
+        <div className="container mx-auto py-10 ">
+          <NavTabs />
+        </div>
       </section>
 
       <Publications
@@ -209,14 +237,14 @@ export default async function Home() {
         footerBlur
         classNames={{
           title: "text-black text-3xl font-bold text-center",
-          container: "bg-gradient-to-r from-gray-100 via-primary/40",
+          container: "",
           card: "w-full relative rounded rounded-tr-[50px] rounded-br-[50px] rounded-bl-[50px] flex flex-col gap-10 justify-between",
         }}
         hasViewAll
         Publications={publications.results as IPublication[]}
       />
       <div className="relative">
-        <div className="  after:content-[''] text-black md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
+        <div className=" bg-gradient-to-r from-gray-100 via-primary/40 after:content-[''] text-black md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
           <div className="py-20 container mx-auto col-span-3 z-50">
             <div className="max-w-lg px-2">
               <Headings
@@ -245,40 +273,15 @@ export default async function Home() {
           <ClientMarquee Clients={clientAndPartner.results} />
         </div>
       </section>
-      <div className="py-10 bg-gradient-to-r from-gray-100 via-primary/40">
+      <div className="py-10">
         <div className="container mx-auto mb-3">
           <Headings title="Testimonials" />
         </div>
         <TestimonialSlider Testimonials={testimonialList.results} />
       </div>
       <Blogs />
-      <section className=" bg-gradient-to-r from-gray-100 via-primary/40 to-gray-100">
-        <div className={"container py-10 mx-auto "}>
-          <div className="grid md:grid-cols-1 gap-10">
-            <div className="my-auto">
-              <h1 className={"text-3xl font-bold text-center"}>Our Reach </h1>
 
-              <p className={"text-lg mt-3 text-center max-w-xl mx-auto"}>
-                We are committed to providing our clients with the highest quality of service. We are committed to
-                providing our clients with the highest quality of service. We are committed to providing our clients
-                with the highest quality of service.
-              </p>
-            </div>
-            <div className={"my-auto"}>
-              <div className="relative w-full ">
-                <Image
-                  src="/images/our-global-reach.gif"
-                  alt="map"
-                  fill
-                  sizes="100vw"
-                  className="object-cover w-full h-full !relative rounded-md"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="py-10">
+      <section className="py-10 ">
         <div className="container mx-auto">
           <ContactForm />
         </div>
