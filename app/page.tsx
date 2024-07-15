@@ -6,7 +6,7 @@ import Services from "./components/Services"
 import Statistics from "./components/Statistics"
 import Publications from "./components/Publication"
 
-import { IClientAndPartner, IInfoGraph, IPaginatedData, IPublication, IService, ITestimonial } from "./Types"
+import { IClientAndPartner, IHomePage, IInfoGraph, IPaginatedData, IPublication, IService, ITestimonial } from "./Types"
 
 import Blogs from "./components/Blogs"
 import Link from "next/link"
@@ -18,6 +18,11 @@ import TestimonialSlider from "./components/testimonial"
 import NavTabs from "./components/ui/NavTab"
 import ClientMarquee from "./components/about/ClientMarquee"
 import Image from "next/image"
+import Story3 from "./layouts/Story3"
+import Story2 from "./layouts/Story2"
+import Story4 from "./layouts/Story4"
+import Testimonial3 from "./layouts/Testimonial3"
+import Testimonial2 from "./layouts/Testimonial2"
 export const metadata: Metadata = {
   title: "Facts nepal",
   openGraph: {
@@ -89,6 +94,16 @@ async function GetBlogs(): Promise<IPaginatedData<any>> {
   const data = (await res.json()) as IPaginatedData<any>
   return data
 }
+async function GetHomePage(): Promise<IPaginatedData<IHomePage>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/home/`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<IHomePage>
+  return data
+}
 export default async function Home() {
   const serviceList = await GetServiceList()
   const infoGraph = await GetInfoGraph()
@@ -96,8 +111,9 @@ export default async function Home() {
   const clientAndPartner = await GetClientAndPartner()
   const testimonialList = await GetTestimonial()
   const blogs = await GetBlogs()
+  const HomeData = await GetHomePage()
   return (
-    <div className="">
+    <div className="grid grid-cols-1 homepage">
       <Hero
         images={[
           {
@@ -124,40 +140,11 @@ export default async function Home() {
         //   path: "/contact",
         // }}
       />
-      <Story
-        title="Our Story"
-        image={{
-          src: "/images/research.jpeg",
-          alt: "story",
-        }}
-        action={{
-          label: "Learn more",
-          path: "/about",
-          icon: <MoveRight />,
-        }}>
-        <p className="text-base mt-5">
-          A lack of proper and timely availability of data in Nepal has always remained a great challenge for all who
-          believe in the power of accurate and contextual data for informed decision-making. In the past, a lot of data
-          in Nepal was considered unattainable, and the available data was often deemed dated, misleading or incomplete,
-          all of which contributed to the escalation of a data-dark situation in Nepal.
-        </p>
-
-        <p className="text-base mt-5  ">
-          Back in 2012, a small group of young, enthusiastic and, like-minded individuals got together with an idea to
-          contribute to address the situation by forming a research company that collected and analyzed data to provide
-          actionable and relevant information to cater to the data-driven needs of the people and organizations, from
-          both in and out of the country. The team knew that accuracy, reliability and trust-worthiness of the data
-          needed to be given special focus. Hence, they envisaged to not only work for their clients, but also increase
-          the awareness of the general public regarding the use and importance of data. This needed to be done in a
-          concise, simple and understandable manner, because they understood that data in its raw form can become
-          overwhelming.
-        </p>
-      </Story>
 
       <Statistics
         title=" "
         classNames={{
-          container: "bg-primary ",
+          container: "!bg-primary order-3",
           statTitle: "text-white",
           statValue: "text-white",
         }}
@@ -171,62 +158,12 @@ export default async function Home() {
         servicesList={serviceList.results}
         classNames={{
           title: "text-black text-3xl font-bold text-center mb-10  ",
-          container: "py-10",
+          container: "py-10 order-4",
           card: "w-full aspect-square relative",
         }}
       />
-      <section className=" bg-gradient-to-r from-gray-100 via-primary/40 to-gray-100">
-        <div className={"container py-10 mx-auto "}>
-          <div className="grid md:grid-cols-2 gap-10">
-            <div className="my-auto">
-              <h1 className={"text-3xl font-bold"}>Why Facts nepal</h1>
 
-              <p className={"text-lg mt-3"}>
-                We are committed to providing our clients with the highest quality of service. We are committed to
-                providing our clients with the highest quality of service. We are committed to providing our clients
-                with the highest quality of service.
-              </p>
-            </div>
-            <div className={"my-auto"}>
-              <div className="relative w-full">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  className="rounded-lg"
-                  src="/trucks.mp4"></video>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="">
-        <div className={"container py-10 mx-auto "}>
-          <div className="grid md:grid-cols-1 gap-10">
-            <div className="my-auto">
-              <h1 className={"text-3xl font-bold text-center"}>Our Reach </h1>
-
-              <p className={"text-lg mt-3 text-center max-w-xl mx-auto"}>
-                We are committed to providing our clients with the highest quality of service. We are committed to
-                providing our clients with the highest quality of service. We are committed to providing our clients
-                with the highest quality of service.
-              </p>
-            </div>
-            <div className={"my-auto"}>
-              <div className="relative w-full ">
-                <Image
-                  src="/images/our-global-reach.gif"
-                  alt="map"
-                  fill
-                  sizes="100vw"
-                  className="object-cover w-full h-full !relative rounded-md"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className=" bg-gradient-to-r from-gray-100 via-primary/40 to-gray-100">
+      <section className=" order-7">
         <div className="container mx-auto py-10 ">
           <NavTabs />
         </div>
@@ -237,14 +174,14 @@ export default async function Home() {
         footerBlur
         classNames={{
           title: "text-black text-3xl font-bold text-center",
-          container: "",
+          container: "order-8",
           card: "w-full relative rounded rounded-tr-[50px] rounded-br-[50px] rounded-bl-[50px] flex flex-col gap-10 justify-between",
         }}
         hasViewAll
         Publications={publications.results as IPublication[]}
       />
-      <div className="relative">
-        <div className=" bg-gradient-to-r from-gray-100 via-primary/40 after:content-[''] text-black md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
+      <section className="relative order-9">
+        <div className="  after:content-[''] text-black md:after:bg-[url('/images/career.png')] after:bg-right-top  after:bg-contain after:top-0 after:mt-auto after:absolute after:left-0 after:bottom-0 after:w-full after:h-full after:z-0 after:bg-no-repeat">
           <div className="py-20 container mx-auto col-span-3 z-50">
             <div className="max-w-lg px-2">
               <Headings
@@ -266,26 +203,77 @@ export default async function Home() {
             </div>
           </div>
         </div>
-      </div>
-      <section>
+      </section>
+      <section className="order-10">
         <div className="container mx-auto py-10">
           <h2 className="text-3xl font-bold text-center mb-3">Our clients</h2>
           <ClientMarquee Clients={clientAndPartner.results} />
         </div>
       </section>
-      <div className="py-10">
+      <section className="py-10 order-11">
         <div className="container mx-auto mb-3">
           <Headings title="Testimonials" />
         </div>
-        <TestimonialSlider Testimonials={testimonialList.results} />
-      </div>
+        <Testimonial3
+          Testimonials={testimonialList.results}
+          title={"Testimonials"}
+        />
+      </section>
       <Blogs />
 
-      <section className="py-10 ">
+      <section className="py-10 order-[13] ">
         <div className="container mx-auto">
           <ContactForm />
         </div>
       </section>
+      {HomeData.results[0].additional_content.map((content, index) => (
+        <section
+          key={content.id}
+          style={{ order: content.sorting_order }}>
+          {(index === 0 && (
+            <Story4
+              title={content.main_heading}
+              image={{
+                src: content.img,
+                alt: content.main_heading,
+              }}
+              action={{
+                label: content.action_label,
+                path: content.action_path,
+              }}>
+              <div dangerouslySetInnerHTML={{ __html: content.paragraph }} />
+            </Story4>
+          )) ||
+            (index === 1 && (
+              <Story
+                image={{
+                  src: content.img,
+                  alt: content.main_heading,
+                }}
+                title={content.main_heading}
+                action={{
+                  label: content.action_label,
+                  path: content.action_path,
+                }}>
+                <div dangerouslySetInnerHTML={{ __html: content.paragraph }} />
+              </Story>
+            )) ||
+            (index === 2 && (
+              <Story
+                title={content.main_heading}
+                image={{
+                  src: content.img,
+                  alt: content.main_heading,
+                }}
+                action={{
+                  label: content.action_label,
+                  path: content.action_path,
+                }}>
+                <div dangerouslySetInnerHTML={{ __html: content.paragraph }} />
+              </Story>
+            ))}
+        </section>
+      ))}
     </div>
   )
 }

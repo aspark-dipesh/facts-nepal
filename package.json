@@ -17,6 +17,7 @@
     "framer-motion": "^11.2.12",
     "google-map-react": "^2.2.1",
     "leaflet": "^1.9.4",
+    "keen-slider": "^6.8.6",
     "lightgallery": "^2.7.2",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
