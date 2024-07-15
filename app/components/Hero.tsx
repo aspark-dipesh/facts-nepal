@@ -31,7 +31,11 @@ interface IHeroProps {
 }
 const Hero = ({ images, content, contentPosition, classNames, action }: IHeroProps) => {
   return (
-    <div className="relative">
+    <section
+      className="relative"
+      style={{
+        order: 0,
+      }}>
       <Swiper
         loop
         spaceBetween={30}
@@ -86,7 +90,7 @@ const Hero = ({ images, content, contentPosition, classNames, action }: IHeroPro
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </section>
   )
 }
 

@@ -1,8 +1,10 @@
 import Image from "next/image"
 import React from "react"
-import { IImage } from "../Types"
+
 import Link from "next/link"
-import Headings from "./ui/Headings"
+
+import { IImage } from "@/app/Types"
+import Headings from "../components/ui/Headings"
 interface IStoryProps {
   title: string
   image: IImage
@@ -13,7 +15,7 @@ interface IStoryProps {
     path?: string
   }
 }
-const Story = ({ image, title, children, action, sub_heading }: IStoryProps) => {
+const Story2 = ({ image, title, children, action, sub_heading }: IStoryProps) => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2  py-10 container mx-auto px-2 md:px-0 gap-10">
@@ -37,14 +39,14 @@ const Story = ({ image, title, children, action, sub_heading }: IStoryProps) => 
             </div>
           )}
         </div>
-        <div className="w-full">
-          <div className="aspect-[4/3] w-full relative">
+        <div className="w-full h-full">
+          <div className="h-full w-full relative">
             <Image
               src={image.src}
               alt={image.alt}
               fill
               sizes="100vw"
-              className="object-contain"
+              className="h-full w-full !relative  sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"
             />
           </div>
         </div>
@@ -53,4 +55,4 @@ const Story = ({ image, title, children, action, sub_heading }: IStoryProps) => 
   )
 }
 
-export default Story
+export default Story2

@@ -26,7 +26,7 @@ interface IServicesProps {
 const Services = ({ servicesList, title, description, footerBlur, classNames, path }: IServicesProps) => {
   const router = useRouter()
   return (
-    <div className={classNames?.container}>
+    <section className={classNames?.container}>
       <div className="container mx-auto ">
         <Headings
           title={title}
@@ -72,7 +72,7 @@ const Services = ({ servicesList, title, description, footerBlur, classNames, pa
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

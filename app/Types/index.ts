@@ -189,3 +189,25 @@ export interface ITestimonial {
   img?: string
   description: string
 }
+
+export interface IHomePage {
+  id: number
+  heading: string
+  img: string
+  description: string
+  additional_content: Additionalcontent[]
+}
+
+interface Additionalcontent {
+  id: number
+  sorting_order: number
+  meta_name?: string
+  meta_description?: string
+  meta_keywords?: string
+  main_heading: string
+  sub_heading: string
+  img: string
+  paragraph: string
+  action_label?: string
+  action_path?: string
+}

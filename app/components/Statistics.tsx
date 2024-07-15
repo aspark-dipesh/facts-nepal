@@ -20,7 +20,7 @@ interface IStatisticsProps {
 const Statistics = ({ title, StatisticsList, classNames }: IStatisticsProps) => {
   return (
     <>
-      <section className={cn("relative not-prose scroll-mt-[72px] ", classNames?.container)}>
+      <div className={cn("relative not-prose scroll-mt-[72px] ", classNames?.container)}>
         <h1 className={cn("text-3xl font-bold", classNames?.title)}>{title}</h1>
         <div className="relative px-4 md:px-6 py-10 md:py-10 lg:py-12 text-default max-w-6xl mx-auto">
           <div className="flex flex-wrap justify-center -m-4 text-center">
@@ -54,7 +54,7 @@ const Statistics = ({ title, StatisticsList, classNames }: IStatisticsProps) => 
             ))}
           </div>
         </div>
-      </section>
+      </div>
     </>
   )
 }

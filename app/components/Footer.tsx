@@ -5,7 +5,7 @@ import Image from "next/image"
 
 const Footer = ({ organization, FooterData }: { organization?: IOrganization; FooterData: IMenu[] }) => {
   return (
-    <footer className="bg-gradient-to-r from-gray-100 via-primary/40 to-gray-100">
+    <footer className="bg-gradient-to-r ">
       <div className="container py-16 mx-auto ">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
