@@ -31,8 +31,8 @@ const ImageContentGrid = ({ image, title, children, ordering, classNames, subtit
               classNames?.imageContainer ? classNames?.imageContainer : "aspect-[4/3]"
             )}>
             <Image
-              src={image.src}
-              alt={image.alt}
+              src={image.src || " "}
+              alt={image.alt || " "}
               fill
               sizes="100vw"
               className={cn("object-contain ", classNames?.image)}

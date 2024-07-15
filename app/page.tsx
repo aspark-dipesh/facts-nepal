@@ -6,7 +6,16 @@ import Services from "./components/Services"
 import Statistics from "./components/Statistics"
 import Publications from "./components/Publication"
 
-import { IClientAndPartner, IHomePage, IInfoGraph, IPaginatedData, IPublication, IService, ITestimonial } from "./Types"
+import {
+  IClientAndPartner,
+  IFacts,
+  IHomePage,
+  IInfoGraph,
+  IPaginatedData,
+  IPublication,
+  IService,
+  ITestimonial,
+} from "./Types"
 
 import Blogs from "./components/Blogs"
 import Link from "next/link"
@@ -104,6 +113,16 @@ async function GetHomePage(): Promise<IPaginatedData<IHomePage>> {
   const data = (await res.json()) as IPaginatedData<IHomePage>
   return data
 }
+async function Facts(): Promise<IFacts> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/facts/`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IFacts
+  return data
+}
 export default async function Home() {
   const serviceList = await GetServiceList()
   const infoGraph = await GetInfoGraph()
@@ -112,6 +131,7 @@ export default async function Home() {
   const testimonialList = await GetTestimonial()
   const blogs = await GetBlogs()
   const HomeData = await GetHomePage()
+  const factsData = await Facts()
   return (
     <div className="grid grid-cols-1 homepage">
       <Hero
@@ -165,7 +185,7 @@ export default async function Home() {
 
       <section className=" order-7">
         <div className="container mx-auto py-10 ">
-          <NavTabs />
+          <NavTabs factsData={factsData} />
         </div>
       </section>
 
@@ -211,9 +231,9 @@ export default async function Home() {
         </div>
       </section>
       <section className="py-10 order-11">
-        <div className="container mx-auto mb-3">
+        {/* <div className="container mx-auto mb-3">
           <Headings title="Testimonials" />
-        </div>
+        </div> */}
         <Testimonial3
           Testimonials={testimonialList.results}
           title={"Testimonials"}

@@ -171,7 +171,6 @@ const ContactForm = ({ hasMap }: { hasMap?: boolean }) => {
                     Phone <span className="text-red-500">&#42;</span>
                   </label>
                   <Input
-                    isRequired
                     errorMessage="Phone number is required"
                     value={formData.phone_number}
                     onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}

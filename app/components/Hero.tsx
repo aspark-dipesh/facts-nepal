@@ -53,8 +53,8 @@ const Hero = ({ images, content, contentPosition, classNames, action }: IHeroPro
         {images.map((image, index) => (
           <SwiperSlide key={index}>
             <Image
-              src={image.src}
-              alt={image.alt}
+              src={image.src!}
+              alt={image.alt!}
               fill
               sizes="100vw"
               className="object-cover"

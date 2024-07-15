@@ -39,20 +39,22 @@ const FactsOfTheDay = ({ description, image, title, classNames, date }: IProps) 
         </div>
         <div className={cn("my-auto", classNames?.image)}>
           <div className="relative w-full ">
-            <LightGalleryComponent>
-              <Link
-                href={image.src}
-                className=" "
-                data-sub-html={description}>
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="100vw"
-                  className="object-cover w-full h-full !relative rounded-md"
-                />
-              </Link>
-            </LightGalleryComponent>
+            {image.src && (
+              <LightGalleryComponent>
+                <Link
+                  href={image.src}
+                  className=" "
+                  data-sub-html={description}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt || "image"}
+                    fill
+                    sizes="100vw"
+                    className="object-cover w-full h-full !relative rounded-md"
+                  />
+                </Link>
+              </LightGalleryComponent>
+            )}
             <p></p>
           </div>
         </div>

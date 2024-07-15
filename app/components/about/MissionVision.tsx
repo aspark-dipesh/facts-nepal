@@ -25,8 +25,8 @@ const MissionVision = ({ image, title, children, ordering, classNames }: IProps)
         <div className={cn("", ordering.image)}>
           <div className="relative w-full aspect-square">
             <Image
-              src={image.src}
-              alt={image.alt}
+              src={image.src || " "}
+              alt={image.alt || " "}
               fill
               sizes="100vw"
               className={cn("object-cover ", classNames?.image)}
