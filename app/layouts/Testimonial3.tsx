@@ -17,14 +17,14 @@ const Testimonial3 = ({ Testimonials, title }: { Testimonials: ITestimonial[]; t
     breakpoints: {
       "(min-width: 640px)": {
         slides: {
-          perView: 2,
+          perView: 1,
           spacing: 20,
         },
       },
 
       "(min-width: 1024px)": {
         slides: {
-          perView: 3,
+          perView: 2,
           spacing: 20,
         },
       },
@@ -87,9 +87,9 @@ const Testimonial3 = ({ Testimonials, title }: { Testimonials: ITestimonial[]; t
             {Testimonials.map((item, index) => {
               return (
                 <div
-                  className="keen-slider__slide px-5 py-10"
+                  className="keen-slider__slide px-5 py-10 w-full"
                   key={index}>
-                  <blockquote className="flex h-full flex-col justify-between bg-white quote-container">
+                  <blockquote className="flex h-full flex-col justify-between  quote-container">
                     {/* <Quote className="absolute top-[-25px] left-[calc(50%-25px)] rotate-180 bg-white h-10 w-10 stroke-secondary" /> */}
                     <div>
                       <Image
@@ -109,8 +109,11 @@ const Testimonial3 = ({ Testimonials, title }: { Testimonials: ITestimonial[]; t
                         />
                       </div>
                     </div>
-
-                    <footer className="mt-4 text-sm font-medium text-gray-700 sm:mt-6">&mdash; {item.position}</footer>
+                    {item.position && (
+                      <footer className="mt-4 text-sm font-medium text-gray-700 sm:mt-6">
+                        &mdash; {item.position}
+                      </footer>
+                    )}
                   </blockquote>
                 </div>
               )

@@ -233,6 +233,7 @@ export default async function Home() {
       <section className="py-10 order-11">
         {/* <div className="container mx-auto mb-3">
           <Headings title="Testimonials" />
+          <TestimonialSlider Testimonials={testimonialList.results} />
         </div> */}
         <Testimonial3
           Testimonials={testimonialList.results}
