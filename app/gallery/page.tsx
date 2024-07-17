@@ -93,7 +93,7 @@ export default async function Gallery() {
       {GalleryData.results.map((gallery) => (
         <div key={gallery.id}>
           <h2 className=" font-semibold my-5 mt-10">{gallery.title} </h2>
-          <LightGalleryComponent className="grid grid-cols-4 gap-4">
+          <LightGalleryComponent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {gallery.image.map((image) => (
               <a
                 key={image.image}
@@ -109,7 +109,7 @@ export default async function Gallery() {
               </a>
             ))}
           </LightGalleryComponent>
-          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols- ">
+          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
             {gallery.youtubelink.map((video, index) => (
               <iframe
                 key={index}

@@ -1,15 +1,15 @@
 import { SearchIcon } from "lucide-react"
 import Banner from "@/app/components/Banner"
-import { IBlog, IPaginatedData } from "@/app/Types"
+import { IBlog, IBlogs, IPaginatedData } from "@/app/Types"
 import BlogsList from "@/app/components/blogs/BlogsList"
-async function getBlogs(): Promise<IPaginatedData<IBlog>> {
+async function getBlogs(): Promise<IPaginatedData<IBlogs>> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`, {
     cache: "no-store",
   })
   if (!res.ok) {
     throw new Error("Failed to fetch data")
   }
-  const data = (await res.json()) as IPaginatedData<IBlog>
+  const data = (await res.json()) as IPaginatedData<IBlogs>
   return data
 }
 export default async function NewsAndBlogs() {

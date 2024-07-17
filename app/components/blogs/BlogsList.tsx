@@ -1,13 +1,13 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import NewsCard from "../NewsCard"
-import { IBlog, IPublication } from "@/app/Types"
+import { IBlog, IBlogs, IPublication } from "@/app/Types"
 function getWindowDimensions() {
   return {
     width: window.innerWidth,
   }
 }
-const BlogsList = ({ filteredData }: { filteredData?: IBlog[] }) => {
+const BlogsList = ({ filteredData }: { filteredData?: IBlogs[] }) => {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
   const [cardPerColumn, setCardPerColumn] = useState<number>(filteredData?.length! / 3)
 
@@ -39,7 +39,7 @@ const BlogsList = ({ filteredData }: { filteredData?: IBlog[] }) => {
           <NewsCard
             key={item.slug}
             date={item.published_date}
-            category={item.category.toString()}
+            category={item.category.name}
             paragraph={item.content}
             img={item.featured_image}
             url={""}
@@ -57,7 +57,7 @@ const BlogsList = ({ filteredData }: { filteredData?: IBlog[] }) => {
             <NewsCard
               key={item.slug}
               date={item.published_date}
-              category={item.category.toString()}
+              category={item.category.name}
               paragraph={item.content}
               img={item.featured_image}
               url={""}
@@ -73,7 +73,7 @@ const BlogsList = ({ filteredData }: { filteredData?: IBlog[] }) => {
           <NewsCard
             key={item.slug}
             date={item.published_date}
-            category={item.category.toString()}
+            category={item.category.name}
             paragraph={item.content}
             img={item.featured_image}
             url={""}

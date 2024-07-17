@@ -7,12 +7,11 @@ import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
 import { Autoplay, Pagination, Navigation } from "swiper/modules"
-import { IContent, IImage } from "../Types"
+import { IBanner, IContent, IImage } from "../Types"
 import Image from "next/image"
 import { Button, cn } from "@nextui-org/react"
 interface IHeroProps {
-  images: IImage[]
-  content?: IContent
+  BannerList: IBanner[]
   contentPosition: "s" | "m" | "e"
   classNames?: {
     content?: string
@@ -29,19 +28,15 @@ interface IHeroProps {
     icon?: React.ReactNode
   }
 }
-const Hero = ({ images, content, contentPosition, classNames, action }: IHeroProps) => {
+const Hero = ({ BannerList, contentPosition, classNames, action }: IHeroProps) => {
   return (
-    <section
-      className="relative"
-      style={{
-        order: 0,
-      }}>
+    <div className="relative">
       <Swiper
         loop
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 2500,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -50,11 +45,11 @@ const Hero = ({ images, content, contentPosition, classNames, action }: IHeroPro
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper absolute ">
-        {images.map((image, index) => (
+        {BannerList.map((banner, index) => (
           <SwiperSlide key={index}>
             <Image
-              src={image.src!}
-              alt={image.alt!}
+              src={banner.feature_image}
+              alt={banner.title || "image"}
               fill
               sizes="100vw"
               className="object-cover"
@@ -68,21 +63,16 @@ const Hero = ({ images, content, contentPosition, classNames, action }: IHeroPro
                 contentPosition === "e" && "justify-end"
               )}>
               <div className={cn("max-w-xl w-full  !text-white", classNames?.description)}>
-                <h1 className={cn("text-2xl font-bold capitalize ", classNames?.title)}>{content?.title}</h1>
-                <p className={cn("text-lg font-semibold mt-5", classNames?.description)}>{content?.description}</p>
-                {action && (
+                <h1 className={cn("text-2xl font-bold capitalize ", classNames?.title)}>{banner?.title}</h1>
+                <p className={cn("text-lg font-semibold mt-5", classNames?.description)}>{banner?.subtitle}</p>
+                {banner.callback && (
                   <Button
+                    href={banner.callback}
                     size="sm"
                     variant="shadow"
                     color="primary"
                     className={cn("flex items-center gap-2 mt-5 mx-auto", classNames?.action)}>
-                    <a
-                      href={action.path}
-                      target="_blank"
-                      rel="noreferrer">
-                      {action.icon}
-                      <p className="text-base font-semibold">{action.label}</p>
-                    </a>
+                    Know more
                   </Button>
                 )}
               </div>
@@ -90,7 +80,7 @@ const Hero = ({ images, content, contentPosition, classNames, action }: IHeroPro
           </SwiperSlide>
         ))}
       </Swiper>
-    </section>
+    </div>
   )
 }
 
