@@ -2,8 +2,9 @@
 import { Modal, ModalBody, ModalContent } from "@nextui-org/react"
 import Image from "next/image"
 import React, { useEffect } from "react"
+import { IPopUpBanner } from "../Types"
 
-const PopupBanner = () => {
+const PopupBanner = ({ popup_banner }: { popup_banner: IPopUpBanner }) => {
   const [showPopup, setShowPopup] = React.useState(false)
   useEffect(() => {
     setShowPopup(sessionStorage.getItem("popup") ? false : true)
@@ -30,7 +31,7 @@ const PopupBanner = () => {
               <ModalBody className="px-0 py-0">
                 <Image
                   alt="popup banner"
-                  src="/images/facts/fact2.jpeg"
+                  src={popup_banner.image}
                   height={2000}
                   width={1000}
                   sizes="100vw"

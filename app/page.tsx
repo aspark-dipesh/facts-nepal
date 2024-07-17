@@ -7,6 +7,7 @@ import Statistics from "./components/Statistics"
 import Publications from "./components/Publication"
 
 import {
+  IBanner,
   IClientAndPartner,
   IFacts,
   IHomePage,
@@ -123,6 +124,17 @@ async function Facts(): Promise<IFacts> {
   const data = (await res.json()) as IFacts
   return data
 }
+
+async function GetBanner(): Promise<IPaginatedData<IBanner>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/banner/`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<IBanner>
+  return data
+}
 export default async function Home() {
   const serviceList = await GetServiceList()
   const infoGraph = await GetInfoGraph()
@@ -132,33 +144,21 @@ export default async function Home() {
   const blogs = await GetBlogs()
   const HomeData = await GetHomePage()
   const factsData = await Facts()
+  const BannerData = await GetBanner()
   return (
     <div className="grid grid-cols-1 homepage">
       <Hero
-        images={[
-          {
-            src: "/images/banner1.jpg",
-            alt: "photo 1",
-          },
-          {
-            src: "/images/banner2.jpg",
-            alt: "photo 2",
-          },
-        ]}
-        contentPosition="m"
-        // content={{
-        //   title: "Offering total research solutions for your business requirements",
-        //   description: "Collecting, processing and analyzing data",
-        // }}
-        // classNames={{
-        //   title: "text-primary text-3xl font-bold text-center",
-        //   container: "bg-black/20",
-        //   description: "text-white text-center",
-        // }}
-        // action={{
-        //   label: "Get Started",
-        //   path: "/contact",
-        // }}
+        BannerList={BannerData.results}
+        contentPosition="s"
+        classNames={{
+          title: "text-primary text-3xl font-bold text-center",
+          container: "bg-black/20",
+          description: "text-white text-center",
+        }}
+        action={{
+          label: "Get Started",
+          path: "/contact",
+        }}
       />
 
       <Statistics
@@ -240,7 +240,7 @@ export default async function Home() {
           title={"Testimonials"}
         />
       </section>
-      <Blogs />
+      {blogs.results.length > 0 && <Blogs blog={blogs.results} />}
 
       <section className="py-10 order-[13] ">
         <div className="container mx-auto">

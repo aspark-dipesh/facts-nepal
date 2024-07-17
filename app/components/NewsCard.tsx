@@ -23,14 +23,14 @@ const NewsCard = ({ category, main_heading, slug, paragraph, sub_heading, img, p
       )}
 
       <div className="mt-5 px-5">
-        <div className="flex">
-          <span className="text-sm font-bold text-primary/70 flex items-center gap-1">
+        <div className="flex flex-wrap">
+          <span className="text-sm font-bold text-primary/70 flex items-center gap-1 min-w-fit ">
             <CalendarDays size={14} />
             {date ? new Date(date).toDateString() : new Date().toDateString()}
           </span>
           {/* dot */}
-          <span className="text-sm font-bold text-primary/70 mx-3">•</span>
-          <span className="text-sm font-bold text-primary/70  capitalize">{category}</span>
+          <span className="text-sm font-bold text-primary/70 mx-3  min-w-fit">•</span>
+          <span className="text-sm font-bold text-primary/70  capitalize  min-w-fit">{category}</span>
         </div>
         <Link
           href={`${slug}`}

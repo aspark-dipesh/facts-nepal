@@ -228,3 +228,37 @@ interface Factoftheday {
   pin: boolean
   fact_of_the_day: boolean
 }
+
+export interface IBlogs {
+  id: number
+  category: Category
+  sorting_order: number
+  title: string
+  slug: string
+  featured_image: string
+  content: string
+  is_published: boolean
+  published_date: string
+  author: string
+}
+
+interface Category {
+  name: string
+  slug: string
+}
+
+export interface IPopUpBanner {
+  image: string
+  callback_url: string
+  callback_label: string
+  timer: number
+  css: any[]
+}
+
+export interface IBanner {
+  title: string
+  subtitle: string
+  feature_image: string
+  callback: string
+  css: any[]
+}

@@ -36,7 +36,7 @@ export default async function NewsAndBlogsDetails({ params }: { params: { slug: 
               />
             </div>
           )}
-          <h1 className="text-3xl md:text-6xl font-bold">{BlogDetail.title}</h1>
+          <h1 className="text-xl md:text-2xl font-bold">{BlogDetail.title}</h1>
           <p className="text-lg mt-3 text-end">{BlogDetail.published_date}</p>
           <p className="text-lg mt-3">{BlogDetail.short_description}</p>
           {/* View pdf */}

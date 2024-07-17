@@ -37,17 +37,16 @@ async function GetFooterData(): Promise<IPaginatedData<IFooterData>> {
   const data = (await res.json()) as IPaginatedData<IFooterData>
   return data
 }
-// async function GetPopBanner(): Promise<IPaginatedData<any>> {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/ourservices`, {
-//     cache: "no-store",
-//   })
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch data")
-//   }
-//   const data = (await res.json()) as IPaginatedData<any>
-//   return data
-// }
-
+async function GetPopBanner(): Promise<IPaginatedData<any>> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/popupbanner/`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  const data = (await res.json()) as IPaginatedData<any>
+  return data
+}
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -56,8 +55,9 @@ export default async function RootLayout({
   const org = await GetOrganization()
   const NavData = await GetMenuData()
   const FooterData = await GetFooterData()
-  // const PopupBannerData = await GetPopBanner()
+  const PopupBannerData = await GetPopBanner()
   // console.log(PopupBannerData)
+
   return (
     <html lang="en">
       <body className={poppins.className + ""}>
@@ -66,7 +66,7 @@ export default async function RootLayout({
         </div> */}
 
         <Providers>
-          <PopupBanner />
+          <PopupBanner popup_banner={PopupBannerData.results[0]} />
           <div className="relative">
             <NavbarLayout
               NavData={NavData.results[0]}
