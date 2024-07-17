@@ -40,8 +40,8 @@ const Story = ({ image, title, children, action, sub_heading }: IStoryProps) => 
         <div className="w-full">
           <div className="aspect-[4/3] w-full relative">
             <Image
-              src={image.src}
-              alt={image.alt}
+              src={image.src || " "}
+              alt={image.alt || ""}
               fill
               sizes="100vw"
               className="object-contain"

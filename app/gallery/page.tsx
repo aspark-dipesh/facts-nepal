@@ -15,7 +15,7 @@ interface IGallery {
 }
 
 interface Youtubelink {
-  youtube_link: string
+  video_id: string
 }
 
 interface Video {
@@ -41,6 +41,7 @@ async function GetGalleryData(): Promise<IPaginatedData<IGallery>> {
 }
 export default async function Gallery() {
   const GalleryData = await GetGalleryData()
+  console.log(GalleryData)
   return (
     <div className="container mx-auto ">
       <Banner
@@ -51,7 +52,7 @@ export default async function Gallery() {
         title="Gallery"
       />
       {/* video section */}
-      <h1 className="text-3xl font-semibold my-5">Videos</h1>
+      {/* <h1 className="text-3xl font-semibold my-5">Videos</h1>
       <div className="grid grid-cols-4 gap-4">
         <iframe
           width="100%"
@@ -87,36 +88,44 @@ export default async function Gallery() {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen></iframe>
-      </div>
+      </div> */}
 
-      <h2 className=" font-semibold my-5 mt-10">Events </h2>
-      <LightGalleryComponent className="grid grid-cols-4 gap-4">
-        {GalleryData.results.map((gallery) =>
-          gallery.image.map((image) => (
-            <a
-              key={image.image}
-              href={image.image}
-              className="relative"
-              //   data-sub-html="
-              // <h4>Beautiful Nature</h4>
-              // <p>A beautiful landscape.</p>
-              // "
-            >
-              <Image
-                fill
-                sizes="50vw"
-                className="h-auto max-w-full object-cover rounded-md"
-                src={image.image}
-                alt=""
-              />
-              {/* <div className="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-30 text-white">
-                <h4>Beautiful Nature</h4>
-                <p>A beautiful landscape.</p>
-              </div> */}
-            </a>
-          ))
-        )}
-      </LightGalleryComponent>
+      {GalleryData.results.map((gallery) => (
+        <div key={gallery.id}>
+          <h2 className=" font-semibold my-5 mt-10">{gallery.title} </h2>
+          <LightGalleryComponent className="grid grid-cols-4 gap-4">
+            {gallery.image.map((image) => (
+              <a
+                key={image.image}
+                className="relative aspect-video"
+                href={`${image.image}`}>
+                <Image
+                  fill
+                  sizes="50vw"
+                  className="h-auto max-w-full object-cover rounded-md"
+                  src={`${image.image}`}
+                  alt=""
+                />
+              </a>
+            ))}
+          </LightGalleryComponent>
+          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols- ">
+            {gallery.youtubelink.map((video, index) => (
+              <iframe
+                key={index}
+                width="100%"
+                style={{
+                  aspectRatio: "16/9",
+                  marginTop: "25px",
+                }}
+                src={`https://www.youtube.com/embed/${video.video_id}`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen></iframe>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   )
 }

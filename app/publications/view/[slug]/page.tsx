@@ -4,6 +4,7 @@ import Publication from "../../data.json"
 import { SearchIcon } from "lucide-react"
 import BreadCrumbs from "@/app/components/BreadCrumbs"
 import { IPublication } from "@/app/Types"
+import Image from "next/image"
 async function PublicationDetails({ slug }: { slug: string }): Promise<IPublication> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/basic/ourpublication/${slug}`, {
     cache: "no-store",
@@ -29,6 +30,16 @@ export default async function NewsAndBlogsDetails({ params }: { params: { slug: 
           { label: publication?.main_heading, path: `/news-and-blogs/view/${publication?.slug}` },
         ]}
       />
+      <div className=" aspect-video relative">
+        {publication.img && (
+          <Image
+            src={publication.img}
+            alt="publication image"
+            className="w-full h-full object-cover"
+            fill
+          />
+        )}
+      </div>
       <div className="grid grid-cols-10 gap-10 py-10">
         <div className="col-span-7">
           <h1 className="text-3xl md:text-6xl font-bold">{publication?.main_heading}</h1>

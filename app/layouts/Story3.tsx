@@ -20,8 +20,8 @@ const Story3 = ({ image, title, children, action, sub_heading }: IStoryProps) =>
           <div className="relative z-10 lg:py-8">
             <div className="relative h-64 sm:h-80 lg:h-full">
               <Image
-                alt=""
-                src={image.src}
+                alt={image.alt || " "}
+                src={image.src || " "}
                 fill
                 className="absolute inset-0 h-full w-full object-contain"
               />

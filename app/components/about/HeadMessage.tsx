@@ -14,8 +14,8 @@ const HeadMessage = ({ children, image, title, headName }: IProps) => {
         <div>
           <div className="relative aspect-square w-full">
             <Image
-              src={image.src}
-              alt={image.alt}
+              src={image.src || " "}
+              alt={image.alt || " "}
               fill
               sizes="100vw"
               className="object-cover"

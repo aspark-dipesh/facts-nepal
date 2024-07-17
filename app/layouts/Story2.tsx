@@ -42,8 +42,8 @@ const Story2 = ({ image, title, children, action, sub_heading }: IStoryProps) =>
         <div className="w-full h-full">
           <div className="h-full w-full relative">
             <Image
-              src={image.src}
-              alt={image.alt}
+              src={image.src || " "}
+              alt={image.alt || ""}
               fill
               sizes="100vw"
               className="h-full w-full !relative  sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"

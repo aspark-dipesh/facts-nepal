@@ -32,12 +32,12 @@ export default function PictoCard({
         <div className="w-full">
           <LightGalleryComponent>
             <Link
-              href={image.src}
+              href={image.src || " "}
               className="relative"
               data-sub-html={description}>
               <Image
-                src={image.src}
-                alt={image.alt}
+                src={image.src || " "}
+                alt={image.alt || "image"}
                 fill
                 sizes="100vw"
                 className="object-cover w-full h-full !relative"

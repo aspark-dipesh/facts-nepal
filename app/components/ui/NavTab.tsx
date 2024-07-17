@@ -3,8 +3,9 @@ import React from "react"
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react"
 import FactsOfTheDay from "../FactsOfTheDay"
 import Headings from "./Headings"
+import { IFacts } from "@/app/Types"
 
-export default function NavTabs() {
+export default function NavTabs({ factsData }: { factsData: IFacts }) {
   return (
     <div className="flex w-full flex-col">
       <Tabs aria-label="Options">
@@ -20,11 +21,11 @@ export default function NavTabs() {
             />
           </div>
           <FactsOfTheDay
-            date=""
-            title="The world's 10 most mountainous countries"
+            date={factsData.fact_of_the_day.published_date || ""}
+            title={factsData.fact_of_the_day.main_heading}
             image={{
-              src: "/images/facts/facts1.jpeg",
-              alt: "facts",
+              src: factsData.fact_of_the_day.img || "/images/facts/facts1.jpeg",
+              alt: factsData.fact_of_the_day.main_heading,
             }}
             classNames={{
               title: "text-xl font-bold  ",
@@ -32,7 +33,7 @@ export default function NavTabs() {
               image: "w-full aspect-video",
               description: " text-black",
             }}
-            description={`Note: Bhutan, a small south Asian country located in the eastern Himalaya, is the most mountainous country in the world. Bhutan average elevation of 10,000 feet(3,280 m) above sea level.`}
+            description={factsData.fact_of_the_day.paragraph}
           />
         </Tab>
         <Tab
@@ -47,11 +48,11 @@ export default function NavTabs() {
             />
           </div>
           <FactsOfTheDay
-            date=""
-            title="The world's 10 most mountainous countries"
+            date={factsData.fact_of_the_month.published_date || ""}
+            title={factsData.fact_of_the_month.main_heading}
             image={{
-              src: "/images/facts/facts1.jpeg",
-              alt: "facts",
+              src: factsData.fact_of_the_month.img || "/images/facts/facts1.jpeg",
+              alt: factsData.fact_of_the_month.main_heading,
             }}
             classNames={{
               title: "text-xl font-bold  ",
@@ -59,7 +60,7 @@ export default function NavTabs() {
               image: "w-full aspect-video",
               description: " text-black",
             }}
-            description={`Note: Bhutan, a small south Asian country located in the eastern Himalaya, is the most mountainous country in the world. Bhutan average elevation of 10,000 feet(3,280 m) above sea level.`}
+            description={factsData.fact_of_the_month.paragraph}
           />
         </Tab>
         <Tab
@@ -75,10 +76,10 @@ export default function NavTabs() {
           </div>
           <FactsOfTheDay
             date=""
-            title="The world's 10 most mountainous countries"
+            title={factsData.fact_of_the_year.main_heading}
             image={{
-              src: "/images/facts/facts1.jpeg",
-              alt: "facts",
+              src: factsData.fact_of_the_year.img,
+              alt: factsData.fact_of_the_year.main_heading,
             }}
             classNames={{
               title: "text-xl font-bold  ",
@@ -86,7 +87,7 @@ export default function NavTabs() {
               image: "w-full aspect-video",
               description: " text-black",
             }}
-            description={`Note: Bhutan, a small south Asian country located in the eastern Himalaya, is the most mountainous country in the world. Bhutan average elevation of 10,000 feet(3,280 m) above sea level.`}
+            description={factsData.fact_of_the_year.paragraph}
           />
         </Tab>
       </Tabs>

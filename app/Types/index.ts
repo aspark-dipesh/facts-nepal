@@ -11,8 +11,8 @@ export interface INavData extends nav {
   type?: string
 }
 export interface IImage {
-  src: string
-  alt: string
+  src?: string
+  alt?: string
 }
 export interface IContent {
   title: string
@@ -210,4 +210,21 @@ interface Additionalcontent {
   paragraph: string
   action_label?: string
   action_path?: string
+}
+
+export interface IFacts {
+  id: number
+  fact_of_the_day: Factoftheday
+  fact_of_the_year: Factoftheday
+  fact_of_the_month: Factoftheday
+}
+
+interface Factoftheday {
+  id: number
+  main_heading: string
+  img?: string
+  paragraph: string
+  published_date?: string
+  pin: boolean
+  fact_of_the_day: boolean
 }
